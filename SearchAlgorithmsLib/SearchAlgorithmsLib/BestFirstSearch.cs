@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace SearchAlgorithmsLib
 {
-    class BestFirstSearch
+    class BestFirstSearch<T>
     {
 
-        var pq = new PriorityQueue<State>();
+        State<T> open = new PriorityQueue<State<T>>();
+        State<T> close = new PriorityQueue<State<T>>();
     }
 }

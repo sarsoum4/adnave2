@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Medallion.Collections;
 
 namespace SearchAlgorithmsLib
 {
@@ -26,7 +27,9 @@ namespace SearchAlgorithmsLib
             return state.Equals(s.state);
         }
 
-
-
+        public static implicit operator State<T>(PriorityQueue<State<T>> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
