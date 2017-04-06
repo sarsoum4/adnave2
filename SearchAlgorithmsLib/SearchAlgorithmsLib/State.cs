@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Medallion.Collections;
 
+
 namespace SearchAlgorithmsLib
 {
     public class State<T>
@@ -14,11 +15,23 @@ namespace SearchAlgorithmsLib
         private double cost; // cost to reach this state (set by a setter)
         private State<T> cameFrom; // the state we came from to this state (setter)
 
+        public State<T> CameFrom
+        {
+            get{return cameFrom;}
+            set{cameFrom = value;}
+        }
 
+        public double Cost
+        {
+            get{return cost;}
+            set{cost = value;}
+        }
 
         public State(T state) // CTOR
         {
             this.state = state;
+            this.Cost = 1;
+            this.CameFrom = null;
         }
 
 
