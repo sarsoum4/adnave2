@@ -27,6 +27,22 @@ namespace SearchAlgorithmsLib
             set{cost = value;}
         }
 
+
+        public T currentState
+        {
+            get
+            {
+                return state;
+            }
+
+            set
+            {
+                state = value;
+            }
+        }
+
+
+
         public State(T state) // CTOR
         {
             this.state = state;
