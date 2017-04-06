@@ -22,9 +22,6 @@ namespace SearchAlgorithmsLib
         }
 
 
-
-
-
         public Solution()
         {
             this.path = new List<State<T>>();

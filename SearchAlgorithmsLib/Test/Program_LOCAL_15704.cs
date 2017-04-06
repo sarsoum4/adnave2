@@ -14,7 +14,7 @@ class Program
 
         Console.WriteLine("THE START !!");
        
-        ISearcher<int> ser = new DFS<int>();
+        ISearcher<int> ser = new BestFirstSearch<int>();
 
         Dictionary<State<int>, List<State<int>>> Adj = new Dictionary<State<int>, List<State<int>>>();
         State<int> one = new State<int>(1);

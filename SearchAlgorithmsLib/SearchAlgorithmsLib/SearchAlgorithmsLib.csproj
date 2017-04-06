@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BestFirstSearch.cs" />
+    <Compile Include="DFS.cs" />
     <Compile Include="ISearchable.cs" />
     <Compile Include="ISearcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

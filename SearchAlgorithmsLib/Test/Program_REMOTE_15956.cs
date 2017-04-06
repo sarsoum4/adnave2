@@ -11,9 +11,6 @@ class Program
 {
     static void Main(string[] args)
     {
-
-        Console.WriteLine("THE START !!");
-       
         ISearcher<int> ser = new DFS<int>();
 
         Dictionary<State<int>, List<State<int>>> Adj = new Dictionary<State<int>, List<State<int>>>();
@@ -35,9 +32,8 @@ class Program
 
         TestSearchable<int> test1 = new TestSearchable<int>(one, six, Adj);
         Solution<int> sol = ser.search(test1);
-    
+
         printSol(sol);
-        Console.ReadLine();
     }
 
 
@@ -45,9 +41,9 @@ class Program
     {
         for (int i = 0; i < s.Path.Count; i++)
         {
-            Console.WriteLine(s.Path[i].currentState.ToString() );
+            Console.Write(s.Path[i].ToString() + ",");
         }
-        Console.WriteLine("");
+        Console.WriteLine();
     }
 }
 
