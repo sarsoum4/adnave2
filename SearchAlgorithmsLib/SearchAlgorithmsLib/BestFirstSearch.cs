@@ -27,7 +27,7 @@ namespace SearchAlgorithmsLib
                 closed.Add(n);
                 if (n.Equals(searchable.getGoalState()))
                 {
-                    return backTrace(n); // private method, back traces through the parents
+                    return backTrace(searchable); // private method, back traces through the parents
                 }
                 List<State<T>> succerssors = new List<State<T>>();
                 succerssors = searchable.getAllPossibleStates(n);
@@ -75,16 +75,6 @@ namespace SearchAlgorithmsLib
 
 
 
-
-        private Solution<T> backTrace(State<T> n)
-        {
-            throw new NotImplementedException();
-        }
-
-        private Solution<T> backTrace()
-        {
-            throw new NotImplementedException();
-        }
 
 
 

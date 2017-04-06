@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Medallion.Collections;
 
-
-namespace SearchAlgorithmsLib
+namespace Test
 {
     public class State<T> : IComparable
     {
@@ -17,14 +15,14 @@ namespace SearchAlgorithmsLib
 
         public State<T> CameFrom
         {
-            get{return cameFrom;}
-            set{cameFrom = value;}
+            get { return cameFrom; }
+            set { cameFrom = value; }
         }
 
         public double Cost
         {
-            get{return cost;}
-            set{cost = value;}
+            get { return cost; }
+            set { cost = value; }
         }
 
         public State(T state) // CTOR
@@ -47,9 +45,9 @@ namespace SearchAlgorithmsLib
 
         }
 
-        //public static implicit operator State<T>(PriorityQueue<State<T>> v)
+        // public static implicit operator State<T>(PriorityQueue<State<T>> v)
         // {
-        //  throw new NotImplementedException();
+        //   throw new NotImplementedException();
         //}
     }
 }

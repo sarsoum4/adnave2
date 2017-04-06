@@ -29,7 +29,7 @@ namespace SearchAlgorithmsLib
 
         protected void addToOpenList(State<T> s)
         {
-            openList.Enqueue(s);
+            this.openList.Enqueue(s);
         }
 
         protected bool openContaines(State<T> s)
