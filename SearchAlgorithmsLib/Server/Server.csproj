@@ -52,8 +52,17 @@
     <Compile Include="Adapter\MazeAdapter.cs" />
     <Compile Include="Adapter\SolutionAdapter.cs" />
     <Compile Include="Adapter\SolutionJson.cs" />
+    <Compile Include="Controler\Controller.cs" />
+    <Compile Include="Controler\GenerateMazeCommand.cs" />
+    <Compile Include="Controler\ICommand.cs" />
+    <Compile Include="TheModel\IModel.cs" />
+    <Compile Include="TheModel\Model.cs" />
+    <Compile Include="Server.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\ClientHandler.cs" />
+    <Compile Include="Controler\IController.cs" />
+    <Compile Include="View\IView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -64,11 +73,7 @@
       <Name>SearchAlgorithmsLib</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controler\" />
-    <Folder Include="Model\" />
-    <Folder Include="View\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
