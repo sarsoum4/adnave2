@@ -35,7 +35,7 @@ namespace SearchAlgorithmsLib
 
 
 
-        public string pathTrace()
+        public string toString()
         {
             string returnPath = "";
             int i;

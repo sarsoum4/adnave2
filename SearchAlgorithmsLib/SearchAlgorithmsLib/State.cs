@@ -15,6 +15,8 @@ namespace SearchAlgorithmsLib
         private double cost; // cost to reach this state (set by a setter)
         private State<T> cameFrom; // the state we came from to this state (setter)
 
+
+
         public State<T> CameFrom
         {
             get{return cameFrom;}

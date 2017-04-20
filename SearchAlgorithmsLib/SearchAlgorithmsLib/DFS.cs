@@ -11,6 +11,8 @@ namespace SearchAlgorithmsLib
         HashSet<State<T>> visited = new HashSet<State<T>>();
         Stack<State<T>> s = new Stack<State<T>>();
 
+
+
         public override Solution<T> search(ISearchable<T> searchable)
         {
             State<T> initial = searchable.getInitialState();
