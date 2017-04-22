@@ -27,6 +27,11 @@ namespace SearchAlgorithmsLib
             return openList.Dequeue(); // poll()
         }
 
+        protected void addEvaluatedNode()
+        {
+            evaluatedNodes++;
+        }
+
         protected void addToOpenList(State<T> s)
         {
             this.openList.Enqueue(s);

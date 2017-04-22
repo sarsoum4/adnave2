@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 namespace Server.Adapter
 {
@@ -20,6 +21,14 @@ namespace Server.Adapter
             this.NodesEvaluated = nodesEvaluated;
         }
 
+        public string solveToJSON()
+        {
+            JObject mazeSolutionObj = new JObject();
+            mazeSolutionObj["Name"] = this.MazeName;
+            mazeSolutionObj["Solution"] = this.Solution;
+            mazeSolutionObj["NodesEvaluated"] = this.NodesEvaluated;
+            return mazeSolutionObj.ToString();
+        }
 
     }
 }

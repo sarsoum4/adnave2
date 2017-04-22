@@ -10,8 +10,6 @@ namespace SearchAlgorithmsLib
     public class BestFirstSearch<T> : Searcher<T>
     {
 
-
-
         public override Solution<T> search(ISearchable<T> searchable)
         {
 

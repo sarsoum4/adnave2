@@ -24,12 +24,18 @@ namespace SearchAlgorithmsLib
             while (!(s.Count == 0))
             {
                 State<T> v = s.Pop();
+                
                 if (v.Equals(searchable.getGoalState())){
+                    if (!(visited.Contains(v)))
+                    {
+                        addEvaluatedNode();
+                    }
                     return backTrace(searchable); // private method, back traces through the parents
                 }
                 if (!(visited.Contains(v)))
                 {
                     visited.Add(v);
+                    addEvaluatedNode();
                     succerssors = searchable.getAllPossibleStates(v);
                     foreach (State<T> state in succerssors)
                     {

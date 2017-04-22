@@ -19,7 +19,6 @@ namespace Server.Adapter
         }
 
 
-
         public List<State<MazeLib.Position>> getAllPossibleStates(State<MazeLib.Position> state)
         {
             List<State<MazeLib.Position>> neighbors = new List<State<MazeLib.Position>>();

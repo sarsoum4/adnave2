@@ -12,8 +12,6 @@ namespace Client
     class Client
     {
 
-
-
         private int port;
         private bool connectionActive = false;
         private IPEndPoint endPonit = null;
@@ -21,8 +19,6 @@ namespace Client
         private NetworkStream stream = null;
         private StreamReader reader = null;
         private StreamWriter writer = null;
-
-
 
 
         public Client(int port)
