@@ -15,10 +15,7 @@ namespace Server.Controler
     {
 
         private IModel model;
-        private MazeAdapter<int> adapter;
-        private ISearcher<int> ser;
-        private Solution<int> sol;
-        private SolutionAdapter solAdapter;
+        private MazeAdapter<Position> adapter;
 
         public StartMazeCommand(IModel model)
         {
@@ -39,7 +36,7 @@ namespace Server.Controler
             }
 
             //add the maze to the list of games ready to be played
-            this.model.AddGameToBePlayed(name);
+            this.model.AddGameToList(name);
 
             return "";
         }

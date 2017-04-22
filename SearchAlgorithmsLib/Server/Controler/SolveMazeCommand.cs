@@ -15,10 +15,10 @@ namespace Server.Controler
     {
 
         private IModel model;
-        private MazeAdapter<int> adapter;
-        private ISearcher<int> ser;
-        private Solution<int> sol;
-        private SolutionAdapter solAdapter;
+        private MazeAdapter<Position> adapter;
+        private ISearcher<Position> ser;
+        private Solution<Position> sol;
+        private SolutionAdapter<Position> solAdapter;
 
         private SolutionJson solJson;
 
@@ -32,23 +32,23 @@ namespace Server.Controler
             string name = args[0];
             string algorithm = args[1];
             //get the maze from the model
-            Maze mazeFromModel = this.model.getMaze(name);
+            Maze mazeFromModel = this.model.GetMaze(name);
             if (mazeFromModel == null)
             {
                 //return there is no maze
             }
 
             //create new adapter
-            adapter = new MazeAdapter<int>(mazeFromModel);
+            adapter = new MazeAdapter<Position>(mazeFromModel);
 
             //if 0 then bfs, if 1 dfs, otherwise print error
             if (algorithm.Equals(0))
             {
-                ser = new BestFirstSearch<int>();
+                ser = new BestFirstSearch<Position>();
             }
             else if (algorithm.Equals(1))
             {
-                ser = new DFS<int>();
+                ser = new DFS<Position>();
             }
             else
             {
@@ -56,10 +56,10 @@ namespace Server.Controler
             }
 
             sol = ser.search(adapter);
-            solAdapter = new SolutionAdapter<>(sol);
+            solAdapter = new SolutionAdapter<Position>(sol);
             //add the solved maze to the solved mazes dictionary in the model
-            this.model.addSolvedMaze(name, solAdapter.ToString());
-            solJson = new SolutionJson(name, solAdapter.ToString(), ser.getNumberOfNodesEvaluated);
+            this.model.AddSolvedMaze(name, solAdapter.ToString());
+            solJson = new SolutionJson(name, solAdapter.ToString(), ser.getNumberOfNodesEvaluated());
             return solJson.solveToJSON();
         }
     }

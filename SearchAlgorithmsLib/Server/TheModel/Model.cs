@@ -58,7 +58,7 @@ namespace Server.TheModel
             return false;
         }
 
-        public void AddGameToBePlayed(string name)
+        public void AddGameToList(string name)
         {
             this.games.Add(name);
         }

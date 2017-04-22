@@ -7,6 +7,7 @@ namespace Server.TheModel
         Maze GenerateMaze(string name, int rows, int cols);
 
         void AddGameToList(string name);
+
         void AddSolvedMaze(string name, string solution);
 
         /**
@@ -17,8 +18,6 @@ namespace Server.TheModel
         Maze GetMaze(string name);
 
         bool CheckIfMazeInDictionary(string name);
-
-        void AddGameToBePlayed(string name);
 
         string GamesList();
     }

@@ -12,7 +12,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Server.Controler
 {
-    class ListCommand : ICommand
+    public class ListCommand : ICommand
     {
 
         private IModel model;
