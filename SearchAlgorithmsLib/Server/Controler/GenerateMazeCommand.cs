@@ -24,7 +24,7 @@ namespace Server.Controler
             int rows = int.Parse(args[1]);
             int cols = int.Parse(args[2]);
             Maze maze = model.GenerateMaze(name, rows, cols);
-            this.model.addMaze(name);
+            this.model.addMaze(name, maze);
             return maze.ToJSON();
         }
     }

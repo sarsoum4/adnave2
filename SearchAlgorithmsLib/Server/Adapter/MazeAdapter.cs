@@ -26,11 +26,12 @@ namespace Server.Adapter
             int col = state.currentState.Col;
 
             //left neighbor
-            if (col >= 0 && col-1 < maze.Cols) {
+            if (col >= 0 && col - 1 < maze.Cols)
+            {
                 if (maze[row, col - 1] == CellType.Free)
                 {
-                    State<MazeLib.Position> leftNeighbor = new State<MazeLib.Position>(new Position(row, col - 1));   
-                        
+                    State<MazeLib.Position> leftNeighbor = new State<MazeLib.Position>(new Position(row, col - 1));
+
                     if (state.Cost + 1 < leftNeighbor.Cost)
                     {
                         leftNeighbor.Cost = state.Cost + 1;
@@ -41,20 +42,20 @@ namespace Server.Adapter
             }
 
 
-           return neighbors;
-    }
+            return neighbors;
+        }
 
 
         public State<MazeLib.Position> getGoalState()
         {
             return new State<Position>(maze.GoalPos);
-            
+
         }
 
         public State<MazeLib.Position> getInitialState()
         {
             State<Position> s = new State<Position>(maze.InitialPos);
-            s.Cost = 0;  
+            s.Cost = 0;
             return s;
         }
     }

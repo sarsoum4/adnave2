@@ -15,8 +15,6 @@ namespace SearchAlgorithmsLib
         private double cost; // cost to reach this state (set by a setter)
         private State<T> cameFrom; // the state we came from to this state (setter)
 
-
-
         public State<T> CameFrom
         {
             get{return cameFrom;}
@@ -28,7 +26,6 @@ namespace SearchAlgorithmsLib
             get{return cost;}
             set{cost = value;}
         }
-
 
         public T currentState
         {
@@ -42,8 +39,6 @@ namespace SearchAlgorithmsLib
                 state = value;
             }
         }
-
-
 
         public State(T state) // CTOR
         {

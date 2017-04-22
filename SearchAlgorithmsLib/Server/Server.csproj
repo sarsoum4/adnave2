@@ -58,6 +58,8 @@
     <Compile Include="Controler\Controller.cs" />
     <Compile Include="Controler\GenerateMazeCommand.cs" />
     <Compile Include="Controler\ICommand.cs" />
+    <Compile Include="Controler\SolveMazeCommand.cs" />
+    <Compile Include="Controler\StartMazeCommand.cs" />
     <Compile Include="TheModel\IModel.cs" />
     <Compile Include="TheModel\Model.cs" />
     <Compile Include="Server.cs" />
@@ -72,6 +74,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Client\Client.csproj">
+      <Project>{d2fe4a67-2933-4fbf-b439-ad02ab9062c0}</Project>
+      <Name>Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SearchAlgorithmsLib\SearchAlgorithmsLib.csproj">
       <Project>{7E073640-80B5-465B-BC5E-48FE2ECF1B9F}</Project>
       <Name>SearchAlgorithmsLib</Name>

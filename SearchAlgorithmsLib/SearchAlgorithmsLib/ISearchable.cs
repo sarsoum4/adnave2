@@ -8,6 +8,7 @@ namespace SearchAlgorithmsLib
 {
     public interface ISearchable<T>
     {
+        global::MazeLib.Position GoalPos { get; set; }
 
         State<T> getInitialState();
         State<T> getGoalState();

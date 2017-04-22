@@ -20,7 +20,7 @@ namespace Server.Adapter
         }
 
 
-        public string toString()
+        public override string ToString()
         {
             StringBuilder stringSolution = new StringBuilder();
             for (int i = 1; i < solution.Size(); i++)
