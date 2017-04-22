@@ -23,7 +23,7 @@ namespace Server.Controler
             string name = args[0];
             int rows = int.Parse(args[1]);
             int cols = int.Parse(args[2]);
-            Maze maze = model.GenerateMaze(name, rows, cols);
+            GameMaze maze = model.GenerateMaze(name, rows, cols);
             this.model.addMaze(name);
             return maze.ToJSON();
         }
