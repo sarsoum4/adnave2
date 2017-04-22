@@ -24,7 +24,11 @@ namespace Server.Controler
 
             commands = new Dictionary<string, ICommand>();
             commands.Add("generate", new GenerateMazeCommand(model));
-            // more commands...
+            commands.Add("solve", new SolveMazeCommand(model));
+            commands.Add("start", new StartMazeCommand(model));
+            commands.Add("list", new ListCommand(model));
+            commands.Add("join", new JoinCommaned(model));
+            commands.Add("play", new PlayCommand(model));
         }
 
 

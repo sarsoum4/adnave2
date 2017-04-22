@@ -55,11 +55,13 @@
     <Compile Include="Adapter\MazeAdapter.cs" />
     <Compile Include="Adapter\SolutionAdapter.cs" />
     <Compile Include="Adapter\SolutionJson.cs" />
+    <Compile Include="Controler\CloseCommand.cs" />
     <Compile Include="Controler\Controller.cs" />
     <Compile Include="Controler\GenerateMazeCommand.cs" />
     <Compile Include="Controler\ICommand.cs" />
     <Compile Include="Controler\JoinCommaned.cs" />
     <Compile Include="Controler\ListCommand.cs" />
+    <Compile Include="Controler\PlayCommand.cs" />
     <Compile Include="Controler\SolveMazeCommand.cs" />
     <Compile Include="Controler\StartMazeCommand.cs" />
     <Compile Include="TheModel\IModel.cs" />
