@@ -28,35 +28,20 @@ namespace Server.Controler
         public string Execute(string[] args, TcpClient client = null)
         {
             string name = args[0];
-            string algorithm = args[1];
-            //get the maze from the model
-            Maze mazeFromModel = this.model.getMaze(name);
-            if (mazeFromModel == null)
+            int rows = int.Parse(args[1]);
+            int cols = int.Parse(args[2]);
+
+            //check if the maze is already in the model. if not - generate it
+            if(!this.model.CheckIfMazeInDictionary(name))
             {
-                //return there is no maze
+                GenerateMazeCommand generate = new GenerateMazeCommand(this.model);
+                generate.Execute(args, null);
             }
 
-            //create new adapter
-            adapter = new MazeAdapter<int>(mazeFromModel);
+            //add the maze to the list of games ready to be played
+            this.model.AddGameToBePlayed(name);
 
-            //if 0 then bfs, if 1 dfs, otherwise print error
-            if (algorithm.Equals(0))
-            {
-                ser = new BestFirstSearch<int>();
-            }
-            else if (algorithm.Equals(0))
-            {
-                ser = new DFS<int>();
-            }
-            else
-            {
-                //return algorithm input invalid
-            }
-
-            sol = ser.search(adapter.GetMaze);
-            solAdapter = new SolutionAdapter<int>(sol);
-            this.model.addSolvedMaze(name, solAdapter.ToString());
-            return solAdapter.ToString();
+            return "";
         }
     }
 }

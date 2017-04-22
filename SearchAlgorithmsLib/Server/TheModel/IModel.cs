@@ -6,15 +6,21 @@ namespace Server.TheModel
     {
         Maze GenerateMaze(string name, int rows, int cols);
 
-
-        void addSolvedMaze(string name, string solution);
+        void AddGameToList(string name);
+        void AddSolvedMaze(string name, string solution);
 
         /**
          * add the maze itself to the mazes dictionary.
          */
-        void addMaze(string name, Maze maze);
+        void AddMaze(string name, Maze maze);
 
-        Maze getMaze(string name);
+        Maze GetMaze(string name);
+
+        bool CheckIfMazeInDictionary(string name);
+
+        void AddGameToBePlayed(string name);
+
+        string GamesList();
     }
 
 }

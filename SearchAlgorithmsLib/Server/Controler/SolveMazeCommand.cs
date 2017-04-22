@@ -56,7 +56,7 @@ namespace Server.Controler
             }
 
             sol = ser.search(adapter);
-            solAdapter = new SolutionAdapter<T>(sol);
+            solAdapter = new SolutionAdapter<>(sol);
             //add the solved maze to the solved mazes dictionary in the model
             this.model.addSolvedMaze(name, solAdapter.ToString());
             solJson = new SolutionJson(name, solAdapter.ToString(), ser.getNumberOfNodesEvaluated);

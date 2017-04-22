@@ -16,6 +16,9 @@ namespace Server.TheModel
         //a dictionary with the maze's name as the key, and its solution.
         private Dictionary<string, string> solvedMaze;
 
+        //a set of all the names of games that can be played
+        HashSet<string> games = new HashSet<string>();
+
         public Model()
         {
 
@@ -26,18 +29,18 @@ namespace Server.TheModel
             throw new NotImplementedException();
         }
 
-        public void addSolvedMaze(string name, string solution) {
+        public void AddSolvedMaze(string name, string solution) {
             this.solvedMaze.Add(name,solution);
         }
         
         /**
          * add the maze itself to the mazes dictionary.
          */
-        public void addMaze(string name, Maze maze) {
+        public void AddMaze(string name, Maze maze) {
             this.mazes.Add(name, maze);
         }
 
-        public Maze getMaze(string name){
+        public Maze GetMaze(string name){
             //return this.mazes.TryGetValue(name);
 
             Maze mazeToReturn;
@@ -46,6 +49,23 @@ namespace Server.TheModel
                 return null;
             }
             return mazeToReturn;
+        }
+
+        public bool CheckIfMazeInDictionary(string name)
+        {
+            if (this.mazes.ContainsKey(name))
+                return true;
+            return false;
+        }
+
+        public void AddGameToBePlayed(string name)
+        {
+            this.games.Add(name);
+        }
+
+        public string GamesList()
+        {
+            return this.games.ToString();
         }
     }
 }

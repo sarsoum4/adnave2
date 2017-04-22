@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Server.Adapter
 {
-    class MazeAdapter<T> : ISearchable<MazeLib.Position>
+    class MazeAdapter<T> : ISearchable<Position>
     {
         private MazeLib.Maze maze;
 
@@ -17,7 +17,6 @@ namespace Server.Adapter
         {
             this.maze = maze;
         }
-
 
         public List<State<MazeLib.Position>> getAllPossibleStates(State<MazeLib.Position> state)
         {
@@ -57,6 +56,11 @@ namespace Server.Adapter
             State<Position> s = new State<Position>(maze.InitialPos);
             s.Cost = 0;
             return s;
+        }
+
+        public Maze GetMaze()
+        {
+            return this.maze;
         }
     }
 }
