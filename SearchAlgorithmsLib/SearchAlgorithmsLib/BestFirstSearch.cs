@@ -18,14 +18,15 @@ namespace SearchAlgorithmsLib
 
             State<T> initialState =  searchable.getInitialState();
             addToOpenList(initialState);
-
+            State<T> n = null;
             while (OpenListSize > 0)
             {
-                State<T> n = popOpenList();
+                n = popOpenList();
                 closed.Add(n);
                 if (n.Equals(searchable.getGoalState()))
                 {
-                    return backTrace(searchable); // private method, back traces through the parents
+                    break;
+                   // return backTrace(searchable); // private method, back traces through the parents
                 }
                 List<State<T>> succerssors = new List<State<T>>();
                 succerssors = searchable.getAllPossibleStates(n);
@@ -50,7 +51,20 @@ namespace SearchAlgorithmsLib
                     }
                 }
             }
-            return backTrace(searchable);
+
+            Solution<T> sol = new Solution<T>();
+            State<T> goal = n;
+            State<T> curr = goal;
+            while (curr != null)
+            {
+                Console.WriteLine("*******");
+                sol.addToSolution(curr);
+                curr = curr.CameFrom;
+            }
+            return sol;
+
+
+            //return backTrace(searchable);
         }
 
 

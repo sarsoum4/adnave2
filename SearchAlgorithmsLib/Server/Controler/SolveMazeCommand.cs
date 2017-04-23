@@ -18,7 +18,7 @@ namespace Server.Controler
         private MazeAdapter<Position> adapter;
         private ISearcher<Position> ser;
         private Solution<Position> sol;
-        private SolutionAdapter<Position> solAdapter;
+        private SolutionAdapter solAdapter;
 
         private SolutionJson solJson;
 
@@ -42,11 +42,11 @@ namespace Server.Controler
             adapter = new MazeAdapter<Position>(mazeFromModel);
 
             //if 0 then bfs, if 1 dfs, otherwise print error
-            if (algorithm.Equals(0))
+            if (algorithm.Equals("0"))
             {
                 ser = new BestFirstSearch<Position>();
             }
-            else if (algorithm.Equals(1))
+            else if (algorithm.Equals("1"))
             {
                 ser = new DFS<Position>();
             }
@@ -56,7 +56,9 @@ namespace Server.Controler
             }
 
             sol = ser.search(adapter);
-            solAdapter = new SolutionAdapter<Position>(sol);
+            Console.WriteLine(sol.Path.Count());
+            Console.WriteLine(sol.Path.Count());
+            solAdapter = new SolutionAdapter(sol);
             //add the solved maze to the solved mazes dictionary in the model
             this.model.AddSolvedMaze(name, solAdapter.ToString());
             solJson = new SolutionJson(name, solAdapter.ToString(), ser.getNumberOfNodesEvaluated());

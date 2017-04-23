@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Server.TheModel
 {
+    // this class represents a multiplayer game.
+    // a multiplayer game contains a name, two clients(which are the players)
+    // and a maze.
     public class MultyplayerGame
     {
         private Maze maze;
@@ -17,9 +20,6 @@ namespace Server.TheModel
         private string name;
         private int numberOfPlayers;
  
-
-
-
 
         public TcpClient FirstPlayer
         {
@@ -49,14 +49,11 @@ namespace Server.TheModel
             }
         }
 
-
-
-
-
+        //the function that makes a player's move
         public void play(string move, TcpClient client)
         {
             TcpClient player = null;
-            if (client == FirstPlayer)
+            if (client.Equals(FirstPlayer))
                 player = secondPlayer;
             else
                 player = firstPlayer;
@@ -65,11 +62,12 @@ namespace Server.TheModel
             BinaryReader reader = new BinaryReader(stream);
             BinaryWriter writer = new BinaryWriter(stream);
             {
+                writer.Flush();
                 writer.Write(move);
             }
         }
 
-
+        //send message to the client, once there are 2 players for this game
         private void SendMessageToPlayer()
         {
             string str = maze.ToJSON();
@@ -78,9 +76,8 @@ namespace Server.TheModel
             BinaryWriter writer = new BinaryWriter(stream);
             {
                 writer.Write(str);
-            }
+            }
         }
-
 
         public string Name
         {
@@ -107,12 +104,9 @@ namespace Server.TheModel
         {
             this.maze = maze;
             this.FirstPlayer = firstPlayer;
-            this.SecondPlayer = null;
+            //this.SecondPlayer = null;
             this.Name = name;
             this.numberOfPlayers = 1;
-
         }
-
-
     }
 }

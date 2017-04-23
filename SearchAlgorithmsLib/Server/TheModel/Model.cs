@@ -46,21 +46,24 @@ namespace Server.TheModel
             {
                 games.Remove(name);
                 TcpClient first;
-                TcpClient second;
+                TcpClient second = null;
 
                 MultyplayerGame game;
                 MultyplayerGames.TryGetValue(name, out game);
 
                 first = game.FirstPlayer;
-                second = game.SecondPlayer;
+                if (game.NumberOfPlayers == 2)
+                    second = game.SecondPlayer;
+                    
                 MultyplayerGames.Remove(name);
 
                 MazesByClients.Remove(first);
-                MazesByClients.Remove(second);
+                if(game.NumberOfPlayers == 2)
+                    MazesByClients.Remove(second);
+                    
             }
         
         }
-
 
 
         public void AddMultyplayerGame(string name, TcpClient client)
@@ -68,7 +71,6 @@ namespace Server.TheModel
             Maze maze = this.GetMaze(name);
             MultyplayerGame game = new MultyplayerGame(client, name, maze);
             MultyplayerGames.Add(name, game);
-
             MazesByClients.Add(client, game);
         }
 
@@ -77,7 +79,7 @@ namespace Server.TheModel
             MultyplayerGame game = null;
             MultyplayerGames.TryGetValue(name, out game);
             game.SecondPlayer = client;
-
+            games.Remove(name);
             MazesByClients.Add(client, game);
 
         }
@@ -92,14 +94,8 @@ namespace Server.TheModel
         }
 
 
-      
-
-
         public Maze GenerateMaze(string name, int rows, int cols)
         {
-
-           if (CheckIfMazeInDictionary(name))
-
             MazeGeneratorLib.IMazeGenerator generator = new DFSMazeGenerator();
             Maze maze = generator.Generate(rows, cols);
             maze.Name = name;

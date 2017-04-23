@@ -20,7 +20,6 @@ namespace Client
         private StreamReader reader = null;
         private StreamWriter writer = null;
 
-
         public Client(int port)
         {
             this.port = port;
@@ -31,7 +30,6 @@ namespace Client
             this.reader = null;
             this.writer = null;
          }
-
 
         private void Recieve()
         {
@@ -65,11 +63,7 @@ namespace Client
                         break;
                     }
 
-
-                    else
-                    {
-                        Console.WriteLine(answer);
-                    }
+                    Console.WriteLine(answer);    
                 }
                 // Server closed the connection.
                 catch
@@ -80,9 +74,9 @@ namespace Client
             }
         }
 
-
         public void Connect()
         {
+            Console.WriteLine("Welcome Player !");
             this.endPonit = new IPEndPoint(IPAddress.Parse("127.0.0.1"), this.port);
             Task send = new Task(() =>
             {
@@ -90,11 +84,12 @@ namespace Client
                 {
                     try
                     {
-                        Console.WriteLine("Welcome Player !");
+                        
                         String userCommand = Console.ReadLine();
 
                         if (!connectionActive)
                         {
+                            
                             connectionActive = true;
                             client = new TcpClient();
                             client.Connect(endPonit);
@@ -109,11 +104,9 @@ namespace Client
 
                             });
                             recv.Start();
-
                         }
                         writer.WriteLine(userCommand);
                         writer.Flush();
-
                     }
 
                     catch
@@ -125,11 +118,6 @@ namespace Client
             }); send.Start();
             send.Wait();
         }
-
-
-
-
-
 
     }
 }

@@ -32,6 +32,7 @@ namespace SearchAlgorithmsLib
         public void addToSolution(State<T> node)
         {
             this.path.Add(node);
+            Console.WriteLine(path.Count());
         }
 
 

@@ -14,7 +14,7 @@ class Program
 
         Console.WriteLine("THE START !!");
        
-        ISearcher<int> ser = new DFS<int>();
+        ISearcher<int> ser = new BestFirstSearch<int>();
 
         Dictionary<State<int>, List<State<int>>> Adj = new Dictionary<State<int>, List<State<int>>>();
         State<int> one = new State<int>(1);
@@ -27,13 +27,13 @@ class Program
 
         Adj[one] = new List<State<int>> { two, three };
         Adj[two] = new List<State<int>> { four, five };
-        Adj[three] = new List<State<int>> { two, six };
+        Adj[three] = new List<State<int>> { two , seven};
         Adj[four] = new List<State<int>>();
-        Adj[five] = new List<State<int>> { six };
+        Adj[five] = new List<State<int>> ();
         Adj[six] = new List<State<int>> { seven };
         Adj[seven] = new List<State<int>> { three };
 
-        TestSearchable<int> test1 = new TestSearchable<int>(one, six, Adj);
+        TestSearchable<int> test1 = new TestSearchable<int>(one, seven, Adj);
         Solution<int> sol = ser.search(test1);
     
         printSol(sol);

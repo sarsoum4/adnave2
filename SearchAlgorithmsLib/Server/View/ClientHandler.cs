@@ -24,26 +24,31 @@ namespace Server.View
         {
             new Task(() => 
             {
-                bool flag = true;
+                //bool flag = true;
                 using (NetworkStream stream = client.GetStream())
                 using (StreamReader reader = new StreamReader(stream))
                 using (StreamWriter writer = new StreamWriter(stream))
-                while (flag)
+                while (true)
                 {
 
                         string commandLine = reader.ReadLine();
                         Console.WriteLine("Got command: {0}", commandLine);
 
                         string result = controller.ExecuteCommand(commandLine, client);
-                        Console.WriteLine(result);
                         if (result.Equals("-1"))
-                            flag = false;
+                        {
+                            client.Close();
+                            break;
+                        }
+                        Console.WriteLine(result);
+                        writer.Write("");
+                        writer.Flush();
                         writer.Write(result);
                         writer.Flush();
                 }
 
                 
-                //client.Close();
+                
             }).Start();
         }
 

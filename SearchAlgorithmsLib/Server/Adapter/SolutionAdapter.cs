@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Server.Adapter
 {
-    class SolutionAdapter<T>
+    class SolutionAdapter
     {
 
         private Solution<Position> solution;
@@ -23,15 +23,18 @@ namespace Server.Adapter
 
         public override string ToString()
         {
-            int size = solution.toString().Length;
+            int size = solution.Path.Count();
+
+
+
 
             StringBuilder stringSolution = new StringBuilder();
-            for (int i = 1; i < size; i++)
+            for (int i = size-1; i > 0; i--)
 
             {
-                State<MazeLib.Position> prev = solution.GetItemAt(i - 1);
+                State<MazeLib.Position> prev = solution.GetItemAt(i);
 
-                State<MazeLib.Position> curr = solution.GetItemAt(i);
+                State<MazeLib.Position> curr = solution.GetItemAt(i-1);
 
                 if (curr.currentState.Col > prev.currentState.Col)
                 {
