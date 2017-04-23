@@ -9,23 +9,19 @@ using System.Threading.Tasks;
 
 namespace Server.Controler
 {
-    public class GenerateMazeCommand : ICommand
+    public class PlayCommand : ICommand
     {
-
         private IModel model;
 
-        public GenerateMazeCommand(IModel model) {
+
+        public PlayCommand(IModel model)
+        {
             this.model = model;
         }
 
         public string Execute(string[] args, TcpClient client = null)
         {
-            string name = args[0];
-            int rows = int.Parse(args[1]);
-            int cols = int.Parse(args[2]);
-            Maze maze = model.GenerateMaze(name, rows, cols);
-            this.model.AddMaze(name, maze);
-            return maze.ToJSON();
+            throw new NotImplementedException();
         }
     }
 }

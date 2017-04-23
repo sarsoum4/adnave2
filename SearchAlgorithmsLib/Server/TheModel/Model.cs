@@ -2,64 +2,48 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using MazeLib;
-using SearchAlgorithmsLib;
 
 namespace Server.TheModel
 {
     public class Model : IModel
     {
-        //a dictionary with the maze's name as the key, and the maze object
-        private Dictionary<string, GameMaze> mazes;
+        //a dictionary with the maze's name as the key, and its solution.
+        private Dictionary<string, Maze> mazes;
         
         //a dictionary with the maze's name as the key, and its solution.
-        private Dictionary<string, Solution<State<Position>>> solvedMaze;
+        private Dictionary<string, string> solvedMaze;
 
-        
+        //a set of all the names of games that can be played
+        HashSet<string> games = new HashSet<string>();
 
         public Model()
         {
- 
-            this.solvedMaze = new Dictionary<string, Solution<State<Position>>>();
-            this.mazes = new Dictionary<string, GameMaze>();
+
         }
 
-
-
-
-        public GameMaze GenerateMaze(string name, int rows, int cols , int maxPlayers)
+        public Maze GenerateMaze(string name, int rows, int cols)
         {
-            if (mazes.ContainsKey(name))
-            {
-                throw new ArgumentException("name already taken, re-enter a command");
-            }
-            MazeGeneratorLib.DFSMazeGenerator generator = new MazeGeneratorLib.DFSMazeGenerator();
-            Maze maze = generator.Generate(rows, cols);
-            maze.Name = name;
-            GameMaze game = new GameMaze(maze, null, maxPlayers);
-            mazes.Add(name, game);
-            return game;
+            throw new NotImplementedException();
         }
 
-
-        public Solution<State<Position>> Solve(string name, string solution) {
+        public void AddSolvedMaze(string name, string solution) {
             this.solvedMaze.Add(name,solution);
         }
         
         /**
          * add the maze itself to the mazes dictionary.
          */
-        public void addMaze(string name, GameMaze maze) {
+        public void AddMaze(string name, Maze maze) {
             this.mazes.Add(name, maze);
         }
 
-        public GameMaze getMaze(string name){
+        public Maze GetMaze(string name){
             //return this.mazes.TryGetValue(name);
 
-            GameMaze mazeToReturn;
+            Maze mazeToReturn;
             if (!mazes.TryGetValue(name, out mazeToReturn)) {
                 // there in no maze with that name
                 return null;
@@ -67,41 +51,21 @@ namespace Server.TheModel
             return mazeToReturn;
         }
 
-
-
-
-
-        public Solution<State<Position>> Solve(string name, string algo)
+        public bool CheckIfMazeInDictionary(string name)
         {
-            throw new NotImplementedException();
+            if (this.mazes.ContainsKey(name))
+                return true;
+            return false;
         }
 
-        public List<string> GetGamesList()
+        public void AddGameToList(string name)
         {
-            throw new NotImplementedException();
+            this.games.Add(name);
         }
 
-        public void AddGame(string name, int rows, int columns, TcpClient host)
+        public string GamesList()
         {
-            throw new NotImplementedException();
+            return this.games.ToString();
         }
-
-        public GameMaze JoinAGame(string name, TcpClient guest)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveGame(string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        public GameMaze GetMazeGame(string name)
-        {
-            throw new NotImplementedException();
-        }
-
-
-
     }
 }

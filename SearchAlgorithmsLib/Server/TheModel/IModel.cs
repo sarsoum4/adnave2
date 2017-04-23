@@ -1,43 +1,25 @@
 ﻿using MazeLib;
-using SearchAlgorithmsLib;
-using System.Collections.Generic;
-using System.Net.Sockets;
 
 namespace Server.TheModel
 {
     public interface IModel
     {
-        GameMaze GenerateMaze(string name, int rows, int cols, int maxPlayers);
+        Maze GenerateMaze(string name, int rows, int cols);
 
+        void AddGameToList(string name);
 
-        Solution<State<Position>> Solve(string name, string algo);
+        void AddSolvedMaze(string name, string solution);
 
+        /**
+         * add the maze itself to the mazes dictionary.
+         */
+        void AddMaze(string name, Maze maze);
 
-        List<string> GetGamesList();
+        Maze GetMaze(string name);
 
+        bool CheckIfMazeInDictionary(string name);
 
-        void AddGame(string name, int rows, int columns, TcpClient host);
-
-
-        GameMaze JoinAGame(string name, TcpClient guest);
-
-
-        void RemoveGame(string name);
-
-
-        GameMaze GetMazeGame(string name);
-
-
-
-    
-
-
-
-
-
-
-
-
-
+        string GamesList();
     }
+
 }

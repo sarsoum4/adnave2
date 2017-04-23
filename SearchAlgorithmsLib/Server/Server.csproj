@@ -34,13 +34,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MazeGeneratorLib">
-      <HintPath>..\..\..\..\..\..\Desktop\MazeGeneratorLib.dll</HintPath>
+      <HintPath>..\..\..\..\..\Downloads\MazeGeneratorLib.dll</HintPath>
     </Reference>
     <Reference Include="MazeLib">
-      <HintPath>..\..\..\..\..\..\Desktop\MazeLib.dll</HintPath>
-    </Reference>
-    <Reference Include="MedallionPriorityQueue">
-      <HintPath>..\SearchAlgorithmsLib\bin\Debug\MedallionPriorityQueue.dll</HintPath>
+      <HintPath>..\..\..\..\..\Downloads\MazeLib.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -58,10 +55,15 @@
     <Compile Include="Adapter\MazeAdapter.cs" />
     <Compile Include="Adapter\SolutionAdapter.cs" />
     <Compile Include="Adapter\SolutionJson.cs" />
+    <Compile Include="Controler\CloseCommand.cs" />
     <Compile Include="Controler\Controller.cs" />
     <Compile Include="Controler\GenerateMazeCommand.cs" />
     <Compile Include="Controler\ICommand.cs" />
-    <Compile Include="GameMaze.cs" />
+    <Compile Include="Controler\JoinCommaned.cs" />
+    <Compile Include="Controler\ListCommand.cs" />
+    <Compile Include="Controler\PlayCommand.cs" />
+    <Compile Include="Controler\SolveMazeCommand.cs" />
+    <Compile Include="Controler\StartMazeCommand.cs" />
     <Compile Include="TheModel\IModel.cs" />
     <Compile Include="TheModel\Model.cs" />
     <Compile Include="Server.cs" />
@@ -76,6 +78,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Client\Client.csproj">
+      <Project>{d2fe4a67-2933-4fbf-b439-ad02ab9062c0}</Project>
+      <Name>Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SearchAlgorithmsLib\SearchAlgorithmsLib.csproj">
       <Project>{7E073640-80B5-465B-BC5E-48FE2ECF1B9F}</Project>
       <Name>SearchAlgorithmsLib</Name>

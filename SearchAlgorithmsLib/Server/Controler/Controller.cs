@@ -15,19 +15,30 @@ namespace Server.Controler
 
         private Dictionary<string, ICommand> commands;
         private IModel model;
-        //private IView view;
+        private IView view;
 
 
         public Controller()
         {
-            model = new TheModel.Model();
 
             commands = new Dictionary<string, ICommand>();
             commands.Add("generate", new GenerateMazeCommand(model));
-            // more commands...
+            commands.Add("solve", new SolveMazeCommand(model));
+            commands.Add("start", new StartMazeCommand(model));
+            commands.Add("list", new ListCommand(model));
+            commands.Add("join", new JoinCommaned(model));
+            commands.Add("play", new PlayCommand(model));
         }
 
+        public void SetView(IView view)
+        {
+            this.view = view;
+        }
 
+        public void SetModel(IModel model)
+        {
+            this.model = model
+        }
 
         public string ExecuteCommand(string commandLine, TcpClient client)
         {

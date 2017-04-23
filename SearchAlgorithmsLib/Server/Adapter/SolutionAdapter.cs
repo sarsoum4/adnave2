@@ -8,22 +8,25 @@ using System.Threading.Tasks;
 
 namespace Server.Adapter
 {
-    class SolutionAdapter
+    class SolutionAdapter<T>
     {
 
-        private Solution<State<Position>> solution;
+        private Solution<Position> solution;
 
-        public SolutionAdapter(Solution<State<Position>> solution)
+        public SolutionAdapter(Solution<Position> solution)
         {
             this.solution = solution;
+            
 
         }
 
 
-        public string toString()
+        public override string ToString()
         {
+            int size = solution.toString().Length;
+
             StringBuilder stringSolution = new StringBuilder();
-            for (int i = 1; i < solution.Size(); i++)
+            for (int i = 1; i < size; i++)
 
             {
                 State<MazeLib.Position> prev = solution.GetItemAt(i - 1);

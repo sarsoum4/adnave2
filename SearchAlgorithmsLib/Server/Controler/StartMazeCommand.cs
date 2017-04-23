@@ -1,12 +1,13 @@
 ﻿using System;
 using MazeLib;
-using MazeAdapter;
 using Server.TheModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using Server.Adapter;
+using SearchAlgorithmsLib;
 
 namespace Server.Controler
 {
@@ -14,10 +15,7 @@ namespace Server.Controler
     {
 
         private IModel model;
-        private MazeAdapter adapter;
-        private Isearchable<T> ser;
-        private Solution<T> sol;
-        private SolutionAdapter<T> solAdapter;
+        private MazeAdapter<Position> adapter;
 
         public StartMazeCommand(IModel model)
         {
@@ -27,35 +25,20 @@ namespace Server.Controler
         public string Execute(string[] args, TcpClient client = null)
         {
             string name = args[0];
-            int algorithm = args[1];
-            //get the maze from the model
-            Maze mazeFromModel = this.model.getMaze(name);
-            if (mazeFromModel == null)
+            int rows = int.Parse(args[1]);
+            int cols = int.Parse(args[2]);
+
+            //check if the maze is already in the model. if not - generate it
+            if(!this.model.CheckIfMazeInDictionary(name))
             {
-                //return there is no maze
+                GenerateMazeCommand generate = new GenerateMazeCommand(this.model);
+                generate.Execute(args, null);
             }
 
-            //create new adapter
-            adapter = new MazeAdapter(mazeFromModel);
+            //add the maze to the list of games ready to be played
+            this.model.AddGameToList(name);
 
-            //if 0 then bfs, if 1 dfs, otherwise print error
-            if (algorithm == 0)
-            {
-                ser = new BestFirstSearch<T>();
-            }
-            else if (algorithm == 1)
-            {
-                ser = new DFS<T>();
-            }
-            else
-            {
-                //return algorithm input invalid
-            }
-
-            sol = ser.search(adapter);
-            solAdapter = new SolutionAdapter<T>(sol);
-            this.model.addSolvedMaze(name, solAdapter.toString());
-            return solAdapter.toString();
+            return "";
         }
     }
 }
