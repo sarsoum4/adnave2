@@ -1,4 +1,5 @@
-﻿using MazeLib;
+﻿using System.Net.Sockets;
+using MazeLib;
 
 namespace Server.TheModel
 {
@@ -18,8 +19,14 @@ namespace Server.TheModel
         Maze GetMaze(string name);
 
         bool CheckIfMazeInDictionary(string name);
-
+        void CloseGame(string name);
         string GamesList();
+
+        void AddMultyplayerGame(string name, TcpClient client);
+        void play(string move, TcpClient client);
+        void AddSecondPlayer(string name, TcpClient client);
+
+        bool GameIsFull(string name);
     }
 
 }

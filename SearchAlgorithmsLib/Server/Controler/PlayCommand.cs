@@ -21,7 +21,9 @@ namespace Server.Controler
 
         public string Execute(string[] args, TcpClient client = null)
         {
-            throw new NotImplementedException();
+            string move = args[0];
+            this.model.play(move, client);
+            return move;
         }
     }
 }

@@ -35,12 +35,20 @@ namespace Client
 
         private void Recieve()
         {
-            while (true)
+            bool flag = true;
+            while (flag)
             {
                 try
                 {
+                    
                     string answer = reader.ReadLine();
-                    if (answer.Equals("close"))
+
+                    if (answer == null)
+                    {
+                        flag = false;
+                    }
+
+                    else if (answer.Equals("close"))
                     {
                         // Close the connection.
                         writer.WriteLine("close");
@@ -50,12 +58,14 @@ namespace Client
                         break;
                     }
                    
-                    if (answer.Equals("-1"))
+                    else if (answer.Equals("-1"))
                     {
                         this.connectionActive = false;
                         client.Close();
                         break;
                     }
+
+
                     else
                     {
                         Console.WriteLine(answer);
@@ -80,6 +90,7 @@ namespace Client
                 {
                     try
                     {
+                        Console.WriteLine("Welcome Player !");
                         String userCommand = Console.ReadLine();
 
                         if (!connectionActive)

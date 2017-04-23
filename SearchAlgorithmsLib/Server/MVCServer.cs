@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Server.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -6,14 +7,14 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server.Model
+namespace Server
 {
-    class Server
+    public class MVCServer
     {
         private int port;
         private TcpListener listener;
-        private IClientHandler ch;
-        public Server(int port, IClientHandler ch)
+        private IView ch;
+        public MVCServer(int port, IView ch)
         {
             this.port = port;
             this.ch = ch;

@@ -21,7 +21,8 @@ namespace Server.Controler
 
         public string Execute(string[] args, TcpClient client = null)
         {
-            return "";
+            this.model.CloseGame(args[0]);
+            return "-1";
         }
     }
 }

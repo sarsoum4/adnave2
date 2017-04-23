@@ -30,7 +30,15 @@ namespace Server.Controler
                 return "maze does not exist";
             }
 
-            return this.model.GetMaze(name).ToJSON();
+            if (!this.model.GameIsFull(name))
+            {
+                this.model.AddSecondPlayer(name, client);
+                return this.model.GetMaze(name).ToJSON();
+            }
+            else
+                return "this game is unavailable";
+
+
         }
     }
 }

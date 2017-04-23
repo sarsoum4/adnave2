@@ -1,5 +1,10 @@
-﻿using System;
+﻿using Server.Controler;
+using Server.TheModel;
+using Server.View;
+
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,14 +16,17 @@ namespace Server
         static void Main(string[] args)
         {
 
-           // IControler controler = new MazeControler();
-           // IModel model = new MazeModel(controler);
-            //IView view = new ClientHandler(controler);
-            //controler.SetViewAndModel(model, view);
-           // string port = ConfigurationManager.AppSettings["port"].ToString();
-            //Server server = new Server(Convert.ToInt32(port), view);
-           // server.Start();
-           // Console.ReadKey();
+            
+            IModel model = new TheModel.Model();
+            IController controler = new Controller(model);
+            //controler.SetModel(model);
+            IView view = new ClientHandler(controler);
+            controler.SetView(view);
+            
+            string port = ConfigurationManager.AppSettings["port"].ToString();
+            MVCServer server = new MVCServer(Convert.ToInt32(port), view);
+            server.Start();
+            Console.ReadKey();
 
 
         }

@@ -18,16 +18,17 @@ namespace Server.Controler
         private IView view;
 
 
-        public Controller()
+        public Controller(IModel model)
         {
-
+            this.model = model;
             commands = new Dictionary<string, ICommand>();
-            commands.Add("generate", new GenerateMazeCommand(model));
-            commands.Add("solve", new SolveMazeCommand(model));
-            commands.Add("start", new StartMazeCommand(model));
-            commands.Add("list", new ListCommand(model));
-            commands.Add("join", new JoinCommaned(model));
-            commands.Add("play", new PlayCommand(model));
+            commands.Add("generate", new GenerateMazeCommand(this.model));
+            commands.Add("solve", new SolveMazeCommand(this.model));
+            commands.Add("start", new StartMazeCommand(this.model));
+            commands.Add("list", new ListCommand(this.model));
+            commands.Add("join", new JoinCommaned(this.model));
+            commands.Add("play", new PlayCommand(this.model));
+            commands.Add("close", new CloseCommand(this.model));
         }
 
         public void SetView(IView view)
@@ -37,7 +38,7 @@ namespace Server.Controler
 
         public void SetModel(IModel model)
         {
-            this.model = model
+            this.model = model;
         }
 
         public string ExecuteCommand(string commandLine, TcpClient client)
@@ -48,7 +49,8 @@ namespace Server.Controler
                 return "Command not found";
             string[] args = arr.Skip(1).ToArray();
             ICommand command = commands[commandKey];
-            return command.Execute(args, client);
+            string s = command.Execute(args, client);
+            return s;
         }
     }
 }

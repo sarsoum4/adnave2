@@ -25,20 +25,20 @@ namespace Server.Controler
         public string Execute(string[] args, TcpClient client = null)
         {
             string name = args[0];
-            int rows = int.Parse(args[1]);
-            int cols = int.Parse(args[2]);
-
+  
             //check if the maze is already in the model. if not - generate it
             if(!this.model.CheckIfMazeInDictionary(name))
             {
                 GenerateMazeCommand generate = new GenerateMazeCommand(this.model);
-                generate.Execute(args, null);
+                string output= generate.Execute(args, client);
             }
 
             //add the maze to the list of games ready to be played
             this.model.AddGameToList(name);
+            this.model.AddMultyplayerGame(name, client);
 
-            return "";
+            //multiplYER
+            return "waiting for another player...";
         }
     }
 }

@@ -31,10 +31,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MazeGeneratorLib">
-      <HintPath>..\..\..\..\..\Downloads\MazeGeneratorLib.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Desktop\MazeGeneratorLib.dll</HintPath>
     </Reference>
     <Reference Include="MazeLib">
-      <HintPath>..\..\..\..\..\Downloads\MazeLib.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Desktop\MazeLib.dll</HintPath>
     </Reference>
     <Reference Include="MedallionPriorityQueue, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MedallionPriorityQueue.1.0.1\lib\net45\MedallionPriorityQueue.dll</HintPath>
