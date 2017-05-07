@@ -1,0 +1,132 @@
+commit f963c29cb881ca973c2525c27b8e58e0c985eb45
+Author: mahmuds <mhmod.srsor@gmail.com>
+Date:   Sun Apr 23 21:53:35 2017 +0300
+
+    Done !
+
+commit 275e3cff071ef3cfaca9bbf205ef7c72d4e9204b
+Author: mahmuds <mhmod.srsor@gmail.com>
+Date:   Sun Apr 23 18:14:45 2017 +0300
+
+    bla blah
+
+commit be7989bbe57578ca88ab1a456e3f5338582cb577
+Merge: 1b811a3 b35f096
+Author: mahmuds <mhmod.srsor@gmail.com>
+Date:   Sun Apr 23 18:04:45 2017 +0300
+
+    start to debug the project
+
+commit b35f0962239ba1dc57e3b532922206eb76f202f5
+Author: Lee Shoshani <alister146@gmail.com>
+Date:   Sun Apr 23 13:14:49 2017 +0300
+
+    changes
+
+commit ea41fb14687d805cde674d98cef09da89c45ee79
+Author: Lee Shoshani <alister146@gmail.com>
+Date:   Sun Apr 23 00:44:17 2017 +0300
+
+    controller updated, added last commands
+
+commit 2ee72aa6cedd40b2cd4fc3ad42214123850afd39
+Author: Lee Shoshani <alister146@gmail.com>
+Date:   Sun Apr 23 00:23:05 2017 +0300
+
+    added command
+
+commit 1b811a3bccee639215eb76389be79efbe96c9ed4
+Author: mahmuds <mhmod.srsor@gmail.com>
+Date:   Sat Apr 22 22:40:20 2017 +0300
+
+    changes in the Model
+
+commit 48f09be4507cdcc27509665b32d1868eade9efcd
+Author: Lee Shoshani <alister146@gmail.com>
+Date:   Sat Apr 22 22:37:01 2017 +0300
+
+    added listcommand, model changed
+
+commit 46880fbf694e2b688aaafbf7bd72d624878c49ce
+Author: Lee Shoshani <alister146@gmail.com>
+Date:   Sat Apr 22 21:24:44 2017 +0300
+
+    mazeadapter,solvemazecommand,startmazecommand
+
+commit 1ad39a5dbb9602d266b1463a3a2531b557d31fb7
+Author: Lee Shoshani <alister146@gmail.com>
+Date:   Sat Apr 22 17:22:37 2017 +0300
+
+    changes in the model, adapters, dfs, searcher and added classes to controller
+
+commit c2f7d58ab8365a82a827f73abc6101efaf8344e9
+Author: mahmuds <mhmod.srsor@gmail.com>
+Date:   Thu Apr 20 22:15:36 2017 +0300
+
+    View and Controller
+
+commit 9985caefd87187b0357b0fe356a61513c8556dbd
+Author: mahmuds <mhmod.srsor@gmail.com>
+Date:   Thu Apr 20 19:47:53 2017 +0300
+
+    Maze Adapter and MVC
+
+commit 0800ee6c6635e97c2b3028b10fe67f7c0e9e33b6
+Author: Lee Shoshani <alister146@gmail.com>
+Date:   Fri Apr 7 10:35:48 2017 +0300
+
+    DFS done
+
+commit 4c9a634774cae826ebd9148ee2a742ca4f935dc5
+Author: Lee Shoshani <alister146@gmail.com>
+Date:   Thu Apr 6 18:23:25 2017 +0300
+
+    dfs
+
+commit 1c57b0ef05fd8ea5789077b4e273669cbad82689
+Author: mahmuds <mhmod.srsor@gmail.com>
+Date:   Thu Apr 6 17:34:16 2017 +0300
+
+    update the test
+
+commit 5d2b84767599a70d3a7b04ae83fa2b911a4bfa0b
+Author: mahmuds <mhmod.srsor@gmail.com>
+Date:   Thu Apr 6 16:34:48 2017 +0300
+
+    Add a test project for the BFS and DFS
+
+commit 10e142bd10706224eab8850509d8d18ec150a5dd
+Author: mahmuds <mhmod.srsor@gmail.com>
+Date:   Thu Apr 6 15:51:41 2017 +0300
+
+    BFS and solution update
+
+commit e5be0e570c364731d198a7902c7100873ddf5927
+Author: mahmuds <mhmod.srsor@gmail.com>
+Date:   Mon Apr 3 20:39:16 2017 +0300
+
+    add all the classes
+
+commit 077218af7c4f7e99b1d4aea3654a290348ea0167
+Author: mahmuds <mhmod.srsor@gmail.com>
+Date:   Mon Apr 3 20:23:31 2017 +0300
+
+    start to implement state ans BFS class
+
+commit 33a76b555530e55c93e5d0cf476ecb80088176fc
+Author: mahmuds <mhmod.srsor@gmail.com>
+Date:   Mon Apr 3 20:10:29 2017 +0300
+
+    add State class and install MedallionPriorityQueue package
+
+commit 398aa54c5993e72c131a87653ed4db86efebbb04
+Author: mahmuds <mhmod.srsor@gmail.com>
+Date:   Mon Apr 3 18:48:41 2017 +0300
+
+    1 2 3
+
+commit 565345f22e6b70ddd1fa8ebcb4381c76b03019b7
+Author: sarsoum4 <sarsoum4@macs.biu.ac.il>
+Date:   Mon Apr 3 18:46:48 2017 +0300
+
+    Initial commit

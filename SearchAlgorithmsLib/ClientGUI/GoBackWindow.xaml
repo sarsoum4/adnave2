@@ -1,0 +1,17 @@
+﻿<Window x:Class="ClientGUI.GoBackWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClientGUI"
+        mc:Ignorable="d"
+        Title="GoBackWindow" Height="180" Width="300">
+    <Grid>
+        <Label x:Name="label" Content="Are You Sure ?? " HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="140" FontSize="20" Background="White" Foreground="#FFF90505"/>
+        <StackPanel HorizontalAlignment="Right" Height="100" Margin="0,0,0,-1" VerticalAlignment="Bottom" Width="292" Orientation="Horizontal">
+            <Button x:Name="yesbutton" Content="YES" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="95,39,5,39" Width="41" Click="yesbutton_Click"/>
+            <Button x:Name="nobutton" Content="NO" VerticalAlignment="Center" Margin="10,39,90,39" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Width="41" Click="nobutton_Click"/>
+        </StackPanel>
+
+    </Grid>
+</Window>
