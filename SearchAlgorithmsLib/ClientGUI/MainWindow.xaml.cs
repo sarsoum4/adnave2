@@ -34,7 +34,8 @@ namespace ClientGUI
 
         private void settings_Click(object sender, RoutedEventArgs e)
         {
-
+            SettingsWindow setting = new SettingsWindow();
+            setting.ShowDialog();
         }
 
         private void singalPlayer_Click(object sender, RoutedEventArgs e)

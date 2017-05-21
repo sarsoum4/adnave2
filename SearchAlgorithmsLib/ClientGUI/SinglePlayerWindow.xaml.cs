@@ -19,10 +19,15 @@ namespace ClientGUI
     /// </summary>
     public partial class SinglePlayerWindow : Window
     {
-        public SinglePlayerWindow(string gameName)
+
+        private int row;
+        private int col;
+        public SinglePlayerWindow(string gameName, int row ,int col)
         {
             InitializeComponent();
             this.Title = gameName;
+            this.row = row;
+            this.col = col;
             Grid grid = new Grid();
         }
 

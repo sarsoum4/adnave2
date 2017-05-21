@@ -26,16 +26,19 @@ namespace ClientGUI
 
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
-            //String gameName = txtMazeName.Text.ToString();
+            String gameName = txtMazeName.Text.ToString();
+            int row = Convert.ToInt32(txtRows.Text.ToString());
+            int col = Convert.ToInt32(txtCols.Text.ToString());
+
             this.Close();
-            //SinglePlayerWindow game = new SinglePlayerWindow();
-            //game.ShowDialog();
+            SinglePlayerWindow game = new SinglePlayerWindow(gameName, row, col);
+            game.ShowDialog();
 
 
             //SinglePlayerMenu menu = new SinglePlayerMenu();
-            Window win = new Window();
-            win.Content = new SinglePlayerMenu();
-            win.ShowDialog();
+            //Window win = new Window();
+            //win.Content = new SinglePlayerMenu();
+            //win.ShowDialog();
         }
     }
 }

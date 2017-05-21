@@ -5,13 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ClientGUI"
              mc:Ignorable="d" 
-             d:DesignHeight="610" d:DesignWidth="620" Loaded="UserControl_Loaded" Background="#FFFDF4F4">
-    <Viewbox>
-        <Border BorderBrush="Black" BorderThickness="3">
-            <Canvas x:Name="myCanvas" Width="300" Height="300">
-            </Canvas>
-        </Border>
-    </Viewbox>
+             d:DesignHeight="310" d:DesignWidth="320" Background="#FFFDF4F4">
+    <Grid>
+
+
+
+
+
+
+    </Grid>
+
 
 
 </UserControl>
