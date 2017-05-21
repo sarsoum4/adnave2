@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClientGUI"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         xmlns:Controls ="clr-namespace:ClientGUI"
-        Title="SinglePlayerWindow" Height="700" Width="650">
+        Height="700" Width="650">
     <Grid>
         <StackPanel HorizontalAlignment="Center" Height="39" VerticalAlignment="Top" Width="642" Orientation="Horizontal" Background="#FF88DFFF">
             <Button x:Name="restartbutton" Content="Restart Game" VerticalAlignment="Center" Margin="200,0,5,0" HorizontalAlignment="Center" Click="restartbutton_Click"/>
@@ -14,8 +15,12 @@
             <Button x:Name="mainbutton" Content="Main Menu" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5,0,200,0" Background="#FFA9F3AC" Click="mainbutton_Click"/>
         </StackPanel>
 
+
+
+
+
         <Grid Margin="10,44,10,10">
-            <Controls:SinglePlayerUserControl />
+            
         </Grid>
 
 
