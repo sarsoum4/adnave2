@@ -42,7 +42,7 @@ namespace ClientGUI.V
         {
             MainWindow win = (MainWindow)Application.Current.MainWindow;
             win.Show();
-            this.Close();
+            this.Close();
         }
     }
 }

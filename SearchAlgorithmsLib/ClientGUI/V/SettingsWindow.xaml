@@ -33,7 +33,7 @@
             <ComboBoxItem>DFS</ComboBoxItem>
         </ComboBox>
         <Button x:Name="saveButton" Content="SAVE"  HorizontalAlignment="Left" Margin="68,76,0,-40" Grid.Row="5" VerticalAlignment="Top" Width="75" Grid.ColumnSpan="2" Click="saveButton_Click"/>
-        <Button x:Name="cancelButton" Content="CANCEL"  HorizontalAlignment="Left" Margin="65,76,0,-41" Grid.Row="5" VerticalAlignment="Top" Width="75" Grid.Column="1"/>
+        <Button x:Name="cancelButton" Content="CANCEL"  HorizontalAlignment="Left" Margin="65,76,0,-41" Grid.Row="5" VerticalAlignment="Top" Width="75" Grid.Column="1" Click="cancelButton_Click"/>
 
 
 
