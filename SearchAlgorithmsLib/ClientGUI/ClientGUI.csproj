@@ -79,8 +79,8 @@
     <Compile Include="V\SinglePlayerMenu.xaml.cs">
       <DependentUpon>SinglePlayerMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="VM\SinglePlayerUserControl.xaml.cs">
-      <DependentUpon>SinglePlayerUserControl.xaml</DependentUpon>
+    <Compile Include="VM\MazeBoard.xaml.cs">
+      <DependentUpon>MazeBoard.xaml</DependentUpon>
     </Compile>
     <Compile Include="V\SinglePlayerWindow.xaml.cs">
       <DependentUpon>SinglePlayerWindow.xaml</DependentUpon>
@@ -109,7 +109,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="VM\SinglePlayerUserControl.xaml">
+    <Page Include="VM\MazeBoard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

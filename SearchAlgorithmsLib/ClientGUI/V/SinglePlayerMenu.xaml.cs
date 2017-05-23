@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ClientGUI
+namespace ClientGUI.V
 {
     /// <summary>
     /// Interaction logic for SinglePlayerMenu.xaml
@@ -31,14 +31,11 @@ namespace ClientGUI
             int col = Convert.ToInt32(txtCols.Text.ToString());
 
             this.Close();
-            SinglePlayerWindow game = new SinglePlayerWindow(gameName, row, col);
+            SinglePlayerWindow game = new SinglePlayerWindow();
             game.ShowDialog();
 
 
-            //SinglePlayerMenu menu = new SinglePlayerMenu();
-            //Window win = new Window();
-            //win.Content = new SinglePlayerMenu();
-            //win.ShowDialog();
+
         }
     }
 }
