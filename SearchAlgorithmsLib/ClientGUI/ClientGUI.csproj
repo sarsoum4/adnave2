@@ -55,16 +55,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="VM\ApplicationSettingsModel.cs" />
+    <Compile Include="VM\ISettingsModel.cs" />
+    <Compile Include="VM\ViewModel.cs" />
     <Compile Include="V\GoBackWindow.xaml.cs">
       <DependentUpon>GoBackWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VM\SettingsViewModel.cs" />
     <Compile Include="V\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="V\SinglePlayerMenu.xaml.cs">
       <DependentUpon>SinglePlayerMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="VM\MazeBoard.xaml.cs">
+    <Compile Include="V\MazeBoard.xaml.cs">
       <DependentUpon>MazeBoard.xaml</DependentUpon>
     </Compile>
     <Compile Include="V\SinglePlayerWindow.xaml.cs">
@@ -94,7 +98,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="VM\MazeBoard.xaml">
+    <Page Include="V\MazeBoard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -132,6 +136,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="M\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\exit_icon.jpg" />
+    <Resource Include="resources\runner.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

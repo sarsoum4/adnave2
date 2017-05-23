@@ -14,10 +14,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ClientGUI.VM
+namespace ClientGUI.V
 {
     /// <summary>
-    /// Interaction logic for SinglePlayerWindow.xaml
+    /// Interaction logic for MazeBoard.xaml
     /// </summary>
     public partial class MazeBoard : UserControl
     {
@@ -25,8 +25,8 @@ namespace ClientGUI.VM
         public int rows;
         public int cols;
         public string maze;
-        private int[] initialPos;
-        private int[] goalPos;
+        public int[] initialPos;
+        public int[] goalPos;
 
         public MazeBoard()
         {
@@ -38,9 +38,6 @@ namespace ClientGUI.VM
 
         }
 
-
-
-        
 
 
         public int Rows
@@ -67,7 +64,7 @@ namespace ClientGUI.VM
                 SetValue(MazeProperty, value);
                 string m = Maze.Replace(",", "");
 
-                System.Windows.Shapes.Rectangle rect;
+               Rectangle rect;
                 for (int i = 0; i < 5; i++)
                 {
 
@@ -89,6 +86,8 @@ namespace ClientGUI.VM
             }
         }
 
+
+
         public int[] InitialPos
         {
 
@@ -97,8 +96,8 @@ namespace ClientGUI.VM
             {
                 SetValue(InitialPosProperty, value);
             }
-
         }
+
 
         public int[] GoalPos
         {
@@ -112,30 +111,30 @@ namespace ClientGUI.VM
 
 
         public static readonly DependencyProperty GoalPosProperty =
-        DependencyProperty.Register("GoalPos", typeof(int[]), typeof(VM.MazeBoard), new
+        DependencyProperty.Register("GoalPos", typeof(int[]), typeof(V.MazeBoard), new
         PropertyMetadata(new int[2, 2]));
 
 
         public static readonly DependencyProperty InitialPosProperty =
-        DependencyProperty.Register("InitialPos", typeof(int[]), typeof(VM.MazeBoard), new
+        DependencyProperty.Register("InitialPos", typeof(int[]), typeof(V.MazeBoard), new
         PropertyMetadata(new int [0, 0]));
 
 
-        // Using a DependencyProperty as the backing store for Rows. This enables animation, styling,
+        // Using a DependencyProperty as the backing store for Maze representation. This enables animation, styling,
         public static readonly DependencyProperty MazeProperty =
-        DependencyProperty.Register("Maze", typeof(string), typeof(VM.MazeBoard), new
+        DependencyProperty.Register("Maze", typeof(string), typeof(V.MazeBoard), new
         PropertyMetadata("11111000001"));
 
 
         // Using a DependencyProperty as the backing store for Rows. This enables animation, styling,
         public static readonly DependencyProperty RowsProperty =
-        DependencyProperty.Register("Rows", typeof(int), typeof(VM.MazeBoard), new
+        DependencyProperty.Register("Rows", typeof(int), typeof(V.MazeBoard), new
         PropertyMetadata(0));
 
 
-        // Using a DependencyProperty as the backing store for Colss. This enables animation, styling,
+        // Using a DependencyProperty as the backing store for Cols. This enables animation, styling,
         public static readonly DependencyProperty ColsProperty =
-        DependencyProperty.Register("Cols", typeof(int), typeof(VM.MazeBoard), new
+        DependencyProperty.Register("Cols", typeof(int), typeof(V.MazeBoard), new
         PropertyMetadata(0));
     }
 }

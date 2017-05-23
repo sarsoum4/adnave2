@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClientGUI.VM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,29 @@ namespace ClientGUI.V
     /// </summary>
     public partial class SettingsWindow : Window
     {
+        private SettingsViewModel vm;
+
+
         public SettingsWindow()
         {
             InitializeComponent();
+            vm = new SettingsViewModel(new ApplicationSettingsModel());
+            this.DataContext = vm;
+        }
+
+        private void saveButton_Click(object sender, RoutedEventArgs e)
+        {
+            vm.SaveSettings();
+            MainWindow win = (MainWindow)Application.Current.MainWindow;
+            win.Show();
+            this.Close();
+        }
+
+        private void cancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow win = (MainWindow)Application.Current.MainWindow;
+            win.Show();
+            this.Close();
         }
     }
 }
