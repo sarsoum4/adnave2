@@ -1,4 +1,4 @@
-﻿<Window x:Class="ClientGUI.SinglePlayerWindow"
+﻿<Window x:Class="ClientGUI.V.SinglePlayerWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ClientGUI"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        xmlns:Controls ="clr-namespace:ClientGUI"
+        xmlns:Controls ="clr-namespace:ClientGUI.VM"
         Height="700" Width="650">
     <Grid>
         <StackPanel HorizontalAlignment="Center" Height="39" VerticalAlignment="Top" Width="642" Orientation="Horizontal" Background="#FF88DFFF">
@@ -16,15 +16,12 @@
         </StackPanel>
 
 
-
-
-
         <Grid Margin="10,44,10,10">
-            
+            <Controls:MazeBoard x:Name="mazeBoard" Grid.Row="1" Margin="10" Rows="5" Cols="5"
+                                Maze="1,0,1,0,0,0,1,0,1,1,1,1,1,0,0,1,0,0,0,1,1,0,1,1,0"
+                                InitialPos="0,1" >
+            </Controls:MazeBoard>
         </Grid>
-
-
-
 
 
     </Grid>
