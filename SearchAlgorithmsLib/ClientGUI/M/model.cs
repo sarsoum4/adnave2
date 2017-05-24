@@ -80,24 +80,24 @@ namespace ClientGUI.M
             MazeGeneratorLib.IMazeGenerator generator = new DFSMazeGenerator();
             Maze maze = generator.Generate(5, 5);
             //this.json = maze.ToJSON();
-
+            JObject ob = JObject.Parse(this.json);
             //use the FromJson method. then this.maze.row is the rows etc
             //this.maze = Maze.FromJSON(jsonFormatStr);
-/**
-            JObject ob = JObject.Parse(this.json);
-            this.mazeRepresentation = ob.GetValue("Maze").ToString();
-            //get the start row
-            this.startRep = ob.SelectToken("Start.Row").ToString();
-            this.startRow = Int32.Parse(this.startRep);
-            //get the start col
-            this.startRep = ob.SelectToken("Start.Col").ToString();
-            this.startCol = Int32.Parse(this.startRep);
-            //get the end row
-            this.endRep = ob.GetValue("End.Row").ToString();
-            this.endRow = Int32.Parse(this.endRep);
-            //get the end col
-            this.endRep = ob.GetValue("End.Row").ToString();
-            this.endCol = Int32.Parse(this.endRep);
+            /**
+                        JObject ob = JObject.Parse(this.json);
+                        this.mazeRepresentation = ob.GetValue("Maze").ToString();
+                        //get the start row
+                        this.startRep = ob.SelectToken("Start.Row").ToString();
+                        this.startRow = Int32.Parse(this.startRep);
+                        //get the start col
+                        this.startRep = ob.SelectToken("Start.Col").ToString();
+                        this.startCol = Int32.Parse(this.startRep);
+                        //get the end row
+                        this.endRep = ob.GetValue("End.Row").ToString();
+                        this.endRow = Int32.Parse(this.endRep);
+                        //get the end col
+                        this.endRep = ob.GetValue("End.Row").ToString();
+                        this.endCol = Int32.Parse(this.endRep);
 */
         }
 
@@ -107,7 +107,7 @@ namespace ClientGUI.M
             Console.WriteLine(port);
             this.endPonit = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 6664);
             client = new TcpClient();
-            client.Connect("127.0.0.1", 66664);
+            client.Connect("127.0.0.1", 8887);
         }
 
         public void start()

@@ -76,12 +76,6 @@
       <DependentUpon>GoBackWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="VM\SettingsViewModel.cs" />
-    <Compile Include="V\MultiplayerMenu.xaml.cs">
-      <DependentUpon>MultiplayerMenu.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="V\MultiplayerWindow.xaml.cs">
-      <DependentUpon>MultiplayerWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="V\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
@@ -110,14 +104,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="V\MultiplayerMenu.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="V\MultiplayerWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="V\SettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
