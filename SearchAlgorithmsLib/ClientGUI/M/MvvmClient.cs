@@ -89,5 +89,10 @@ namespace ClientGUI.M
         {
             throw new NotImplementedException();
         }
+
+        public void connect(string ip, int port)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

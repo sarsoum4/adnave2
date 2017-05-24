@@ -35,6 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MazeGeneratorLib">
+      <HintPath>..\..\..\..\..\..\Desktop\MazeGeneratorLib.dll</HintPath>
+    </Reference>
+    <Reference Include="MazeLib">
+      <HintPath>..\..\..\..\..\..\Desktop\MazeLib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -55,8 +61,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="M\IModel.cs" />
+    <Compile Include="M\IMvvmClient.cs" />
+    <Compile Include="M\INotifyPropertyChanged.cs" />
+    <Compile Include="M\model.cs" />
+    <Compile Include="M\ModelToServer.cs" />
+    <Compile Include="M\MvvmClient.cs" />
     <Compile Include="VM\ApplicationSettingsModel.cs" />
     <Compile Include="VM\ISettingsModel.cs" />
+    <Compile Include="VM\SinglePlayerVM.cs" />
     <Compile Include="VM\ViewModel.cs" />
     <Compile Include="V\GoBackWindow.xaml.cs">
       <DependentUpon>GoBackWindow.xaml</DependentUpon>
@@ -134,9 +147,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="M\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="resources\exit_icon.jpg" />
     <Resource Include="resources\runner.png" />

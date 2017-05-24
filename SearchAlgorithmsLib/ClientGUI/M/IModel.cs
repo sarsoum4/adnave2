@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +24,8 @@ namespace ClientGUI.M
         int cols { set; get; }
 
         // activate actuators
-        void generateNewMazeMaze (string name, int rows, int cols);
-        void movePlayer();
+        void generateNewMazeMaze(string name, int rows, int cols);
+        void getGamesList();
+        void movePlayer();
     }
 }

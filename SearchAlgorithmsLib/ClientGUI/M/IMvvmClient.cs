@@ -11,6 +11,6 @@ namespace ClientGUI.M
         void connect(string ip, int port);
         void write(string command);
         string read(); // blocking call
-        void disconnect();
+        void disconnect();
     }
 }

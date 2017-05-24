@@ -22,7 +22,7 @@ namespace ClientGUI.M
         private StreamWriter writer = null;
         private String userCommand;
         private String answer;
-        private Model model; 
+        private Model model;
 
         public ModelToServer(int port, Model model)
         {
