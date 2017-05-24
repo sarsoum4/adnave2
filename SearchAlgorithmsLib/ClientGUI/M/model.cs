@@ -34,44 +34,37 @@ namespace ClientGUI.M
             this.client = new MvvmClient();
         }
 
-        public string mazeName
-        {
+        public string mazeName {
             get { return name; }
             set { this.name = value; }
         }
 
-        int IModel.startRow
-        {
+        int IModel.startRow {
             get { return this.startRow; }
             set { this.startRow = value; }
         }
 
-        int IModel.startCol
-        {
+        int IModel.startCol {
             get { return this.startCol; }
             set { this.startCol = value; }
         }
 
-        int IModel.endRow
-        {
+        int IModel.endRow {
             get { return this.endRow; }
             set { this.endRow = value; }
         }
 
-        int IModel.endCol
-        {
+        int IModel.endCol {
             get { return this.endCol; }
             set { this.endCol = value; }
         }
 
-        public int rows
-        {
+        public int rows {
             get { return this.rows; }
             set { this.rows = value; }
         }
 
-        public int cols
-        {
+        public int cols {
             get { return this.cols; }
             set { this.cols = value; }
         }
@@ -79,7 +72,7 @@ namespace ClientGUI.M
 
         public void getCommandFromServer(string command)
         {
-            this.currentCommand = command;
+           this.currentCommand = command;
         }
 
         public String commandToSend()
@@ -138,7 +131,7 @@ namespace ClientGUI.M
 
         public void getGamesList()
         {
-            this.currentCommand = "list";
+            this.currentCommand = "list"; 
         }
 
         public void movePlayer()
