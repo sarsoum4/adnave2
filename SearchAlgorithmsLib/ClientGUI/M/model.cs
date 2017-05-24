@@ -15,7 +15,6 @@ namespace ClientGUI.M
 
         private String userCommand;
         private String answer;
-        private string commandType;
 
         private int port;
         private bool connectionActive = false;
@@ -60,8 +59,10 @@ namespace ClientGUI.M
             this.stream = null;
             this.reader = null;
             this.writer = null;
-            this.commandType = null;
         }
+
+
+
 
 
         public void getCommandFromServer(string command)
@@ -80,46 +81,36 @@ namespace ClientGUI.M
             MazeGeneratorLib.IMazeGenerator generator = new DFSMazeGenerator();
             Maze maze = generator.Generate(5, 5);
             //this.json = maze.ToJSON();
-            JObject ob = JObject.Parse(this.json);
+
             //use the FromJson method. then this.maze.row is the rows etc
             //this.maze = Maze.FromJSON(jsonFormatStr);
-            /**
-                        JObject ob = JObject.Parse(this.json);
-                        this.mazeRepresentation = ob.GetValue("Maze").ToString();
-                        //get the start row
-                        this.startRep = ob.SelectToken("Start.Row").ToString();
-                        this.startRow = Int32.Parse(this.startRep);
-                        //get the start col
-                        this.startRep = ob.SelectToken("Start.Col").ToString();
-                        this.startCol = Int32.Parse(this.startRep);
-                        //get the end row
-                        this.endRep = ob.GetValue("End.Row").ToString();
-                        this.endRow = Int32.Parse(this.endRep);
-                        //get the end col
-                        this.endRep = ob.GetValue("End.Row").ToString();
-                        this.endCol = Int32.Parse(this.endRep);
+/**
+            JObject ob = JObject.Parse(this.json);
+            this.mazeRepresentation = ob.GetValue("Maze").ToString();
+            //get the start row
+            this.startRep = ob.SelectToken("Start.Row").ToString();
+            this.startRow = Int32.Parse(this.startRep);
+            //get the start col
+            this.startRep = ob.SelectToken("Start.Col").ToString();
+            this.startCol = Int32.Parse(this.startRep);
+            //get the end row
+            this.endRep = ob.GetValue("End.Row").ToString();
+            this.endRow = Int32.Parse(this.endRep);
+            //get the end col
+            this.endRep = ob.GetValue("End.Row").ToString();
+            this.endCol = Int32.Parse(this.endRep);
 */
         }
+
+
 
         public void connect(string ip, int port)
         {
             Console.WriteLine(ip);
             Console.WriteLine(port);
-            this.endPonit = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 6664);
-            client = new TcpClient();
-            client.Connect("127.0.0.1", 8887);
-        }
+            this.endPonit = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 6345);
 
-        public void start()
-        {
-            Task send = new Task(() =>
-            {
-                while (true)
-                {
-                    try
-                    {
-                        if (!connectionActive)
-                        {
+
                             connectionActive = true;
                             client = new TcpClient();
                             client.Connect(endPonit);
@@ -134,17 +125,11 @@ namespace ClientGUI.M
 
                             });
                             recv.Start();
-                        }
-                    }
-                    catch
-                    {
-                        connectionActive = false;
-                        client.Close();
-                    }
-                }
-            }); send.Start();
-            send.Wait();
+                        
+
         }
+
+
 
         public void Recieve()
         {
@@ -153,6 +138,7 @@ namespace ClientGUI.M
             {
                 try
                 {
+
                     this.answer = reader.ReadLine();
 
                     if (answer == null)
@@ -160,10 +146,6 @@ namespace ClientGUI.M
                         flag = false;
                     }
 
-                    if(this.commandType.Equals("generate"))
-                    {
-                        this.Json = answer;
-                    }
                     else if (answer.Equals("close"))
                     {
                         // Close the connection.
@@ -192,31 +174,20 @@ namespace ClientGUI.M
         }
 
 
-        //the command to send to server
+
+        //send to server
         public void send(string s)
         {
             this.userCommand = s;
-            
             writer.WriteLine(s);
             writer.Flush();
         }
 
 
+
         public void generateNewMaze(string name, int rows, int cols)
         {
-            string s = "generate " + name + " " + rows.ToString() + " " + cols.ToString();
-            this.userCommand = s;
-
-            client = new TcpClient();
-            client.Connect(endPonit);
-
-            writer = new StreamWriter(s);
-
-            writer.Write(s);
-            writer.Flush();
-            this.commandType = "generate";
-
-            string answer = reader.ReadLine();
+            throw new NotImplementedException();
         }
 
         public void movePlayer(string move)
@@ -239,5 +210,15 @@ namespace ClientGUI.M
             throw new NotImplementedException();
         }
 
+        public void start()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void generateNewMazeMaze(string name, int rows, int cols)
+        {
+            //this.currentCommand = "generate " + name + row.ToString() + " " + col.ToString();
+            //Server.Controler.Controller 
+        }
     }
 }

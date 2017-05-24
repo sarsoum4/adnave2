@@ -35,7 +35,7 @@ namespace ClientGUI.V
             int col = Convert.ToInt32(txtCols.Text.ToString());
 
             this.Close();
-            SinglePlayerWindow game = new SinglePlayerWindow(Name, row, col);
+            SinglePlayerWindow game = new SinglePlayerWindow(gameName, row, col);
             game.ShowDialog();
 
 

@@ -28,6 +28,9 @@ namespace ClientGUI.VM
 
         private string json;
 
+
+
+
         public SinglePlayerVM(string name, int row, int col, int port, string ip)
         {
             this.name = name;
@@ -42,7 +45,23 @@ namespace ClientGUI.VM
             };
 
             model.connect(ip, port);
+           
         }
+
+
+
+        ///get the maze representation
+        private void parseMaze(string json)
+        {
+            //char[] detlimiter = { '\\' };
+            string[] words = json.Split('\\');
+            yhryhryh
+                 
+            
+
+        }
+
+
 
 
         public string Json
@@ -60,11 +79,14 @@ namespace ClientGUI.VM
         public void startGame(string name, int row , int col)
         {
             string s = "generate " + name +" "+ row +" "+ col;
-            //model.send(s);
-            model.generateNewMaze(name, row, col);
-            //model.start();
+            model.send(s);
+            this.Json = model.Recieve();
+            parseMaze(json);
         }
         
+            
+
+
 
         public Maze Maze
         {

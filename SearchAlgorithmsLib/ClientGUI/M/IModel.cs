@@ -17,7 +17,7 @@ namespace ClientGUI.M
         // connection to the server
         void connect(string ip, int port);
         void disconnect();
-        void Recieve();
+        string Recieve();
         void start();
         void send(string s);
 
