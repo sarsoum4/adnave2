@@ -2,17 +2,14 @@
 using MazeLib;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using System.ComponentModel;
-
 namespace ClientGUI.VM
 {
-
-
-    public class SinglePlayerVM : ViewModel
+    public class MultiplayerVM : ViewModel
     {
         private string name;
         private int cols;
@@ -28,7 +25,8 @@ namespace ClientGUI.VM
 
         private string json;
 
-        public SinglePlayerVM(string name, int row, int col, int port, string ip)
+
+        public MultiplayerVM(string name, int row, int col, int port, string ip)
         {
             this.name = name;
             this.rows = row;
@@ -55,36 +53,31 @@ namespace ClientGUI.VM
             }
         }
 
-
-
-        public void startGame(string name, int row , int col)
+        public void startGame(string name, int row, int col)
         {
-            string s = "generate " + name +" "+ row +" "+ col;
+            string s = "generate " + name + " " + row + " " + col;
             //model.send(s);
             model.generateNewMaze(name, row, col);
             //model.start();
         }
-        
 
         public Maze Maze
         {
-            get{return maze;}
-            set{maze = value;}
+            get { return maze; }
+            set { maze = value; }
         }
 
         public Position PlayerPosition
         {
-            get{return playerPosition;}
-            set{playerPosition = value;}
+            get { return playerPosition; }
+            set { playerPosition = value; }
         }
 
         public bool IsConnecting
         {
-            get{return isConnecting;}
-            set{isConnecting = value;}
+            get { return isConnecting; }
+            set { isConnecting = value; }
         }
-
-
 
     }
 }

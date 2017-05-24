@@ -22,20 +22,25 @@ namespace ClientGUI.V
     {
 
         private SinglePlayerVM vm;
-        private string name;
+        //private string nameOfMaze;
         private int row;
         private int col;
 
-        public SinglePlayerWindow(string name, int row, int col)
+        public SinglePlayerWindow()
         {
             InitializeComponent();
-            this.name = name;
+        }
+
+        public SinglePlayerWindow(string givenName, int row, int col)
+        {
+            InitializeComponent();
+            //this.nameOfMaze = givenName;
             this.row = row;
             this.col = col;
             int port = Properties.Settings.Default.ServerPort;
             string ip = Properties.Settings.Default.ServerIP;
-            vm = new SinglePlayerVM(this.name, this.row, this.col, port, ip);
-            vm.startGame(this.name, this.row, this.col);
+            vm = new SinglePlayerVM(givenName, this.row, this.col, port, ip);
+            vm.startGame(givenName, this.row, this.col);
 
     }
 

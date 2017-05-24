@@ -32,6 +32,6 @@ Margin="3"></TextBox>
         <Button x:Name="btnStart" Grid.Row="5" HorizontalAlignment="Center" Margin="2,5,106,5" Padding="5" Click="btnStart_Click" Grid.Column="1" Width="80">Start Game</Button>
         <Button x:Name="btnJoin" Grid.Row="1" HorizontalAlignment="Center" Margin="2,5,106,5" Padding="5" Click="btnJoin_Click" Grid.Column="1" Width="80">Join Game</Button>
         <TextBlock Padding="3" Margin="3">List of games:</TextBlock>
-        <ComboBox x:Name="txtListOfGames" Grid.Column="1" Padding="3" Margin="3"></ComboBox>    </Grid>
+        <ComboBox x:Name="txtListOfGames" Grid.Column="1" Padding="3" Margin="3"></ComboBox>
+    </Grid>
 </Window>
-

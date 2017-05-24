@@ -15,6 +15,7 @@ namespace ClientGUI.M
 
         private String userCommand;
         private String answer;
+        private string commandType;
 
         private int port;
         private bool connectionActive = false;
@@ -59,10 +60,8 @@ namespace ClientGUI.M
             this.stream = null;
             this.reader = null;
             this.writer = null;
+            this.commandType = null;
         }
-
-
-
 
 
         public void getCommandFromServer(string command)
@@ -102,13 +101,17 @@ namespace ClientGUI.M
 */
         }
 
-
-
         public void connect(string ip, int port)
         {
             Console.WriteLine(ip);
             Console.WriteLine(port);
-            this.endPonit = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 6665);
+            this.endPonit = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 6664);
+            client = new TcpClient();
+            client.Connect("127.0.0.1", 66664);
+        }
+
+        public void start()
+        {
             Task send = new Task(() =>
             {
                 while (true)
@@ -140,10 +143,8 @@ namespace ClientGUI.M
                     }
                 }
             }); send.Start();
-            //send.Wait();
+            send.Wait();
         }
-
-
 
         public void Recieve()
         {
@@ -152,7 +153,6 @@ namespace ClientGUI.M
             {
                 try
                 {
-
                     this.answer = reader.ReadLine();
 
                     if (answer == null)
@@ -160,6 +160,10 @@ namespace ClientGUI.M
                         flag = false;
                     }
 
+                    if(this.commandType.Equals("generate"))
+                    {
+                        this.Json = answer;
+                    }
                     else if (answer.Equals("close"))
                     {
                         // Close the connection.
@@ -188,20 +192,31 @@ namespace ClientGUI.M
         }
 
 
-
-        //send to server
+        //the command to send to server
         public void send(string s)
         {
             this.userCommand = s;
+            
             writer.WriteLine(s);
             writer.Flush();
         }
 
 
-
         public void generateNewMaze(string name, int rows, int cols)
         {
-            throw new NotImplementedException();
+            string s = "generate " + name + " " + rows.ToString() + " " + cols.ToString();
+            this.userCommand = s;
+
+            client = new TcpClient();
+            client.Connect(endPonit);
+
+            writer = new StreamWriter(s);
+
+            writer.Write(s);
+            writer.Flush();
+            this.commandType = "generate";
+
+            string answer = reader.ReadLine();
         }
 
         public void movePlayer(string move)
@@ -224,15 +239,5 @@ namespace ClientGUI.M
             throw new NotImplementedException();
         }
 
-        public void start()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void generateNewMazeMaze(string name, int rows, int cols)
-        {
-            //this.currentCommand = "generate " + name + row.ToString() + " " + col.ToString();
-            //Server.Controler.Controller 
-        }
     }
 }
