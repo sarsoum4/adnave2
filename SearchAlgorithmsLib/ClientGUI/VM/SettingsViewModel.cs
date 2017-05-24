@@ -14,6 +14,9 @@ namespace ClientGUI.VM
             this.model = model;
         }
 
+
+
+
         public string ServerIP
         {
             get { return model.ServerIP; }

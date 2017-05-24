@@ -1,83 +1,78 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Server.Controler;
 using MazeLib;
 using MazeGeneratorLib;
-using Newtonsoft.Json.Linq;
 using System.ComponentModel;
+using System.Net;
+using System.Net.Sockets;
+using System.Threading.Tasks;
+using System.IO;
 
 namespace ClientGUI.M
 {
     class Model : IModel
     {
-        private int row;
-        private int col;
-        private string name;
-        private string mazeRepresentation;
-        private string json;
-        private string startRep;
-        private string endRep;
-        private int startRow;
-        private int startCol;
-        private int endRow;
-        private int endCol;
-        private string currentCommand;
-        private MvvmClient client;
+
+
+        private String userCommand;
+        private String answer;
+
+        private int port;
+        private bool connectionActive = false;
+        private IPEndPoint endPonit = null;
+        private TcpClient client = null;
+        private NetworkStream stream = null;
+        private StreamReader reader = null;
+        private StreamWriter writer = null;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public void NotifyPropertyChanged(string propName)
+        {
+            if (this.PropertyChanged != null)
+            {
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
+        }
+
+        public string Json
+        {
+            get
+            {
+                return answer;
+            }
+
+            set
+            {
+                this.answer = value;
+                NotifyPropertyChanged("Json");
+            }
+        }
+
+
+
         public Model()
         {
-            this.client = new MvvmClient();
+
+            this.connectionActive = false;
+            this.endPonit = null;
+            this.client = null;
+            this.stream = null;
+            this.reader = null;
+            this.writer = null;
         }
 
-        public string mazeName {
-            get { return name; }
-            set { this.name = value; }
-        }
 
-        int IModel.startRow {
-            get { return this.startRow; }
-            set { this.startRow = value; }
-        }
 
-        int IModel.startCol {
-            get { return this.startCol; }
-            set { this.startCol = value; }
-        }
-
-        int IModel.endRow {
-            get { return this.endRow; }
-            set { this.endRow = value; }
-        }
-
-        int IModel.endCol {
-            get { return this.endCol; }
-            set { this.endCol = value; }
-        }
-
-        public int rows {
-            get { return this.rows; }
-            set { this.rows = value; }
-        }
-
-        public int cols {
-            get { return this.cols; }
-            set { this.cols = value; }
-        }
 
 
         public void getCommandFromServer(string command)
         {
-           this.currentCommand = command;
+           //this.currentCommand = command;
         }
 
         public String commandToSend()
         {
-            return this.currentCommand;
+            return null;
         }
 
         ///get the maze representation, the
@@ -85,11 +80,11 @@ namespace ClientGUI.M
         {
             MazeGeneratorLib.IMazeGenerator generator = new DFSMazeGenerator();
             Maze maze = generator.Generate(5, 5);
-            this.json = maze.ToJSON();
+            //this.json = maze.ToJSON();
 
             //use the FromJson method. then this.maze.row is the rows etc
             //this.maze = Maze.FromJSON(jsonFormatStr);
-
+/**
             JObject ob = JObject.Parse(this.json);
             this.mazeRepresentation = ob.GetValue("Maze").ToString();
             //get the start row
@@ -104,11 +99,122 @@ namespace ClientGUI.M
             //get the end col
             this.endRep = ob.GetValue("End.Row").ToString();
             this.endCol = Int32.Parse(this.endRep);
-
-
+*/
         }
 
+
+
         public void connect(string ip, int port)
+        {
+            Console.WriteLine(ip);
+            Console.WriteLine(port);
+            this.endPonit = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 6665);
+            Task send = new Task(() =>
+            {
+                while (true)
+                {
+                    try
+                    {
+                        if (!connectionActive)
+                        {
+                            connectionActive = true;
+                            client = new TcpClient();
+                            client.Connect(endPonit);
+                            stream = client.GetStream();
+                            this.writer = new StreamWriter(stream);
+                            this.reader = new StreamReader(stream);
+
+                            // Run the receiving task.
+                            Task recv = new Task(() =>
+                            {
+                                Recieve();
+
+                            });
+                            recv.Start();
+                        }
+                    }
+                    catch
+                    {
+                        connectionActive = false;
+                        client.Close();
+                    }
+                }
+            }); send.Start();
+            //send.Wait();
+        }
+
+
+
+        public void Recieve()
+        {
+            bool flag = true;
+            while (flag)
+            {
+                try
+                {
+
+                    this.answer = reader.ReadLine();
+
+                    if (answer == null)
+                    {
+                        flag = false;
+                    }
+
+                    else if (answer.Equals("close"))
+                    {
+                        // Close the connection.
+                        writer.WriteLine("close");
+                        writer.Flush();
+                        this.connectionActive = false;
+                        client.Close();
+                        break;
+                    }
+
+                    else if (answer.Equals("-1"))
+                    {
+                        this.connectionActive = false;
+                        client.Close();
+                        break;
+                    }
+
+                }
+                // Server closed the connection.
+                catch
+                {
+                    this.connectionActive = false;
+                    client.Close();
+                }
+            }
+        }
+
+
+
+        //send to server
+        public void send(string s)
+        {
+            this.userCommand = s;
+            writer.WriteLine(s);
+            writer.Flush();
+        }
+
+
+
+        public void generateNewMaze(string name, int rows, int cols)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void movePlayer(string move)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void getGamesList()
+        {
+            //this.currentCommand = "list";
+        }
+
+        public void movePlayer()
         {
             throw new NotImplementedException();
         }
@@ -125,18 +231,8 @@ namespace ClientGUI.M
 
         public void generateNewMazeMaze(string name, int rows, int cols)
         {
-            this.currentCommand = "generate " + name + row.ToString() + " " + col.ToString();
+            //this.currentCommand = "generate " + name + row.ToString() + " " + col.ToString();
             //Server.Controler.Controller 
-        }
-
-        public void getGamesList()
-        {
-            this.currentCommand = "list"; 
-        }
-
-        public void movePlayer()
-        {
-            throw new NotImplementedException();
         }
     }
 }

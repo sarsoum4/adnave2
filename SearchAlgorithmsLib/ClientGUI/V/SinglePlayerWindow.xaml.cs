@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClientGUI.VM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,13 +21,23 @@ namespace ClientGUI.V
     public partial class SinglePlayerWindow : Window
     {
 
+        private SinglePlayerVM vm;
+        private string name;
+        private int row;
+        private int col;
 
-        public SinglePlayerWindow()
+        public SinglePlayerWindow(string name, int row, int col)
         {
             InitializeComponent();
-            
+            this.name = name;
+            this.row = row;
+            this.col = col;
+            int port = Properties.Settings.Default.ServerPort;
+            string ip = Properties.Settings.Default.ServerIP;
+            vm = new SinglePlayerVM(this.name, this.row, this.col, port, ip);
+            vm.startGame(this.name, this.row, this.col);
 
-        }
+    }
 
 
         private void restartbutton_Click(object sender, RoutedEventArgs e)
