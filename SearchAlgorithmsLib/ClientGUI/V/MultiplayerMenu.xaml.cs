@@ -10,39 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace ClientGUI.V
 {
     /// <summary>
-    /// Interaction logic for MultiplayerMenu.xaml
+    /// Interaction logic for MultiPlayerMenu.xaml
     /// </summary>
-    public partial class MultiplayerMenu : Window
+    public partial class MultiPlayerMenu : Page
     {
-        public MultiplayerMenu()
+        public MultiPlayerMenu()
         {
             InitializeComponent();
         }
-
-
-        private void btnStart_Click(object sender, RoutedEventArgs e)
-        {
-            String gameName = txtMazeName.Text.ToString();
-            int row = Convert.ToInt32(txtRows.Text.ToString());
-            int col = Convert.ToInt32(txtCols.Text.ToString());
-
-            this.Close();
-            SinglePlayerWindow game = new SinglePlayerWindow();
-            game.ShowDialog();
-
-        }
-
-        private void btnJoin_Click(object sender, RoutedEventArgs e)
-        {
-
-            // get the list of the games from the server.
-
-        }
-
     }
 }

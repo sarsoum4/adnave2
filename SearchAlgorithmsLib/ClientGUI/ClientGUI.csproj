@@ -36,13 +36,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MazeGeneratorLib">
-      <HintPath>..\..\..\..\..\..\Desktop\MazeGeneratorLib.dll</HintPath>
+      <HintPath>..\..\..\..\..\Downloads\MazeGeneratorLib.dll</HintPath>
     </Reference>
     <Reference Include="MazeLib">
-      <HintPath>..\..\..\..\..\..\Desktop\MazeLib.dll</HintPath>
+      <HintPath>..\..\..\..\..\Downloads\MazeLib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -69,12 +71,19 @@
     <Compile Include="M\ModelToServer.cs" />
     <Compile Include="VM\ApplicationSettingsModel.cs" />
     <Compile Include="VM\ISettingsModel.cs" />
+    <Compile Include="VM\MultiplayerVM.cs" />
     <Compile Include="VM\SinglePlayerVM.cs" />
     <Compile Include="VM\ViewModel.cs" />
     <Compile Include="V\GoBackWindow.xaml.cs">
       <DependentUpon>GoBackWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="VM\SettingsViewModel.cs" />
+    <Compile Include="V\MultiplayerMenu.xaml.cs">
+      <DependentUpon>MultiplayerMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="V\MultiplayerWindow.xaml.cs">
+      <DependentUpon>MultiplayerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="V\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
@@ -103,6 +112,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="V\MultiplayerMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="V\MultiplayerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="V\SettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -147,7 +164,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="resources\exit_icon.jpg" />
     <Resource Include="resources\runner.png" />
