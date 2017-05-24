@@ -12,24 +12,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ClientGUI
+namespace ClientGUI.V
 {
     /// <summary>
-    /// Interaction logic for SinglePlayerWindow1.xaml
+    /// Interaction logic for SinglePlayerWindow.xaml
     /// </summary>
     public partial class SinglePlayerWindow : Window
     {
 
-        private int row;
-        private int col;
-        public SinglePlayerWindow(string gameName, int row ,int col)
+
+        public SinglePlayerWindow()
         {
             InitializeComponent();
-            this.Title = gameName;
-            this.row = row;
-            this.col = col;
-            Grid grid = new Grid();
+            
+
         }
+
 
         private void restartbutton_Click(object sender, RoutedEventArgs e)
         {

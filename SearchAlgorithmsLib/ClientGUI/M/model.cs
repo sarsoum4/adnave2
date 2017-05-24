@@ -70,14 +70,6 @@ namespace ClientGUI.M
         }
 
 
-
-        //TODO: add the mazes name
-        public void generatMaze(int row, int col)
-        {
-            this.currentCommand = "generate " + row.ToString() + " " + col.ToString();
-            //Server.Controler.Controller 
-        }
-
         public void getCommandFromServer(string command)
         {
            this.currentCommand = command;
@@ -133,7 +125,13 @@ namespace ClientGUI.M
 
         public void generateNewMazeMaze(string name, int rows, int cols)
         {
-            throw new NotImplementedException();
+            this.currentCommand = "generate " + name + row.ToString() + " " + col.ToString();
+            //Server.Controler.Controller 
+        }
+
+        public void getGamesList()
+        {
+            this.currentCommand = "list"; 
         }
 
         public void movePlayer()

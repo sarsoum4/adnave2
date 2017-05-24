@@ -15,14 +15,15 @@ using System.Windows.Shapes;
 namespace ClientGUI.V
 {
     /// <summary>
-    /// Interaction logic for SinglePlayerMenu.xaml
+    /// Interaction logic for MultiplayerMenu.xaml
     /// </summary>
-    public partial class SinglePlayerMenu : Window
+    public partial class MultiplayerMenu : Window
     {
-        public SinglePlayerMenu()
+        public MultiplayerMenu()
         {
             InitializeComponent();
         }
+
 
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
@@ -34,8 +35,14 @@ namespace ClientGUI.V
             SinglePlayerWindow game = new SinglePlayerWindow();
             game.ShowDialog();
 
+        }
 
+        private void btnJoin_Click(object sender, RoutedEventArgs e)
+        {
+
+            // get the list of the games from the server.
 
         }
+
     }
 }

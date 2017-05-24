@@ -35,15 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MazeGeneratorLib">
-      <HintPath>..\..\..\..\..\Downloads\MazeGeneratorLib.dll</HintPath>
-    </Reference>
-    <Reference Include="MazeLib">
-      <HintPath>..\..\..\..\..\Downloads\MazeLib.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -64,23 +55,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="M\IMvvmClient.cs" />
-    <Compile Include="M\IModel.cs" />
-    <Compile Include="M\INotifyPropertyChanged.cs" />
-    <Compile Include="M\Model.cs" />
-    <Compile Include="M\ModelToServer.cs" />
-    <Compile Include="M\MvvmClient.cs" />
+    <Compile Include="VM\ApplicationSettingsModel.cs" />
+    <Compile Include="VM\ISettingsModel.cs" />
+    <Compile Include="VM\ViewModel.cs" />
     <Compile Include="V\GoBackWindow.xaml.cs">
       <DependentUpon>GoBackWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VM\SettingsViewModel.cs" />
     <Compile Include="V\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="V\SinglePlayerMenu.xaml.cs">
       <DependentUpon>SinglePlayerMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="VM\SinglePlayerUserControl.xaml.cs">
-      <DependentUpon>SinglePlayerUserControl.xaml</DependentUpon>
+    <Compile Include="V\MazeBoard.xaml.cs">
+      <DependentUpon>MazeBoard.xaml</DependentUpon>
     </Compile>
     <Compile Include="V\SinglePlayerWindow.xaml.cs">
       <DependentUpon>SinglePlayerWindow.xaml</DependentUpon>
@@ -109,7 +98,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="VM\SinglePlayerUserControl.xaml">
+    <Page Include="V\MazeBoard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -136,7 +125,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -147,10 +135,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Server\Server.csproj">
-      <Project>{e7faa424-3771-43e3-bb4a-ec7252c1ca46}</Project>
-      <Name>Server</Name>
-    </ProjectReference>
+    <Folder Include="M\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\exit_icon.jpg" />
+    <Resource Include="resources\runner.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
