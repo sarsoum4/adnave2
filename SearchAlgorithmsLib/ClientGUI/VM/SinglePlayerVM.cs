@@ -55,7 +55,7 @@ namespace ClientGUI.VM
         {
             //char[] detlimiter = { '\\' };
             string[] words = json.Split('\\');
-
+            yhryhryh
                  
             
 
