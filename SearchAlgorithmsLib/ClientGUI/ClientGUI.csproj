@@ -63,7 +63,9 @@
     </ApplicationDefinition>
     <Compile Include="M\IModel.cs" />
     <Compile Include="M\INotifyPropertyChanged.cs" />
-    <Compile Include="M\Model.cs" />
+    <Compile Include="..\..\..\..\..\..\Desktop\Model.cs">
+      <Link>M\Model.cs</Link>
+    </Compile>
     <Compile Include="M\ModelToServer.cs" />
     <Compile Include="VM\ApplicationSettingsModel.cs" />
     <Compile Include="VM\ISettingsModel.cs" />

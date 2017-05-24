@@ -108,15 +108,9 @@ namespace ClientGUI.M
         {
             Console.WriteLine(ip);
             Console.WriteLine(port);
-            this.endPonit = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 6665);
-            Task send = new Task(() =>
-            {
-                while (true)
-                {
-                    try
-                    {
-                        if (!connectionActive)
-                        {
+            this.endPonit = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 6345);
+
+
                             connectionActive = true;
                             client = new TcpClient();
                             client.Connect(endPonit);
@@ -131,16 +125,8 @@ namespace ClientGUI.M
 
                             });
                             recv.Start();
-                        }
-                    }
-                    catch
-                    {
-                        connectionActive = false;
-                        client.Close();
-                    }
-                }
-            }); send.Start();
-            //send.Wait();
+                        
+
         }
 
 

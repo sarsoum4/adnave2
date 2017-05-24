@@ -45,7 +45,23 @@ namespace ClientGUI.VM
             };
 
             model.connect(ip, port);
+           
         }
+
+
+
+        ///get the maze representation
+        private void parseMaze(string json)
+        {
+            //char[] detlimiter = { '\\' };
+            string[] words = json.Split('\\');
+
+                 
+            
+
+        }
+
+
 
 
         public string Json
@@ -64,6 +80,8 @@ namespace ClientGUI.VM
         {
             string s = "generate " + name +" "+ row +" "+ col;
             model.send(s);
+            this.Json = model.Recieve();
+            parseMaze(json);
         }
         
             

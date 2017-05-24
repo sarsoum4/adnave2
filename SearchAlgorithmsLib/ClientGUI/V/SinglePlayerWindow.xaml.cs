@@ -36,6 +36,7 @@ namespace ClientGUI.V
             string ip = Properties.Settings.Default.ServerIP;
             vm = new SinglePlayerVM(this.name, this.row, this.col, port, ip);
             vm.startGame(this.name, this.row, this.col);
+           
 
     }
 
