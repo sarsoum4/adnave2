@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClientGUI.VM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,12 @@ namespace ClientGUI.V
     /// </summary>
     public partial class SinglePlayerMenu : Window
     {
+
+
         public SinglePlayerMenu()
         {
             InitializeComponent();
+        
         }
 
         private void btnStart_Click(object sender, RoutedEventArgs e)
@@ -31,7 +35,7 @@ namespace ClientGUI.V
             int col = Convert.ToInt32(txtCols.Text.ToString());
 
             this.Close();
-            SinglePlayerWindow game = new SinglePlayerWindow();
+            SinglePlayerWindow game = new SinglePlayerWindow(gameName, row, col);
             game.ShowDialog();
 
 

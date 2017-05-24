@@ -1,15 +1,18 @@
-﻿using MazeLib;
+﻿using ClientGUI.M;
+using MazeLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.ComponentModel;
+
 namespace ClientGUI.VM
 {
 
 
-    public class SinglePlayerVM
+    public class SinglePlayerVM : ViewModel
     {
         private string name;
         private int cols;
@@ -21,7 +24,12 @@ namespace ClientGUI.VM
         private int port;
         private string ip;
 
-        private Client client;
+        private IModel model;
+
+        private string json;
+
+
+
 
         public SinglePlayerVM(string name, int row, int col, int port, string ip)
         {
@@ -30,15 +38,35 @@ namespace ClientGUI.VM
             this.cols = col;
             this.port = port;
             this.ip = ip;
+            this.model = new Model();
+            model.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e)
+            {
+                NotifyPropertyChanged(e.PropertyName);
+            };
 
-           this.client = new Client(port);
+            model.connect(ip, port);
         }
 
-       
-        public string startGame(string name, int row , int col)
+
+        public string Json
         {
-            return null;
-        }    
+            get { return model.Json; }
+            set
+            {
+                model.Json = value;
+                NotifyPropertyChanged("Json");
+            }
+        }
+
+
+
+        public void startGame(string name, int row , int col)
+        {
+            string s = "generate " + name +" "+ row +" "+ col;
+            model.send(s);
+        }
+        
+            
 
 
 

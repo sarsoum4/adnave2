@@ -17,9 +17,8 @@
 
 
         <Grid Margin="10,44,10,10">
-            <Controls:MazeBoard x:Name="mazeBoard" Grid.Row="1" Margin="10" Rows="5" Cols="5"
-                                Maze="1,0,1,0,0,0,1,0,1,1,1,1,1,0,0,1,0,0,0,1,1,0,1,1,0" >
-            </Controls:MazeBoard>
+         
+            
         </Grid>
 
 

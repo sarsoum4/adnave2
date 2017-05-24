@@ -6,25 +6,24 @@ using System.Threading.Tasks;
 
 namespace ClientGUI.M
 {
-    interface IModel : INotifyPropertyChanged
+    interface IModel :  INotifyPropertyChanged
     {
+
+
+        // maze fields
+        string Json { set; get; }
+
+
         // connection to the server
         void connect(string ip, int port);
         void disconnect();
+        void Recieve();
         void start();
-
-        // maze fields
-        string mazeName { set; get; }
-        int startRow { set; get; }
-        int startCol { set; get; }
-        int endRow { set; get; }
-        int endCol { set; get; }
-        int rows { set; get; }
-        int cols { set; get; }
+        void send(string s);
 
         // activate actuators
-        void generateNewMazeMaze (string name, int rows, int cols);
+        void generateNewMaze (string name, int rows, int cols);
         void getGamesList();
-        void movePlayer();
+        void movePlayer(string move);
     }
 }
