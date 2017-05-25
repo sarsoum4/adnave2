@@ -8,7 +8,7 @@
         WindowStartupLocation="CenterScreen"
         xmlns:Controls ="clr-namespace:ClientGUI.V"
         Height="700" Width="650"
-        >
+        KeyDown="Window_KeyDown">
     <Grid>
         <StackPanel HorizontalAlignment="Center" Height="39" VerticalAlignment="Top" Width="642" Orientation="Horizontal" Background="#FF88DFFF">
             <Button x:Name="restartbutton" Content="Restart Game" VerticalAlignment="Center" Margin="200,0,5,0" HorizontalAlignment="Center" Click="restartbutton_Click"/>
@@ -18,7 +18,9 @@
 
 
         <Grid Margin="10,44,10,10">
-            <Controls:MazeBoard x:Name="mazeBoard">
+            <Controls:MazeBoard x:Name="mazeBoard" Maze="{Binding VM_MazeRep}"
+               PlayerPos = "{Binding VM_PlayerPosition, Mode=TwoWay}" Rows="{Binding VM_Rows}"
+               Cols="{Binding VM_Cols}" >
 
             </Controls:MazeBoard>
         </Grid>

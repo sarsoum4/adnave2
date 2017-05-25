@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MazeLib;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -28,17 +29,14 @@ namespace ClientGUI.V
         public string initialPos;
         public string goalPos;
 
-
-        private int playercol;
+        private string playerPos;
+        private int playerCol;
         private int playerRow;
 
         public MazeBoard()
         {
 
             InitializeComponent();
-
-            
-
 
         }
 
@@ -48,42 +46,76 @@ namespace ClientGUI.V
 
         private void myCanvas_Loaded(Object sender, EventArgs e)
         {
-            rows = 5;
-            cols = 5;
-            Maze = "1,0,1,0,1,0,1,0,1,1,1,1,1,0,0,1,0,*,0,1,1,0,1,1,#";
-            playercol = 2 ;
-            playerRow = 3;
 
 
-            
+            string m = Maze.Replace(",", "");
 
-    }
-
-
-
-
-
-
-        private void myCanvas_KeyUp(Object sender, KeyEventArgs e)
-        {
-            
-            MessageBox.Show("5555555");
-            IEnumerable<Rectangle> rectangles = myCanvas.Children.OfType<Rectangle>();
-            int count = 0;
-            foreach (var rect in rectangles)
+            Rectangle rect;
+            for (int i = 0; i < Rows; i++)
             {
-                if(count == rows * playercol + playerRow)
+
+                for (int j = 0; j < Cols; j++)
                 {
-                    rect.Stroke = new SolidColorBrush(Colors.Yellow);
-                    rect.Fill = new SolidColorBrush(Colors.Yellow);
+                    if (m[i * Rows + j] == '1')
+                    {
+                        rect = new System.Windows.Shapes.Rectangle();
+                        rect.Width = myCanvas.Width / Rows;
+                        rect.Height = myCanvas.Height / Rows;
+                        rect.Stroke = new SolidColorBrush(Colors.Black);
+                        rect.Fill = new SolidColorBrush(Colors.Black);
+                        Canvas.SetTop(rect, i * rect.Height);
+                        Canvas.SetLeft(rect, j * rect.Width);
+                        myCanvas.Children.Add(rect);
+                    }
+
+                    else if (m[i * Rows + j] == '0')
+                    {
+                        rect = new System.Windows.Shapes.Rectangle();
+                        rect.Width = myCanvas.Width / Rows;
+                        rect.Height = myCanvas.Height / Rows;
+                        rect.Stroke = new SolidColorBrush(Colors.White);
+                        rect.Fill = new SolidColorBrush(Colors.White);
+                        Canvas.SetTop(rect, i * rect.Height);
+                        Canvas.SetLeft(rect, j * rect.Width);
+                        myCanvas.Children.Add(rect);
+                    }
+
+
+                    else if (m[i * Rows + j] == ' ')
+                    {
+                        continue;
+                    }
+                    else if (m[i * Rows + j] == '#')
+                    {
+                        rect = new System.Windows.Shapes.Rectangle();
+                        rect.Width = myCanvas.Width / Rows;
+                        rect.Height = myCanvas.Height / Rows;
+                        rect.Stroke = new SolidColorBrush(Colors.Red);
+                        rect.Fill = new SolidColorBrush(Colors.Red);
+                        Canvas.SetTop(rect, i * rect.Height);
+                        Canvas.SetLeft(rect, j * rect.Width);
+                        myCanvas.Children.Add(rect);
+                    }
+                    else
+                    {
+                        //PlayerPos = j + "," + i;
+                        playerCol = i;
+                        playerRow = j;
+                        rect = new System.Windows.Shapes.Rectangle();
+                        rect.Width = myCanvas.Width / Rows;
+                        rect.Height = myCanvas.Height / Rows;
+                        rect.Stroke = new SolidColorBrush(Colors.Yellow);
+                        rect.Fill = new SolidColorBrush(Colors.Yellow);
+                        Canvas.SetTop(rect, i * rect.Height);
+                        Canvas.SetLeft(rect, j * rect.Width);
+                        myCanvas.Children.Add(rect);
+                    }
                 }
-                count++;
             }
         }
 
-        
 
-
+       
 
         public int Rows
         {
@@ -107,69 +139,6 @@ namespace ClientGUI.V
             set
             {
                 SetValue(MazeProperty, value);
-                string m = Maze.Replace(",", "");
-
-               Rectangle rect;
-                for (int i = 0; i < rows; i++)
-                {
-
-                    for (int j = 0; j < cols; j++)
-                    {
-                        if (m[i * 5 + j] == '1')
-                        {
-                            rect = new System.Windows.Shapes.Rectangle();
-                            rect.Width = myCanvas.Width / 5;
-                            rect.Height = myCanvas.Height / 5;
-                            rect.Stroke = new SolidColorBrush(Colors.Black);
-                            rect.Fill = new SolidColorBrush(Colors.Black);
-                            Canvas.SetTop(rect, i * rect.Height);
-                            Canvas.SetLeft(rect, j * rect.Width);
-                            myCanvas.Children.Add(rect);
-                        }
-
-                        else if (m[i * 5 + j] == '0')
-                        {
-                            rect = new System.Windows.Shapes.Rectangle();
-                            rect.Width = myCanvas.Width / 5;
-                            rect.Height = myCanvas.Height / 5;
-                            rect.Stroke = new SolidColorBrush(Colors.White);
-                            rect.Fill = new SolidColorBrush(Colors.White);
-                            Canvas.SetTop(rect, i * rect.Height);
-                            Canvas.SetLeft(rect, j * rect.Width);
-                            myCanvas.Children.Add(rect);
-                        }
-
-
-                        else if (m[i * 5 + j] == ' ')
-                        {
-                            continue;
-                        }
-                        else if(m[i * 5 + j] == '#')
-                        {
-                            rect = new System.Windows.Shapes.Rectangle();
-                            rect.Width = myCanvas.Width / 5;
-                            rect.Height = myCanvas.Height / 5;
-                            rect.Stroke = new SolidColorBrush(Colors.Red);
-                            rect.Fill = new SolidColorBrush(Colors.Red);
-                            Canvas.SetTop(rect, i * rect.Height);
-                            Canvas.SetLeft(rect, j * rect.Width);
-                            myCanvas.Children.Add(rect);
-                        }
-                        else
-                        {
-                            playercol = i;
-                            playerRow = j;
-                            rect = new System.Windows.Shapes.Rectangle();
-                            rect.Width = myCanvas.Width / 5;
-                            rect.Height = myCanvas.Height / 5;
-                            rect.Stroke = new SolidColorBrush(Colors.Yellow);
-                            rect.Fill = new SolidColorBrush(Colors.Yellow);
-                            Canvas.SetTop(rect, i * rect.Height);
-                            Canvas.SetLeft(rect, j * rect.Width);
-                            myCanvas.Children.Add(rect);
-                        }
-                    }
-                }
             }
         }
 
@@ -196,6 +165,41 @@ namespace ClientGUI.V
         }
 
 
+        public string PlayerPos
+        {
+            get
+            {
+                return (string)GetValue(PlayerPosProperty);
+                
+            }
+
+            set
+            {
+                SetValue(PlayerPosProperty, value);
+                
+                string[] s = playerPos.Split(',');
+
+                int preRow = playerRow;
+                int prevCol = playerCol;
+
+                playerRow = Int32.Parse(s[0]);
+                playerCol = Int32.Parse(s[1]);
+
+                ChangePlayerPosition(preRow, prevCol, playerRow, playerCol);
+            }
+        }
+
+        private void ChangePlayerPosition(int prow, int pcol, int row, int col)
+        {
+            Rectangle rect = CellAtPosition(prow, pcol);
+            rect.Stroke = new SolidColorBrush(Colors.White);
+            rect.Fill = new SolidColorBrush(Colors.White);
+
+            rect = CellAtPosition(row, col);
+            rect.Stroke = new SolidColorBrush(Colors.Yellow);
+            rect.Fill = new SolidColorBrush(Colors.Yellow);
+        }
+
 
         public static readonly DependencyProperty GoalPosProperty =
         DependencyProperty.Register("GoalPos", typeof(string), typeof(V.MazeBoard), new
@@ -209,8 +213,7 @@ namespace ClientGUI.V
 
         // Using a DependencyProperty as the backing store for Maze representation. This enables animation, styling,
         public static readonly DependencyProperty MazeProperty =
-        DependencyProperty.Register("Maze", typeof(string), typeof(V.MazeBoard), new
-        PropertyMetadata("11111000001"));
+        DependencyProperty.Register("Maze", typeof(string), typeof(MazeBoard));
 
 
         // Using a DependencyProperty as the backing store for Rows. This enables animation, styling,
@@ -225,30 +228,11 @@ namespace ClientGUI.V
         PropertyMetadata(0));
 
 
+        // Using a DependencyProperty as the backing store for Cols. This enables animation, styling,
+        public static readonly DependencyProperty PlayerPosProperty =
+        DependencyProperty.Register("PlayerPos", typeof(Position), typeof(MazeBoard));
 
 
-
-
-
-
-
-            /**
-                        // Right
-                        int newCol = playercol + 1;
-                        int newRow = playerRow;
-
-                        Rectangle rect = CellAtPosition(playerRow, playercol);
-                        rect.Stroke = new SolidColorBrush(Colors.White);
-                        rect.Fill = new SolidColorBrush(Colors.White);
-
-                        rect = CellAtPosition(newRow, newCol);
-                        rect.Stroke = new SolidColorBrush(Colors.Yellow);
-                        rect.Fill = new SolidColorBrush(Colors.Yellow);
-
-                        playercol = newCol;
-                        playerRow = newRow;
-            *
-*/
 
 
         private Rectangle CellAtPosition(int i, int j)
@@ -266,6 +250,9 @@ namespace ClientGUI.V
             return null;
         }
 
+
+
+        /**
         public void UserControl_KeyDown(object sender, KeyEventArgs e)
         {
 
@@ -286,10 +273,10 @@ namespace ClientGUI.V
                 playerRow = newRow;
             }
 
-            if (e.Key == Key.Down)
+            else if (e.Key == Key.Up)
             {
                 int newCol = playercol;
-                int newRow = playerRow + 1;
+                int newRow = playerRow - 1;
 
                 Rectangle rect = CellAtPosition(playerRow, playercol);
                 rect.Stroke = new SolidColorBrush(Colors.White);
@@ -302,6 +289,46 @@ namespace ClientGUI.V
                 playercol = newCol;
                 playerRow = newRow;
             }
+
+            else if (e.Key == Key.Right)
+            {
+                // Right
+                int newCol = playercol + 1;
+                int newRow = playerRow;
+
+                Rectangle rect = CellAtPosition(playerRow, playercol);
+                rect.Stroke = new SolidColorBrush(Colors.White);
+                rect.Fill = new SolidColorBrush(Colors.White);
+
+                rect = CellAtPosition(newRow, newCol);
+                rect.Stroke = new SolidColorBrush(Colors.Yellow);
+                rect.Fill = new SolidColorBrush(Colors.Yellow);
+
+                playercol = newCol;
+                playerRow = newRow;
+            }
+
+            else if (e.Key == Key.Left)
+            {
+                // Right
+                int newCol = playercol - 1;
+                int newRow = playerRow;
+
+                Rectangle rect = CellAtPosition(playerRow, playercol);
+                rect.Stroke = new SolidColorBrush(Colors.White);
+                rect.Fill = new SolidColorBrush(Colors.White);
+
+                rect = CellAtPosition(newRow, newCol);
+                rect.Stroke = new SolidColorBrush(Colors.Yellow);
+                rect.Fill = new SolidColorBrush(Colors.Yellow);
+
+                playercol = newCol;
+                playerRow = newRow;
+            }
+
+
         }
+    */
+
     }
 }

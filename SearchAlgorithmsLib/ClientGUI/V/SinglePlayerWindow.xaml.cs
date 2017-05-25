@@ -29,10 +29,11 @@ namespace ClientGUI.V
 
 
 
+
         public SinglePlayerWindow(string name, int row, int col)
         {
             InitializeComponent();
-            this.KeyDown += mazeBoard.UserControl_KeyDown;
+            this.KeyDown += Window_KeyDown;
 
             this.name = name;
             this.row = row;
@@ -41,9 +42,39 @@ namespace ClientGUI.V
             string ip = Properties.Settings.Default.ServerIP;
             vm = new SinglePlayerVM(this.name, this.row, this.col, port, ip);
             vm.startGame(this.name, this.row, this.col);
-           
+            DataContext = vm;
 
-    }
+
+        }
+
+
+
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+
+
+            if (e.Key == Key.Down)
+            {
+                
+                vm.PlayerMoveDown();
+            }
+
+            else if (e.Key == Key.Up)
+            {
+                vm.PlayerMoveUp();
+            }
+
+            else if (e.Key == Key.Right)
+            {
+                vm.PlayerMoveRight();
+            }
+
+            else if (e.Key == Key.Left)
+            {
+                vm.PlayerMoveLeft();
+            }
+        }
 
 
         private void restartbutton_Click(object sender, RoutedEventArgs e)
@@ -71,7 +102,6 @@ namespace ClientGUI.V
             }
 
         }
-
 
     }
 }
