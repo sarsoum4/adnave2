@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="MultiplayerMenu" Height="300" Width="300">
 
+
     <Grid TextBlock.FontSize="14" Background="#FFE8F0FF">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -29,9 +30,12 @@ Margin="3"></TextBox>
         <TextBlock Grid.Row="4" Padding="3" Margin="3">Maze columns:</TextBlock>
         <TextBox x:Name="txtCols" Grid.Row="4" Grid.Column="1" Padding="3"
 Margin="3"></TextBox>
-        <Button x:Name="btnStart" Grid.Row="5" HorizontalAlignment="Center" Margin="2,5,106,5" Padding="5" Click="btnStart_Click" Grid.Column="1" Width="80">Start Game</Button>
-        <Button x:Name="btnJoin" Grid.Row="1" HorizontalAlignment="Center" Margin="2,5,106,5" Padding="5" Click="btnJoin_Click" Grid.Column="1" Width="80">Join Game</Button>
+        <Button x:Name="btnStart" Grid.Row="5" HorizontalAlignment="Center" Margin="2,5,106,5" Padding="5"  Grid.Column="1" Width="80">Start Game</Button>
+        <Button x:Name="btnJoin" Grid.Row="1" HorizontalAlignment="Center" Margin="2,5,106,5" Padding="5"  Grid.Column="1" Width="80">Join Game</Button>
         <TextBlock Padding="3" Margin="3">List of games:</TextBlock>
         <ComboBox x:Name="txtListOfGames" Grid.Column="1" Padding="3" Margin="3"></ComboBox>
     </Grid>
+
+
+
 </Window>

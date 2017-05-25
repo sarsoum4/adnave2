@@ -26,9 +26,14 @@ namespace ClientGUI.V
         private int row;
         private int col;
 
+
+
+
         public SinglePlayerWindow(string name, int row, int col)
         {
             InitializeComponent();
+            this.KeyDown += mazeBoard.UserControl_KeyDown;
+
             this.name = name;
             this.row = row;
             this.col = col;
@@ -66,5 +71,7 @@ namespace ClientGUI.V
             }
 
         }
+
+
     }
 }

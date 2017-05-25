@@ -17,6 +17,12 @@ namespace ClientGUI.VM
         private string name;
         private int cols;
         private int rows;
+        private int startRow;
+        private int startCol;
+        private int endRow;
+        private int endCol;
+        private string mazeRep;
+
         private Maze maze;
         private Position playerPosition;
 
@@ -27,15 +33,15 @@ namespace ClientGUI.VM
         private IModel model;
 
         private string json;
-
+        //private Jobject j;
 
 
 
         public SinglePlayerVM(string name, int row, int col, int port, string ip)
         {
-            this.name = name;
-            this.rows = row;
-            this.cols = col;
+            this.Name = name;
+            this.Rows = row;
+            this.Cols = col;
             this.port = port;
             this.ip = ip;
             this.model = new Model();
@@ -53,13 +59,26 @@ namespace ClientGUI.VM
         ///get the maze representation
         private void parseMaze(string json)
         {
-            //char[] detlimiter = { '\\' };
-            string[] words = json.Split('\\');
-            yhryhryh
-                 
-            
 
-        }
+            Maze maze = MazeLib.Maze.FromJSON(json);
+            Cols =  maze.Cols;
+            Rows = maze.Rows;
+            mazeRep = maze.ToString();
+            mazeRep = mazeRep.Replace('\n', ' ');
+            mazeRep = mazeRep.Replace('\r', ' ');
+            
+            Name = maze.Name;
+
+            startRow = maze.InitialPos.Row;
+            startCol = maze.InitialPos.Col;
+            endRow = maze.GoalPos.Row;
+            endCol = maze.GoalPos.Col;
+            playerPosition = maze.InitialPos;
+
+    }
+
+
+
 
 
 
@@ -69,8 +88,9 @@ namespace ClientGUI.VM
             get { return model.Json; }
             set
             {
+                json = value;
                 model.Json = value;
-                NotifyPropertyChanged("Json");
+                
             }
         }
 
@@ -81,7 +101,7 @@ namespace ClientGUI.VM
             string s = "generate " + name +" "+ row +" "+ col;
             model.send(s);
             this.Json = model.Recieve();
-            parseMaze(json);
+            parseMaze(this.Json);
         }
         
             
@@ -91,7 +111,10 @@ namespace ClientGUI.VM
         public Maze Maze
         {
             get{return maze;}
-            set{maze = value;}
+            set
+            {
+                maze = value;
+            }
         }
 
         public Position PlayerPosition
@@ -100,11 +123,129 @@ namespace ClientGUI.VM
             set{playerPosition = value;}
         }
 
+
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+
+            set
+            {
+                name = value;
+            }
+        }
+
+        public int Cols
+        {
+            get
+            {
+                return cols;
+            }
+
+            set
+            {
+                cols = value;
+                NotifyPropertyChanged("Cols");
+            }
+        }
+
+        public int Rows
+        {
+            get
+            {
+                return rows;
+            }
+
+            set
+            {
+                rows = value;
+            }
+        }
+
+        public int StartRow
+        {
+            get
+            {
+                return startRow;
+            }
+
+            set
+            {
+                startRow = value;
+            }
+        }
+
+        public int StartCol
+        {
+            get
+            {
+                return startCol;
+            }
+
+            set
+            {
+                startCol = value;
+            }
+        }
+
+        public int EndRow
+        {
+            get
+            {
+                return endRow;
+            }
+
+            set
+            {
+                endRow = value;
+            }
+        }
+
+        public int EndCol
+        {
+            get
+            {
+                return endCol;
+            }
+
+            set
+            {
+                endCol = value;
+            }
+        }
+
+        public string MazeRep
+        {
+            get
+            {
+                return mazeRep;
+            }
+
+            set
+            {
+                mazeRep = value;
+                NotifyPropertyChanged("MazeRep");
+
+            }
+        }
+
         public bool IsConnecting
         {
-            get{return isConnecting;}
-            set{isConnecting = value;}
+            get
+            {
+                return isConnecting;
+            }
+
+            set
+            {
+                isConnecting = value;
+            }
         }
+
+
+
 
 
 

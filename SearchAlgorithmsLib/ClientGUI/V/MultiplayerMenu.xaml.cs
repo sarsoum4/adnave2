@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace ClientGUI.V
 {
     /// <summary>
-    /// Interaction logic for MultiPlayerMenu.xaml
+    /// Interaction logic for MultiplayerMenu.xaml
     /// </summary>
-    public partial class MultiPlayerMenu : Page
+    public partial class MultiplayerMenu : Window
     {
-        public MultiPlayerMenu()
+        public MultiplayerMenu()
         {
             InitializeComponent();
         }
