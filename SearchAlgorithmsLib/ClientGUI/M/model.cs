@@ -67,7 +67,7 @@ namespace ClientGUI.M
 
         public void getCommandFromServer(string command)
         {
-           //this.currentCommand = command;
+            //this.currentCommand = command;
         }
 
         public String commandToSend()
@@ -75,32 +75,8 @@ namespace ClientGUI.M
             return null;
         }
 
-        ///get the maze representation, the
-        public void parseMaze()
-        {
-            MazeGeneratorLib.IMazeGenerator generator = new DFSMazeGenerator();
-            Maze maze = generator.Generate(5, 5);
-            //this.json = maze.ToJSON();
 
-            //use the FromJson method. then this.maze.row is the rows etc
-            //this.maze = Maze.FromJSON(jsonFormatStr);
-/**
-            JObject ob = JObject.Parse(this.json);
-            this.mazeRepresentation = ob.GetValue("Maze").ToString();
-            //get the start row
-            this.startRep = ob.SelectToken("Start.Row").ToString();
-            this.startRow = Int32.Parse(this.startRep);
-            //get the start col
-            this.startRep = ob.SelectToken("Start.Col").ToString();
-            this.startCol = Int32.Parse(this.startRep);
-            //get the end row
-            this.endRep = ob.GetValue("End.Row").ToString();
-            this.endRow = Int32.Parse(this.endRep);
-            //get the end col
-            this.endRep = ob.GetValue("End.Row").ToString();
-            this.endCol = Int32.Parse(this.endRep);
-*/
-        }
+
 
 
 
@@ -108,42 +84,40 @@ namespace ClientGUI.M
         {
             Console.WriteLine(ip);
             Console.WriteLine(port);
-            this.endPonit = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 6345);
+            this.endPonit = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 6675);
 
+            if (!connectionActive)
+            {
+                connectionActive = true;
+                client = new TcpClient();
+                client.Connect(endPonit);
+                stream = client.GetStream();
+                this.writer = new StreamWriter(stream);
+                this.reader = new StreamReader(stream);
+            }
 
-                            connectionActive = true;
-                            client = new TcpClient();
-                            client.Connect(endPonit);
-                            stream = client.GetStream();
-                            this.writer = new StreamWriter(stream);
-                            this.reader = new StreamReader(stream);
-
-                            // Run the receiving task.
-                            Task recv = new Task(() =>
-                            {
-                                Recieve();
-
-                            });
-                            recv.Start();
-                        
 
         }
 
 
-
-        public void Recieve()
+        //string
+        public string Recieve()
         {
+
             bool flag = true;
+            string current = "";
+
             while (flag)
             {
                 try
                 {
 
                     this.answer = reader.ReadLine();
-
-                    if (answer == null)
+                    if (answer == "  }")
                     {
-                        flag = false;
+                        current += "  }";
+                        current += "}";
+                        break;
                     }
 
                     else if (answer.Equals("close"))
@@ -153,14 +127,14 @@ namespace ClientGUI.M
                         writer.Flush();
                         this.connectionActive = false;
                         client.Close();
-                        break;
+                        return "Close";
                     }
 
                     else if (answer.Equals("-1"))
                     {
                         this.connectionActive = false;
                         client.Close();
-                        break;
+                        return "-1";
                     }
 
                 }
@@ -170,7 +144,10 @@ namespace ClientGUI.M
                     this.connectionActive = false;
                     client.Close();
                 }
+                current += answer;
             }
+            return current;
+
         }
 
 
