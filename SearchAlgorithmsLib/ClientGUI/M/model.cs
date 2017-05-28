@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 using System.IO;
+using Newtonsoft.Json.Linq;
 
 namespace ClientGUI.M
 {
@@ -17,6 +18,7 @@ namespace ClientGUI.M
         private String answer;
         private Position playerPosition;
         private string playerPositionStr;
+        private string solved;
 
         private int port;
         private bool connectionActive = false;
@@ -190,6 +192,67 @@ namespace ClientGUI.M
             }
         }
 
+        //TODO: check how to get the diffault algo?#################################################3
+        public string SolveMaze()
+        {
+
+            bool flag = true;
+            string current = "";
+
+            while (flag)
+            {
+                try
+                {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        this.answer = reader.ReadLine();
+                        if (answer == "  }")
+                        {
+                            current += "  }";
+                            current += "}";
+                            break;
+                        }
+
+                        else if (answer.Equals("close"))
+                        {
+                            // Close the connection.
+                            writer.WriteLine("close");
+                            writer.Flush();
+                            this.connectionActive = false;
+                            client.Close();
+                            return "Close";
+                        }
+
+                        else if (answer.Equals("-1"))
+                        {
+                            this.connectionActive = false;
+                            client.Close();
+                            return "-1";
+                        }
+                        current += answer;
+                    }
+                    break;
+                }
+                // Server closed the connection.
+                catch
+                {
+                    this.connectionActive = false;
+                    client.Close();
+                }
+                
+            }
+            
+            return current;
+        }
+
+        public string SolvedMazeRep {
+            get { return solved; }
+            set
+            {
+                solved = value;
+                NotifyPropertyChanged("SolvedMazeRep");
+            }
+        }
 
         public void generateNewMaze(string name, int rows, int cols)
         {
@@ -212,6 +275,7 @@ namespace ClientGUI.M
         {
             throw new NotImplementedException();
         }
+
 
     }
 }

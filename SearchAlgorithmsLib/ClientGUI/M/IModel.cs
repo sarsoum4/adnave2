@@ -30,5 +30,9 @@ namespace ClientGUI.M
         Position PlayerPosition { get; set; }
 
         string PlayerPositionStr { get ;set;}
+
+        string SolveMaze();
+
+        string SolvedMazeRep { get; set; }
     }
 }

@@ -41,10 +41,8 @@ namespace ClientGUI.V
             int port = Properties.Settings.Default.ServerPort;
             string ip = Properties.Settings.Default.ServerIP;
             vm = new SinglePlayerVM(this.name, this.row, this.col, port, ip);
-            vm.startGame(this.name, this.row, this.col);
+            vm.GenerateGame(this.name, this.row, this.col);
             DataContext = vm;
-
-
         }
 
 
@@ -88,14 +86,17 @@ namespace ClientGUI.V
             action.ShowDialog();
             if (action.getYesNoFlag() == 1)
             {
-
+                vm.RestartGame();
+                
             }
         }
 
         private void solvebutton_Click(object sender, RoutedEventArgs e)
         {
-
+            vm.SolveMaze(this.name, 0);
+            MessageBox.Show("Maze is solved! You can restart the maze");
         }
+
 
         private void mainbutton_Click(object sender, RoutedEventArgs e)
         {
