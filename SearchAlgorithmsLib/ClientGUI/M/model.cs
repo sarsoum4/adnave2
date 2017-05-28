@@ -15,6 +15,8 @@ namespace ClientGUI.M
 
         private String userCommand;
         private String answer;
+        private Position playerPosition;
+        private string playerPositionStr;
 
         private int port;
         private bool connectionActive = false;
@@ -84,7 +86,7 @@ namespace ClientGUI.M
         {
             Console.WriteLine(ip);
             Console.WriteLine(port);
-            this.endPonit = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 6675);
+            this.endPonit = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 6677);
 
             if (!connectionActive)
             {
@@ -159,13 +161,35 @@ namespace ClientGUI.M
         }
 
 
-
-        public void generateNewMaze(string name, int rows, int cols)
+        public void movePlayer(int row, int col)
         {
-            throw new NotImplementedException();
+            PlayerPosition = new Position(row, col);
+            PlayerPositionStr = playerPosition.ToString();
         }
 
-        public void movePlayer(string move)
+        public Position PlayerPosition
+        {
+            get { return playerPosition; }
+            set
+            {
+                playerPosition = value;
+                NotifyPropertyChanged("PlayerPosition");
+            }
+        }
+
+        public string PlayerPositionStr
+        {
+            get { return playerPositionStr; }
+            set
+            {
+                playerPositionStr = value;
+                NotifyPropertyChanged("PlayerPositionStr");
+
+            }
+        }
+
+
+        public void generateNewMaze(string name, int rows, int cols)
         {
             throw new NotImplementedException();
         }
@@ -175,10 +199,7 @@ namespace ClientGUI.M
             //this.currentCommand = "list";
         }
 
-        public void movePlayer()
-        {
-            throw new NotImplementedException();
-        }
+
 
         public void disconnect()
         {
@@ -190,10 +211,5 @@ namespace ClientGUI.M
             throw new NotImplementedException();
         }
 
-        public void generateNewMazeMaze(string name, int rows, int cols)
-        {
-            //this.currentCommand = "generate " + name + row.ToString() + " " + col.ToString();
-            //Server.Controler.Controller 
-        }
     }
 }

@@ -25,7 +25,7 @@ namespace ClientGUI.V
         public SinglePlayerMenu()
         {
             InitializeComponent();
-        
+
         }
 
         private void btnStart_Click(object sender, RoutedEventArgs e)

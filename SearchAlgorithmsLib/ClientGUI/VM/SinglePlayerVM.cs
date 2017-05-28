@@ -25,7 +25,8 @@ namespace ClientGUI.VM
 
         private Maze maze;
         private Position playerPosition;
-
+        private Position previousPlayerPosition;
+        private string playerPositionStr;
 
         private bool isConnecting;
         private int port;
@@ -43,7 +44,7 @@ namespace ClientGUI.VM
             this.model = new Model();
             model.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e)
             {
-                NotifyPropertyChanged("VM_"+e.PropertyName);
+                NotifyPropertyChanged("VM_" + e.PropertyName);
             };
 
             this.VM_Name = name;
@@ -51,11 +52,11 @@ namespace ClientGUI.VM
             this.VM_Cols = col;
             this.port = port;
             this.ip = ip;
-            
+
 
 
             model.connect(ip, port);
-           
+
         }
 
 
@@ -64,21 +65,21 @@ namespace ClientGUI.VM
         {
 
             Maze maze = MazeLib.Maze.FromJSON(json);
-            VM_Cols =  maze.Cols;
+            VM_Cols = maze.Cols;
             VM_Rows = maze.Rows;
             mazeRep = maze.ToString();
             mazeRep = mazeRep.Replace('\n', ' ');
             mazeRep = mazeRep.Replace('\r', ' ');
             string current = "";
-            foreach(char c in mazeRep)
+            foreach (char c in mazeRep)
             {
-                if(c != ' ')
+                if (c != ' ')
                 {
                     current += c;
                 }
             }
             VM_MazeRep = current;
-              
+
             VM_Name = maze.Name;
 
             startRow = maze.InitialPos.Row;
@@ -86,19 +87,18 @@ namespace ClientGUI.VM
             endRow = maze.GoalPos.Row;
             endCol = maze.GoalPos.Col;
             VM_PlayerPosition = maze.InitialPos;
-            
 
-    }
+        }
 
 
 
         private char CellAtPosition(int i, int j)
         {
-            
+
             int count = 0;
             foreach (char c in mazeRep)
             {
-                if (count == i * VM_Rows + j)
+                if (count == i * VM_Cols + j)
                 {
                     return c;
                 }
@@ -108,19 +108,18 @@ namespace ClientGUI.VM
         }
 
 
-
         internal void PlayerMoveDown()
         {
             int newCol = playerPosition.Col;
             int newRow = playerPosition.Row + 1;
 
-
             char newPosition = CellAtPosition(newRow, newCol);
-            if (newPosition == '0')
+            if ((newPosition == '0') || (newCol == VM_EndCol && newRow == VM_EndRow))
             {
                 playerPosition.Row++;
-                VM_PlayerPosition = new Position(newRow, newCol);
-               
+                model.movePlayer(newRow, newCol);
+                //VM_PlayerPosition = new Position(newRow, newCol);
+
             }
         }
 
@@ -129,13 +128,14 @@ namespace ClientGUI.VM
             int newCol = playerPosition.Col + 1;
             int newRow = playerPosition.Row;
 
-
+            
             char newPosition = CellAtPosition(newRow, newCol);
-            if (newPosition == '0')
+            if ((newPosition == '0') || (newCol == VM_EndCol && newRow == VM_EndRow))
             {
                 playerPosition.Col++;
-                VM_PlayerPosition = new Position(newRow, newCol);
-                
+                model.movePlayer(newRow, newCol);
+                //VM_PlayerPosition = new Position(newRow, newCol);
+
             }
         }
 
@@ -146,11 +146,12 @@ namespace ClientGUI.VM
 
 
             char newPosition = CellAtPosition(newRow, newCol);
-            if (newPosition == '0')
+            if ((newPosition == '0') || (newCol == VM_EndCol && newRow == VM_EndRow))
             {
                 playerPosition.Col--;
-                VM_PlayerPosition = new Position(newRow, newCol);
-               
+                model.movePlayer(newRow, newCol);
+                //VM_PlayerPosition = new Position(newRow, newCol);
+
             }
         }
 
@@ -161,11 +162,12 @@ namespace ClientGUI.VM
 
 
             char newPosition = CellAtPosition(newRow, newCol);
-            if (newPosition == '0')
+            if ((newPosition == '0') || (newCol == VM_EndCol && newRow == VM_EndRow))
             {
                 playerPosition.Row--;
-                VM_PlayerPosition = new Position(newRow, newCol);
-                
+                model.movePlayer(newRow, newCol);
+                //VM_PlayerPosition = new Position(newRow, newCol);
+
             }
         }
 
@@ -195,7 +197,7 @@ namespace ClientGUI.VM
 
         public Maze VM_Maze
         {
-            get{return maze;}
+            get { return maze; }
             set
             {
                 maze = value;
@@ -204,18 +206,43 @@ namespace ClientGUI.VM
 
         public Position VM_PlayerPosition
         {
-            get{return playerPosition;}
-            set{
+            get { return this.playerPosition; }
+            set
+            {
                 playerPosition = value;
-                
+                //VM_PlayerPositionStr = playerPosition.ToString();
+                NotifyPropertyChanged("VM_PlayerPosition");
+            }
+        }
+
+        public Position VM_PreviousPlayerPosition
+        {
+            get { return this.previousPlayerPosition; }
+            set
+            {
+                playerPosition = value;
+                //VM_PlayerPositionStr = playerPosition.ToString();
+                NotifyPropertyChanged("VM_PreviousPlayerPosition");
+            }
+        }
+
+        public string VM_PlayerPositionStr
+        {
+            get { return this.playerPositionStr; }
+            set
+            {
+                playerPositionStr = value;
+                NotifyPropertyChanged("VM_PlayerPositionStr");
+
             }
         }
 
 
         public string VM_Name
         {
-            get{return name;}
-            set{
+            get { return name; }
+            set
+            {
                 name = value;
                 NotifyPropertyChanged("VM_Name");
             }
@@ -223,7 +250,7 @@ namespace ClientGUI.VM
 
         public int VM_Cols
         {
-            get{return cols;}
+            get { return cols; }
             set
             {
                 cols = value;
@@ -233,8 +260,9 @@ namespace ClientGUI.VM
 
         public int VM_Rows
         {
-            get{return rows;}
-            set{
+            get { return rows; }
+            set
+            {
                 rows = value;
                 NotifyPropertyChanged("VM_Rows");
             }
@@ -242,8 +270,9 @@ namespace ClientGUI.VM
 
         public int VM_StartRow
         {
-            get{return startRow;}
-            set{
+            get { return startRow; }
+            set
+            {
                 startRow = value;
                 NotifyPropertyChanged("VM_StartRow");
             }
@@ -251,8 +280,9 @@ namespace ClientGUI.VM
 
         public int VM_StartCol
         {
-            get{return startCol;}
-            set{
+            get { return startCol; }
+            set
+            {
                 startCol = value;
                 NotifyPropertyChanged("VM_StartCol");
             }
@@ -260,8 +290,9 @@ namespace ClientGUI.VM
 
         public int VM_EndRow
         {
-            get{return endRow;}
-            set{
+            get { return endRow; }
+            set
+            {
                 endRow = value;
                 NotifyPropertyChanged("VM_EndRow");
             }
@@ -269,8 +300,9 @@ namespace ClientGUI.VM
 
         public int VM_EndCol
         {
-            get{return endCol;}
-            set{
+            get { return endCol; }
+            set
+            {
                 endCol = value;
                 NotifyPropertyChanged("VM_EndCol");
             }
@@ -278,18 +310,18 @@ namespace ClientGUI.VM
 
         public string VM_MazeRep
         {
-            get{return mazeRep;}
+            get { return mazeRep; }
             set
             {
                 mazeRep = value;
-              //  NotifyPropertyChanged("VM_MazeRep");
+                //  NotifyPropertyChanged("VM_MazeRep");
             }
         }
 
         public bool VM_IsConnecting
         {
-            get{return isConnecting;}
-            set{isConnecting = value;}
+            get { return isConnecting; }
+            set { isConnecting = value; }
         }
 
 

@@ -19,7 +19,7 @@
 
         <Grid Margin="10,44,10,10">
             <Controls:MazeBoard x:Name="mazeBoard" Maze="{Binding VM_MazeRep}"
-               PlayerPos = "{Binding VM_PlayerPosition, Mode=TwoWay}" Rows="{Binding VM_Rows}"
+               PlayerPos = "{Binding VM_PlayerPosition}" Rows="{Binding VM_Rows}"
                Cols="{Binding VM_Cols}" >
 
             </Controls:MazeBoard>

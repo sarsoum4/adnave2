@@ -13,6 +13,6 @@
             <Canvas x:Name="myCanvas" Width="320" Height="310" Background="White" Loaded="myCanvas_Loaded" 
                     />
         </Border>
-    </Viewbox>
+    </Viewbox>
 
 </UserControl>

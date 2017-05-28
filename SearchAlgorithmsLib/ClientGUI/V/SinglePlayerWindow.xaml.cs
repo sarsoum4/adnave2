@@ -34,7 +34,7 @@ namespace ClientGUI.V
         {
             
             InitializeComponent();
-            this.KeyDown += Window_KeyDown;
+            //this.KeyDown += Window_KeyDown;
 
             this.name = name;
             this.row = row;
@@ -50,15 +50,14 @@ namespace ClientGUI.V
 
 
 
-
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
 
-
+            
             if (e.Key == Key.Down)
             {
-                
                 vm.PlayerMoveDown();
+                
             }
 
             else if (e.Key == Key.Up)
@@ -75,6 +74,12 @@ namespace ClientGUI.V
             {
                 vm.PlayerMoveLeft();
             }
+
+            if(vm.VM_PlayerPosition.Row == vm.VM_EndRow && vm.VM_PlayerPosition.Col == vm.VM_EndCol)
+            {
+                MessageBox.Show("You Win!");
+                this.Close();
+            }
         }
 
 
@@ -84,7 +89,7 @@ namespace ClientGUI.V
             action.ShowDialog();
             if (action.getYesNoFlag() == 1)
             {
-                
+
             }
         }
 
@@ -97,7 +102,7 @@ namespace ClientGUI.V
         {
             GoBackWindow action = new GoBackWindow();
             action.ShowDialog();
-            if(action.getYesNoFlag() == 1)
+            if (action.getYesNoFlag() == 1)
             {
                 this.Close();
             }

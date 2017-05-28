@@ -29,7 +29,7 @@ Margin="3"></TextBox>
 Margin="3"></TextBox>
         <Button x:Name="btnStart" Grid.Row="3" HorizontalAlignment="Center"
 Grid.ColumnSpan="2" Margin="5" Padding="5" Click="btnStart_Click">Start Game</Button>
-    </Grid>
-
+    </Grid>
 
 </Window>
+
