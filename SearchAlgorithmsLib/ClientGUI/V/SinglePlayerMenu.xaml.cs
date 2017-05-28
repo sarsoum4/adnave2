@@ -36,6 +36,7 @@ namespace ClientGUI.V
 
             this.Close();
             SinglePlayerWindow game = new SinglePlayerWindow(gameName, row, col);
+            game.Title = gameName;
             game.ShowDialog();
 
 
