@@ -7,6 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 using System.ComponentModel;
+using Newtonsoft.Json.Linq;
+using System.Windows;
+using System.Windows.Threading;
+using System.Threading;
 
 namespace ClientGUI.VM
 {
@@ -23,10 +27,13 @@ namespace ClientGUI.VM
         private int endCol;
         private string mazeRep;
 
+        private Position startPoint;
+
         private Maze maze;
         private Position playerPosition;
         private Position previousPlayerPosition;
         private string playerPositionStr;
+        private string solved;
 
         private bool isConnecting;
         private int port;
@@ -35,9 +42,6 @@ namespace ClientGUI.VM
         private IModel model;
 
         private string json;
-        //private Jobject j;
-
-
 
         public SinglePlayerVM(string name, int row, int col, int port, string ip)
         {
@@ -61,7 +65,7 @@ namespace ClientGUI.VM
 
 
         ///get the maze representation
-        private void parseMaze(string json)
+        private void ParseMaze(string json)
         {
 
             Maze maze = MazeLib.Maze.FromJSON(json);
@@ -84,13 +88,30 @@ namespace ClientGUI.VM
 
             startRow = maze.InitialPos.Row;
             startCol = maze.InitialPos.Col;
+            startPoint = new Position(startRow, startCol);
             endRow = maze.GoalPos.Row;
             endCol = maze.GoalPos.Col;
             VM_PlayerPosition = maze.InitialPos;
 
         }
 
+        public void RestartGame()
+        {
+            playerPosition = VM_StartPosition;
+            playerPositionStr = playerPosition.ToString();
+            model.movePlayer(startPoint.Row, startPoint.Col);
+        }
 
+        private void ParseMazeSolution(string solution)
+        {
+            string rep = solution;
+            int start = rep.IndexOf("Solution");
+            int end = rep.IndexOf("NodesEvaluated");
+            string sub = rep.Substring(start);
+            string[] temp = sub.Split('"');
+            //the 2 place in the array is the solution
+            VM_SolvedMaze = temp[2];
+        }
 
         private char CellAtPosition(int i, int j)
         {
@@ -106,7 +127,6 @@ namespace ClientGUI.VM
             }
             return ' ';
         }
-
 
         internal void PlayerMoveDown()
         {
@@ -177,11 +197,63 @@ namespace ClientGUI.VM
             string s = "generate " + name + " " + row + " " + col;
             model.send(s);
             this.VM_Json = model.Recieve();
-            parseMaze(this.VM_Json);
+            ParseMaze(this.VM_Json);
         }
 
 
 
+        public void SolveMaze(string name, int algorithm)
+        {
+            string s = "solve " + name + " " + algorithm;
+            model.send(s);
+            this.VM_SolvedMaze = model.SolveMaze();
+            ParseMazeSolution(this.VM_SolvedMaze);
+
+            foreach (char c in VM_SolvedMaze)
+            {
+                Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, new Action(() =>
+                {
+                    //move left
+                    if(c == '0')
+                    {
+                        PlayerMoveLeft();
+                    }
+                    //move right
+                    else if(c == '1')
+                    {
+                        PlayerMoveRight();
+                    }
+                    //move up
+                    else if (c == '2')
+                    {
+                        PlayerMoveUp();
+                    }
+                    //move down
+                    else if (c == '3')
+                    {
+                        PlayerMoveDown();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Something is wrong. Try to restart");
+                    }
+                }));
+
+                Thread.Sleep(1000);
+            }
+
+        }
+
+        public string VM_SolvedMaze
+        {
+            get { return model.SolvedMazeRep; }
+            set
+            {
+                solved = value;
+                model.SolvedMazeRep = value;
+                NotifyPropertyChanged("VM_SolvedMaze");
+            }
+        }
 
         public string VM_Json
         {
@@ -194,7 +266,6 @@ namespace ClientGUI.VM
             }
         }
 
-
         public Maze VM_Maze
         {
             get { return maze; }
@@ -203,6 +274,17 @@ namespace ClientGUI.VM
                 maze = value;
             }
         }
+
+        public Position VM_StartPosition
+        {
+            get { return startPoint; }
+            set
+            {
+                startPoint = value;
+                NotifyPropertyChanged("VM_StartPosition");
+            }
+        }
+
 
         public Position VM_PlayerPosition
         {
@@ -236,7 +318,6 @@ namespace ClientGUI.VM
 
             }
         }
-
 
         public string VM_Name
         {
