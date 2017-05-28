@@ -14,8 +14,15 @@ namespace ClientGUI.VM
         private string name;
         private int cols;
         private int rows;
+        private int startRow;
+        private int startCol;
+        private int endRow;
+        private int endCol;
+        private string mazeRep;
+
         private Maze maze;
         private Position playerPosition;
+
 
         private bool isConnecting;
         private int port;
@@ -28,30 +35,22 @@ namespace ClientGUI.VM
 
         public MultiplayerVM(string name, int row, int col, int port, string ip)
         {
-            this.name = name;
-            this.rows = row;
-            this.cols = col;
-            this.port = port;
-            this.ip = ip;
-            this.model = new Model();
+            this.model = new MultiplayerModel();
             model.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e)
             {
-                NotifyPropertyChanged(e.PropertyName);
+                NotifyPropertyChanged("VM_" + e.PropertyName);
             };
+
+            this.VM_Name = name;
+            this.VM_Rows = row;
+            this.VM_Cols = col;
+            this.port = port;
+            this.ip = ip;
 
             model.connect(ip, port);
         }
 
 
-        public string Json
-        {
-            get { return model.Json; }
-            set
-            {
-                model.Json = value;
-                NotifyPropertyChanged("Json");
-            }
-        }
 
         public void startGame(string name, int row, int col)
         {
@@ -61,17 +60,129 @@ namespace ClientGUI.VM
             //model.start();
         }
 
-        public Maze Maze
+
+
+
+        public string VM_Json
         {
-            get { return maze; }
-            set { maze = value; }
+            get { return model.Json; }
+            set
+            {
+                json = value;
+                model.Json = value;
+                NotifyPropertyChanged("VM_Json");
+            }
         }
 
-        public Position PlayerPosition
+
+        public Maze VM_Maze
+        {
+            get { return maze; }
+            set
+            {
+                maze = value;
+            }
+        }
+
+        public Position VM_PlayerPosition
         {
             get { return playerPosition; }
-            set { playerPosition = value; }
+            set
+            {
+                playerPosition = value;
+
+            }
         }
+
+
+
+
+        public string VM_Name
+        {
+            get { return name; }
+            set
+            {
+                name = value;
+                NotifyPropertyChanged("VM_Name");
+            }
+        }
+
+        public int VM_Cols
+        {
+            get { return cols; }
+            set
+            {
+                cols = value;
+                NotifyPropertyChanged("VM_Cols");
+            }
+        }
+
+
+
+        public int VM_Rows
+        {
+            get { return rows; }
+            set
+            {
+                rows = value;
+                NotifyPropertyChanged("VM_Rows");
+            }
+        }
+
+        public int VM_StartRow
+        {
+            get { return startRow; }
+            set
+            {
+                startRow = value;
+                NotifyPropertyChanged("VM_StartRow");
+            }
+        }
+
+
+
+        public int VM_StartCol
+        {
+            get { return startCol; }
+            set
+            {
+                startCol = value;
+                NotifyPropertyChanged("VM_StartCol");
+            }
+        }
+
+        public int VM_EndRow
+        {
+            get { return endRow; }
+            set
+            {
+                endRow = value;
+                NotifyPropertyChanged("VM_EndRow");
+            }
+        }
+
+
+        public int VM_EndCol
+        {
+            get { return endCol; }
+            set
+            {
+                endCol = value;
+                NotifyPropertyChanged("VM_EndCol");
+            }
+        }
+
+        public string VM_MazeRep
+        {
+            get { return mazeRep; }
+            set
+            {
+                mazeRep = value;
+                //  NotifyPropertyChanged("VM_MazeRep");
+            }
+        }
+
+
 
         public bool IsConnecting
         {

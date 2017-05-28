@@ -170,7 +170,7 @@ namespace ClientGUI.VM
         }
 
 
-        public void startGame(string name, int row, int col)
+        public void GenerateGame(string name, int row, int col)
         {
             string s = "generate " + name + " " + row + " " + col;
             model.send(s);

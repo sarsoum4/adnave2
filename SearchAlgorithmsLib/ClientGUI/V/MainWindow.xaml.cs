@@ -29,7 +29,8 @@ namespace ClientGUI.V
 
         private void multiplayer_Click(object sender, RoutedEventArgs e)
         {
-
+            MultiplayerMenu menu = new MultiplayerMenu();
+            menu.ShowDialog();
         }
 
         private void settings_Click(object sender, RoutedEventArgs e)

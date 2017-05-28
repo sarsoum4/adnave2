@@ -1,15 +1,16 @@
 ﻿using System;
-using MazeLib;
-using MazeGeneratorLib;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 using System.Threading.Tasks;
-using System.IO;
 
 namespace ClientGUI.M
 {
-    class Model : IModel
+    class MultiplayerModel : IModel
     {
 
 
@@ -24,8 +25,9 @@ namespace ClientGUI.M
         private StreamReader reader = null;
         private StreamWriter writer = null;
 
-        public event PropertyChangedEventHandler PropertyChanged;
 
+
+        public event PropertyChangedEventHandler PropertyChanged;
         public void NotifyPropertyChanged(string propName)
         {
             if (this.PropertyChanged != null)
@@ -34,23 +36,11 @@ namespace ClientGUI.M
             }
         }
 
-        public string Json
-        {
-            get
-            {
-                return answer;
-            }
-
-            set
-            {
-                this.answer = value;
-                NotifyPropertyChanged("Json");
-            }
-        }
 
 
 
-        public Model()
+
+        public MultiplayerModel()
         {
 
             this.connectionActive = false;
@@ -195,5 +185,25 @@ namespace ClientGUI.M
             //this.currentCommand = "generate " + name + row.ToString() + " " + col.ToString();
             //Server.Controler.Controller 
         }
+
+
+
+        public string Json
+        {
+            get
+            {
+                return answer;
+            }
+
+            set
+            {
+                this.answer = value;
+                NotifyPropertyChanged("Json");
+            }
+        }
+
+
+
+
     }
 }
