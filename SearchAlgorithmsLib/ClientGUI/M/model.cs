@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 
 namespace ClientGUI.M
 {
@@ -88,7 +89,7 @@ namespace ClientGUI.M
         {
             Console.WriteLine(ip);
             Console.WriteLine(port);
-            this.endPonit = new IPEndPoint(IPAddress.Parse("127.0.0.1"), port);
+            this.endPonit = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 6677);
 
             if (!connectionActive)
             {
@@ -264,12 +265,17 @@ namespace ClientGUI.M
             }
         }
 
+        public List<string> GamesList {
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
+        }
+
         public void generateNewMaze(string name, int rows, int cols)
         {
             throw new NotImplementedException();
         }
 
-        public void getGamesList()
+        public void GetGamesList()
         {
             //this.currentCommand = "list";
         }

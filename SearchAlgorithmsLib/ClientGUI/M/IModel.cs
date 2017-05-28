@@ -24,9 +24,10 @@ namespace ClientGUI.M
 
         // activate actuators
         void generateNewMaze (string name, int rows, int cols);
-        void getGamesList();
+        void GetGamesList();
         void movePlayer(int row, int col);
 
+        List<String> GamesList { get; set; }
         Position PlayerPosition { get; set; }
 
         string PlayerPositionStr { get ;set;}

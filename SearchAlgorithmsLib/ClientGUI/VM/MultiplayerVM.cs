@@ -67,8 +67,6 @@ namespace ClientGUI.VM
             model.connect(ip, port);
         }
 
-
-
         public void startGame(string name, int row, int col)
         {
             string s = "start " + name + " " + row + " " + col;
@@ -85,9 +83,6 @@ namespace ClientGUI.VM
 
             StartParseMaze(this.VM_Json);
         }
-
-
-
 
         internal void PlayerMoveDown()
         {
@@ -152,8 +147,6 @@ namespace ClientGUI.VM
             }
         }
 
-
-
         private char CellAtPosition(int i, int j)
         {
 
@@ -168,8 +161,6 @@ namespace ClientGUI.VM
             }
             return ' ';
         }
-
-
 
         ///get the maze representation
         private void StartParseMaze(string json)
@@ -202,9 +193,6 @@ namespace ClientGUI.VM
 
         }
 
-
-
-
         internal void Join(string gameName)
         {
             string s = "join " + gameName;
@@ -212,8 +200,6 @@ namespace ClientGUI.VM
             this.VM_Json = model.Recieve();
             parseMaze(this.VM_Json);
         }
-
-
 
         ///get the maze representation
         private void parseMaze(string json)
@@ -245,8 +231,6 @@ namespace ClientGUI.VM
 
         }
 
-
-
         public string VM_Json
         {
             get { return model.Json; }
@@ -257,7 +241,6 @@ namespace ClientGUI.VM
                 NotifyPropertyChanged("VM_Json");
             }
         }
-
 
         public Maze VM_Maze
         {
@@ -277,9 +260,6 @@ namespace ClientGUI.VM
 
             }
         }
-
-
-
 
         public string VM_Name
         {
@@ -301,8 +281,6 @@ namespace ClientGUI.VM
             }
         }
 
-
-
         public int VM_Rows
         {
             get { return rows; }
@@ -322,8 +300,6 @@ namespace ClientGUI.VM
                 NotifyPropertyChanged("VM_StartRow");
             }
         }
-
-
 
         public int VM_StartCol
         {
@@ -345,7 +321,6 @@ namespace ClientGUI.VM
             }
         }
 
-
         public int VM_EndCol
         {
             get { return endCol; }
@@ -353,6 +328,16 @@ namespace ClientGUI.VM
             {
                 endCol = value;
                 NotifyPropertyChanged("VM_EndCol");
+            }
+        }
+
+        public List<String> VM_GamesList
+        {
+            get { return model.GamesList; }
+            set
+            {
+                model.GamesList = value;
+                NotifyPropertyChanged("VM_GamesList");
             }
         }
 
@@ -366,15 +351,11 @@ namespace ClientGUI.VM
             }
         }
 
-
-
         public bool IsConnecting
         {
             get { return isConnecting; }
             set { isConnecting = value; }
         }
-
-
 
         public Position VM_OtherPlayerPosition
         {

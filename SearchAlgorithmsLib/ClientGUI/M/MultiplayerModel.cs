@@ -7,6 +7,8 @@ using System.Net.Sockets;
 using System.Threading.Tasks;
 using System.IO;
 using System.Threading;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace ClientGUI.M
 {
@@ -19,7 +21,7 @@ namespace ClientGUI.M
         private String answer;
         private Position playerPosition;
         private string playerPositionStr;
-
+        private List<String> games;
         private int port;
         private bool connectionActive = false;
         private IPEndPoint endPonit = null;
@@ -112,7 +114,7 @@ namespace ClientGUI.M
         {
             Console.WriteLine(ip);
             Console.WriteLine(port);
-            this.endPonit = new IPEndPoint(IPAddress.Parse("127.0.0.1"), port);
+            this.endPonit = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 6677);
 
             if (!connectionActive)
             {
@@ -214,15 +216,66 @@ namespace ClientGUI.M
             }
         }
 
+        public List<String> GamesList
+        {
+            get { return games; }
+            set
+            {
+                games = value;
+                NotifyPropertyChanged("GamesList");
+            }
+        }
 
         public void generateNewMaze(string name, int rows, int cols)
         {
             throw new NotImplementedException();
         }
 
-        public void getGamesList()
+        public void GetGamesList()
         {
-            //this.currentCommand = "list";
+            
+            send("list");
+
+            bool flag = true;
+            string current = "";
+            games = new List<String>();
+
+            while (flag)
+            {
+                try
+                {
+                    this.answer = reader.ReadLine();
+                    if (answer == null)
+                    {
+                        flag = false;
+                    }
+                    if (answer.Equals("close"))
+                    {
+                        // Close the connection.
+                        writer.WriteLine("close");
+                        writer.Flush();
+                        this.connectionActive = false;
+                        client.Close();
+                        //return "Close";
+                    }
+
+                    else if (answer.Equals("-1"))
+                    {
+                        this.connectionActive = false;
+                        client.Close();
+                        // return "-1";
+                    }
+                }
+                // Server closed the connection.
+                catch
+                {
+                    this.connectionActive = false;
+                    client.Close();
+                }
+                //it should be current += answer then do in list
+                current += answer;
+            }
+            GamesList = JsonConvert.DeserializeObject<List<string>>(answer);
         }
 
 

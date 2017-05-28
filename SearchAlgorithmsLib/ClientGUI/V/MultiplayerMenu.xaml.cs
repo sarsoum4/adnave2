@@ -27,10 +27,6 @@ namespace ClientGUI.V
             txtCols.Text = Properties.Settings.Default.MazeCols.ToString();
         }
 
-
-
-
-
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
 
@@ -57,11 +53,14 @@ namespace ClientGUI.V
 
         }
 
+        private void txtListOfGames_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
+        }
 
+        private void txtListOfGames_DropDownOpened(object sender, EventArgs e)
+        {
 
-
-
-
+        }
     }
 }
