@@ -112,7 +112,7 @@ namespace ClientGUI.M
         {
             Console.WriteLine(ip);
             Console.WriteLine(port);
-            this.endPonit = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 6677);
+            this.endPonit = new IPEndPoint(IPAddress.Parse("127.0.0.1"), port);
 
             if (!connectionActive)
             {
@@ -237,10 +237,12 @@ namespace ClientGUI.M
             throw new NotImplementedException();
         }
 
+        public string SolveMaze()
+        {
+            throw new NotImplementedException();
+        }
 
-
-
-                public string Json
+        public string Json
         {
             get
             {
@@ -254,8 +256,17 @@ namespace ClientGUI.M
             }
         }
 
+        public string SolvedMazeRep
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
 
-
-
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 }

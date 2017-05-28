@@ -1,0 +1,39 @@
+﻿<Window x:Class="ClientGUI.V.MultiplayerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClientGUI.V"
+        mc:Ignorable="d"
+        KeyDown="Window_KeyDown"
+        xmlns:Controls ="clr-namespace:ClientGUI.V"
+        WindowStartupLocation="CenterScreen"
+        Title="MultiplayerWindow" Height="600" Width="1010">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" Height="39" VerticalAlignment="Top" Width="1010" Orientation="Horizontal" Background="#FF88DFFF">
+            <Button x:Name="mainbutton"  Margin="470,0,0,0" Content="Main Menu" HorizontalAlignment="Center" VerticalAlignment="Center"  Background="#FFA9F3AC" Click="mainbutton_Click"/>
+            <Label x:Name="connectlabel" Margin="10,0,0,0" Background="Green" Content="Connection ON" HorizontalAlignment="Center"  VerticalAlignment="Center" />
+        </StackPanel>
+        
+        <Grid HorizontalAlignment="Left" Height="516" Margin="10,44,0,0" VerticalAlignment="Top" Width="490">
+            <Controls:MazeBoard x:Name="myBoard" Maze="{Binding VM_MazeRep}"
+                                Rows="{Binding VM_Rows}" Cols="{Binding VM_Cols}"
+                                PlayerPos = "{Binding VM_PlayerPosition}" >
+                
+            </Controls:MazeBoard>
+        </Grid>
+        
+        
+        <Grid HorizontalAlignment="Left" Height="516" Margin="500,44,0,0" VerticalAlignment="Top" Width="490">
+            <Controls:MazeBoard x:Name="otherBoard" Maze="{Binding VM_MazeRep}"
+                                Rows="{Binding VM_Rows}" Cols="{Binding VM_Cols}" 
+                                PlayerPos = "{Binding VM_OtherPlayerPosition}" >
+                
+            </Controls:MazeBoard>
+        </Grid>
+
+
+
+
+    </Grid>
+</Window>

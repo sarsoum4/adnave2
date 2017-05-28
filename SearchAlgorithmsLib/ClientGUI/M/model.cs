@@ -88,7 +88,7 @@ namespace ClientGUI.M
         {
             Console.WriteLine(ip);
             Console.WriteLine(port);
-            this.endPonit = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 6677);
+            this.endPonit = new IPEndPoint(IPAddress.Parse("127.0.0.1"), port);
 
             if (!connectionActive)
             {

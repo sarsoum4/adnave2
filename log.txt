@@ -1,3 +1,206 @@
+commit f15da848b551fec2e7df6b4592d88cb621c7e090
+Merge: 7fe30e9 9158846
+Author: mahmuds <mhmod.srsor@gmail.com>
+Date:   Sun May 28 19:27:33 2017 +0300
+
+    hhhhh
+
+commit 9158846bd63203cd9c559d31f8e10f9220babfbc
+Author: Lee Shoshani <alister146@gmail.com>
+Date:   Sun May 28 19:25:56 2017 +0300
+
+    singlePlayer restart and solved done
+
+commit 7fe30e99adc40f220ed234f1fed7ad72e12a5b45
+Author: mahmuds <mhmod.srsor@gmail.com>
+Date:   Sun May 28 19:25:39 2017 +0300
+
+    ......................
+
+commit abd4541f3e93c9b102af879ec2a1238d862f61dd
+Merge: b3f8e0e bc5578f
+Author: mahmuds <mhmod.srsor@gmail.com>
+Date:   Sun May 28 13:40:28 2017 +0300
+
+    Merge branch 'master' of https://github.com/sarsoum4/adnave2.git
+
+commit b3f8e0efe0a6dbca2ac210f1dd4efbe525764150
+Author: mahmuds <mhmod.srsor@gmail.com>
+Date:   Sun May 28 13:40:14 2017 +0300
+
+    lkhlig
+
+commit bc5578ffa9dd72742ea60d5b43a13cb010a8cf75
+Merge: 12827af dbc72fa
+Author: Lee Shoshani <alister146@gmail.com>
+Date:   Sun May 28 13:39:30 2017 +0300
+
+    single
+
+commit 12827af6c62ec22cbb5eb3c896784c90e4e51de3
+Author: Lee Shoshani <alister146@gmail.com>
+Date:   Sun May 28 13:35:31 2017 +0300
+
+    single done
+
+commit dbc72fa81f37d58c1af45fbd254ca17477e6164d
+Author: mahmuds <mhmod.srsor@gmail.com>
+Date:   Fri May 26 14:53:52 2017 +0300
+
+    final 2:53
+
+commit 0af6ed550de7632e423b191b01d8b32b06f3732b
+Merge: 8ca50ab 2e4be31
+Author: mahmuds <mhmod.srsor@gmail.com>
+Date:   Fri May 26 14:49:56 2017 +0300
+
+    final final final
+
+commit 8ca50ab514c89c209f8f52430120161a671e5f88
+Author: mahmuds <mhmod.srsor@gmail.com>
+Date:   Thu May 25 21:35:08 2017 +0300
+
+    single
+
+commit b24c407b261a8872c88b6b803214a792560c6ab5
+Author: mahmuds <mhmod.srsor@gmail.com>
+Date:   Thu May 25 15:50:12 2017 +0300
+
+    key Press
+
+commit 2e4be318f340859dbd07316d652d9dde9538334a
+Merge: d998019 ef80903
+Author: Lee Shoshani <alister146@gmail.com>
+Date:   Wed May 24 22:04:42 2017 +0300
+
+    not updated
+
+commit d998019e2a21e294f3c6d9d198dc7ba4afe7a69b
+Author: Lee Shoshani <alister146@gmail.com>
+Date:   Wed May 24 22:02:14 2017 +0300
+
+    not updated
+
+commit ef80903601d91365cdde7d5140436ec086e1c7d5
+Merge: d767b48 b661230
+Author: mahmuds <mhmod.srsor@gmail.com>
+Date:   Wed May 24 21:59:16 2017 +0300
+
+    f
+
+commit d767b4838a189933c0654882126869288bd7dbc6
+Author: mahmuds <mhmod.srsor@gmail.com>
+Date:   Wed May 24 21:56:15 2017 +0300
+
+    cbxndvnc
+
+commit 626b77a9817d6be163ffdeecf4451c94f3686f74
+Author: mahmuds <mhmod.srsor@gmail.com>
+Date:   Wed May 24 21:53:10 2017 +0300
+
+    vm
+
+commit b661230501a986f26f934223911e58d5e46c32a0
+Author: Lee Shoshani <alister146@gmail.com>
+Date:   Wed May 24 20:17:17 2017 +0300
+
+    with multi
+
+commit c099c0cb8d16779182062b097b6f61ba665d4b77
+Merge: 155cece ee12a2c
+Author: Lee Shoshani <alister146@gmail.com>
+Date:   Wed May 24 20:08:10 2017 +0300
+
+    with multi
+
+commit 155ceceb6ddbf24e76f4da6a0862e930c42600a1
+Author: Lee Shoshani <alister146@gmail.com>
+Date:   Wed May 24 15:19:05 2017 +0300
+
+    mmm
+
+commit ee12a2ce79cf83db852d3c8cd76a9960885dfbf7
+Author: mahmuds <mhmod.srsor@gmail.com>
+Date:   Wed May 24 14:17:10 2017 +0300
+
+    client
+
+commit 162f02a2f2f26509f1fea6913a93e23e5fd3e23e
+Merge: cfaea7a ed1e64c
+Author: mahmuds <mhmod.srsor@gmail.com>
+Date:   Wed May 24 11:00:19 2017 +0300
+
+    .......
+
+commit cfaea7a8e6b72a988529c29e93b7f37c063d2eb1
+Author: mahmuds <mhmod.srsor@gmail.com>
+Date:   Wed May 24 10:57:45 2017 +0300
+
+    ......
+
+commit ed1e64cd3867058a9032f8a134963410dfbab460
+Merge: 90210d4 c2b9096
+Author: Lee Shoshani <alister146@gmail.com>
+Date:   Tue May 23 20:21:04 2017 +0300
+
+    model
+
+commit 90210d4f72fa8be81a792b221c1b917ca91092d9
+Author: Lee Shoshani <alister146@gmail.com>
+Date:   Tue May 23 20:05:07 2017 +0300
+
+    m
+
+commit c2b909610c7d83c5f8920fa00778b22b93806a0d
+Merge: 88e899a a4996cf
+Author: mahmuds <mhmod.srsor@gmail.com>
+Date:   Tue May 23 19:48:15 2017 +0300
+
+    setting VM
+
+commit 88e899adb99958b48dff138b8c5fca80c169b6c5
+Author: mahmuds <mhmod.srsor@gmail.com>
+Date:   Tue May 23 19:28:44 2017 +0300
+
+    VM settings implements
+
+commit a4996cf8285fde6754bfb52cfadb5b539abce44b
+Merge: 3341dfa 305ff80
+Author: Lee Shoshani <alister146@gmail.com>
+Date:   Tue May 23 13:40:29 2017 +0300
+
+    Merge branch 'master' of https://github.com/sarsoum4/advance2
+
+commit 3341dfa6b653109003cb35415f0989b11246f38b
+Author: Lee Shoshani <alister146@gmail.com>
+Date:   Tue May 23 13:39:34 2017 +0300
+
+    model half done
+
+commit 305ff80fd6b3cf1b271d678c82e3eaea749624e8
+Author: mahmuds <mhmod.srsor@gmail.com>
+Date:   Tue May 23 13:24:15 2017 +0300
+
+    binding
+
+commit 526178dd45f8b034315794c0e6d270d4c8da26cb
+Author: mahmuds <mhmod.srsor@gmail.com>
+Date:   Sun May 21 12:43:50 2017 +0300
+
+    MvvM
+
+commit d633bd34e345c4863ad6963af55ae423c4769a00
+Author: mahmuds <mhmod.srsor@gmail.com>
+Date:   Sun May 21 12:15:06 2017 +0300
+
+    user control
+
+commit da59d2415761687dbe266e138dccc48cce06c7cb
+Author: mahmuds <mhmod.srsor@gmail.com>
+Date:   Sun May 7 17:30:15 2017 +0300
+
+    start the GUI
+
 commit f963c29cb881ca973c2525c27b8e58e0c985eb45
 Author: mahmuds <mhmod.srsor@gmail.com>
 Date:   Sun Apr 23 21:53:35 2017 +0300

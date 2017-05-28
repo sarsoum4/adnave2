@@ -1,0 +1,28 @@
+﻿<Window x:Class="ClientGUI.V.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClientGUI.V"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="325">
+    <Grid Background="#FF44A891">
+        <Image x:Name="image" HorizontalAlignment="Left" Height="34" Margin="5,6,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.5,0.5" Source="C:\Users\Win7\Desktop/logo.jpg">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.527"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <StackPanel Height="139" Margin="0,126,0,55" Width="517" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button x:Name="singalPlayer" Content="Single Player" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="1,1,1,0" Margin="214,5,214,10" Height="32" Width="88" Click="singalPlayer_Click"/>
+            <Button x:Name="multiplayer" Content="Multi Player" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="214,0,214,10" Width="88" Height="32" Click="multiplayer_Click"/>
+            <Button x:Name="settings" Content="Settings" HorizontalAlignment="Left" VerticalAlignment="Center" Height="31" Margin="234,0" Click="settings_Click"/>
+        </StackPanel>
+       
+        
+    </Grid>
+</Window>
