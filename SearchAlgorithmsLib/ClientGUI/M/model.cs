@@ -12,7 +12,7 @@ namespace ClientGUI.M
 {
     class Model : IModel
     {
-
+        
 
         private String userCommand;
         private String answer;
@@ -88,7 +88,7 @@ namespace ClientGUI.M
         {
             Console.WriteLine(ip);
             Console.WriteLine(port);
-            this.endPonit = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 6677);
+            this.endPonit = new IPEndPoint(IPAddress.Parse("127.0.0.1"), port);
 
             if (!connectionActive)
             {
@@ -99,9 +99,18 @@ namespace ClientGUI.M
                 this.writer = new StreamWriter(stream);
                 this.reader = new StreamReader(stream);
             }
-
-
         }
+
+
+
+
+
+
+
+
+
+
+
 
 
         //string
@@ -170,6 +179,7 @@ namespace ClientGUI.M
             PlayerPosition = new Position(row, col);
             PlayerPositionStr = playerPosition.ToString();
         }
+
 
         public Position PlayerPosition
         {
