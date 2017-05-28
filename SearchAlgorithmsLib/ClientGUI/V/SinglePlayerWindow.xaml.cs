@@ -26,9 +26,15 @@ namespace ClientGUI.V
         private int row;
         private int col;
 
+
+
+
+
         public SinglePlayerWindow(string name, int row, int col)
         {
             InitializeComponent();
+            //this.KeyDown += Window_KeyDown;
+
             this.name = name;
             this.row = row;
             this.col = col;
@@ -36,9 +42,44 @@ namespace ClientGUI.V
             string ip = Properties.Settings.Default.ServerIP;
             vm = new SinglePlayerVM(this.name, this.row, this.col, port, ip);
             vm.startGame(this.name, this.row, this.col);
-           
+            DataContext = vm;
 
-    }
+
+        }
+
+
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            
+            if (e.Key == Key.Down)
+            {
+                vm.PlayerMoveDown();
+                
+            }
+
+            else if (e.Key == Key.Up)
+            {
+                vm.PlayerMoveUp();
+            }
+
+            else if (e.Key == Key.Right)
+            {
+                vm.PlayerMoveRight();
+            }
+
+            else if (e.Key == Key.Left)
+            {
+                vm.PlayerMoveLeft();
+            }
+
+            if(vm.VM_PlayerPosition.Row == vm.VM_EndRow && vm.VM_PlayerPosition.Col == vm.VM_EndCol)
+            {
+                MessageBox.Show("You Win!");
+                this.Close();
+            }
+        }
 
 
         private void restartbutton_Click(object sender, RoutedEventArgs e)
@@ -47,7 +88,7 @@ namespace ClientGUI.V
             action.ShowDialog();
             if (action.getYesNoFlag() == 1)
             {
-                
+
             }
         }
 
@@ -60,11 +101,12 @@ namespace ClientGUI.V
         {
             GoBackWindow action = new GoBackWindow();
             action.ShowDialog();
-            if(action.getYesNoFlag() == 1)
+            if (action.getYesNoFlag() == 1)
             {
                 this.Close();
             }
 
         }
+
     }
 }

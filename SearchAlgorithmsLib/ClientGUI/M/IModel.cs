@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MazeLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,10 @@ namespace ClientGUI.M
         // activate actuators
         void generateNewMaze (string name, int rows, int cols);
         void getGamesList();
-        void movePlayer(string move);
+        void movePlayer(int row, int col);
+
+        Position PlayerPosition { get; set; }
+
+        string PlayerPositionStr { get ;set;}
     }
 }

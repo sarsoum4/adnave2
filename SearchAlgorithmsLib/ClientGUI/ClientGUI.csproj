@@ -41,6 +41,9 @@
     <Reference Include="MazeLib">
       <HintPath>..\..\..\..\..\Downloads\MazeLib.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -65,9 +68,7 @@
     </ApplicationDefinition>
     <Compile Include="M\IModel.cs" />
     <Compile Include="M\INotifyPropertyChanged.cs" />
-    <Compile Include="..\..\..\..\..\..\Desktop\Model.cs">
-      <Link>M\Model.cs</Link>
-    </Compile>
+    <Compile Include="M\model.cs" />
     <Compile Include="M\ModelToServer.cs" />
     <Compile Include="VM\ApplicationSettingsModel.cs" />
     <Compile Include="VM\ISettingsModel.cs" />
@@ -141,6 +142,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
