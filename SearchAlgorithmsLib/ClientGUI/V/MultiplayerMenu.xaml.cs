@@ -22,7 +22,7 @@ namespace ClientGUI.V
         public MultiplayerMenu()
         {
             InitializeComponent();
-            this.txtListOfGames.Items.Add("5");
+            this.txtListOfGames.Items.Add("game1");
             txtRows.Text = Properties.Settings.Default.MazeRows.ToString();
             txtCols.Text = Properties.Settings.Default.MazeCols.ToString();
         }
@@ -33,13 +33,16 @@ namespace ClientGUI.V
 
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
+
             String gameName = txtMazeName.Text.ToString();
             int row = Convert.ToInt32(txtRows.Text.ToString());
             int col = Convert.ToInt32(txtCols.Text.ToString());
 
-            this.Close();
+            MessageBox.Show("waiting for another player..");
 
+            this.Close();
             MultiplayerWindow game = new MultiplayerWindow(gameName, row, col);
+            game.Title = gameName;           
             game.ShowDialog();
 
         }

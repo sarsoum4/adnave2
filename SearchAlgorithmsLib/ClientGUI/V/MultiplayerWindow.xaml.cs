@@ -45,8 +45,11 @@ namespace ClientGUI.V
             int port = Properties.Settings.Default.ServerPort;
             string ip = Properties.Settings.Default.ServerIP;
             vm = new MultiplayerVM(this.name, this.row, this.col, port, ip);
+            vm.startGame(this.name, this.row, this.col);
             DataContext = vm;
         }
+
+
 
         public MultiplayerWindow(string gameName)
         {
@@ -54,23 +57,59 @@ namespace ClientGUI.V
             myPosition = new Position(0, 0);
             otherPosition = new Position(0, 0);
             this.name= gameName;
-            this.waitlabel.Content = "";
+            
+
+            int port = Properties.Settings.Default.ServerPort;
+            string ip = Properties.Settings.Default.ServerIP;
+            vm = new MultiplayerVM(this.name, port, ip);
+            vm.Join(gameName);
+            DataContext = vm;
+
         }
 
-        private void restartbutton_Click(object sender, RoutedEventArgs e)
+
+
+
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            GoBackWindow action = new GoBackWindow();
-            action.ShowDialog();
-            if (action.getYesNoFlag() == 1)
+
+
+            if (e.Key == Key.Down)
             {
-                action.Close();
+                vm.PlayerMoveDown();
+
+            }
+
+            else if (e.Key == Key.Up)
+            {
+                vm.PlayerMoveUp();
+            }
+
+            else if (e.Key == Key.Right)
+            {
+                vm.PlayerMoveRight();
+            }
+
+            else if (e.Key == Key.Left)
+            {
+                vm.PlayerMoveLeft();
+            }
+
+            if (vm.VM_PlayerPosition.Row == vm.VM_EndRow && vm.VM_PlayerPosition.Col == vm.VM_EndCol)
+            {
+                MessageBox.Show("You Win!");
+                this.Close();
             }
         }
 
-        private void solvebutton_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
+
+
+
+
+
+
 
         private void mainbutton_Click(object sender, RoutedEventArgs e)
         {

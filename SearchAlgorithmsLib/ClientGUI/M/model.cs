@@ -11,7 +11,7 @@ namespace ClientGUI.M
 {
     class Model : IModel
     {
-
+        
 
         private String userCommand;
         private String answer;
@@ -100,6 +100,17 @@ namespace ClientGUI.M
         }
 
 
+
+
+
+
+
+
+
+
+
+
+
         //string
         public string Recieve()
         {
@@ -166,6 +177,7 @@ namespace ClientGUI.M
             PlayerPosition = new Position(row, col);
             PlayerPositionStr = playerPosition.ToString();
         }
+
 
         public Position PlayerPosition
         {

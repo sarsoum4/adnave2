@@ -22,6 +22,7 @@
             <Button x:Name="multiplayer" Content="Multi Player" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="214,0,214,10" Width="88" Height="32" Click="multiplayer_Click"/>
             <Button x:Name="settings" Content="Settings" HorizontalAlignment="Left" VerticalAlignment="Center" Height="31" Margin="234,0" Click="settings_Click"/>
         </StackPanel>
-
+       
+        
     </Grid>
 </Window>

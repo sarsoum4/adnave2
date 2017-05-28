@@ -1,21 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
+using MazeLib;
+using MazeGeneratorLib;
 using System.ComponentModel;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.Threading;
 
 namespace ClientGUI.M
 {
     class MultiplayerModel : IModel
     {
-
+        private Position otherPlayerPosition;
+        private string otherPlayerMove;
 
         private String userCommand;
         private String answer;
+        private Position playerPosition;
+        private string playerPositionStr;
 
         private int port;
         private bool connectionActive = false;
@@ -25,9 +28,8 @@ namespace ClientGUI.M
         private StreamReader reader = null;
         private StreamWriter writer = null;
 
-
-
         public event PropertyChangedEventHandler PropertyChanged;
+
         public void NotifyPropertyChanged(string propName)
         {
             if (this.PropertyChanged != null)
@@ -37,6 +39,45 @@ namespace ClientGUI.M
         }
 
 
+
+
+        public string OtherPlayerMove
+        {
+            get
+            {
+                return otherPlayerMove;
+            }
+
+            set
+            {
+                this.otherPlayerMove = value;
+                NotifyPropertyChanged("OtherPlayerMove");
+            }
+        }
+
+
+
+        public void RecieveOtherPlayerMove()
+        {
+            bool flag = true;
+
+            while (flag)
+            {
+                try
+                {
+
+                    this.answer = reader.ReadLine();
+                    otherPlayerMove = answer;
+                }
+
+                // Server closed the connection.
+                catch
+                {
+                    this.connectionActive = false;
+                    client.Close();
+                }
+            }
+        }
 
 
 
@@ -54,7 +95,6 @@ namespace ClientGUI.M
 
 
 
-
         public void getCommandFromServer(string command)
         {
             //this.currentCommand = command;
@@ -68,13 +108,11 @@ namespace ClientGUI.M
 
 
 
-
-
         public void connect(string ip, int port)
         {
             Console.WriteLine(ip);
             Console.WriteLine(port);
-            this.endPonit = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 6675);
+            this.endPonit = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 6677);
 
             if (!connectionActive)
             {
@@ -91,7 +129,6 @@ namespace ClientGUI.M
         //string
         public string Recieve()
         {
-
             bool flag = true;
             string current = "";
 
@@ -99,13 +136,14 @@ namespace ClientGUI.M
             {
                 try
                 {
-
+                    
                     this.answer = reader.ReadLine();
                     if (answer == "  }")
                     {
                         current += "  }";
                         current += "}";
                         break;
+                        //flag = false;
                     }
 
                     else if (answer.Equals("close"))
@@ -115,14 +153,14 @@ namespace ClientGUI.M
                         writer.Flush();
                         this.connectionActive = false;
                         client.Close();
-                        return "Close";
+                        //return "Close";
                     }
 
                     else if (answer.Equals("-1"))
                     {
                         this.connectionActive = false;
                         client.Close();
-                        return "-1";
+                        // return "-1";
                     }
 
                 }
@@ -135,7 +173,6 @@ namespace ClientGUI.M
                 current += answer;
             }
             return current;
-
         }
 
 
@@ -149,13 +186,36 @@ namespace ClientGUI.M
         }
 
 
-
-        public void generateNewMaze(string name, int rows, int cols)
+        public void movePlayer(int row, int col)
         {
-            throw new NotImplementedException();
+            PlayerPosition = new Position(row, col);
+            PlayerPositionStr = playerPosition.ToString();
+            this.send(PlayerPositionStr);
         }
 
-        public void movePlayer(string move)
+        public Position PlayerPosition
+        {
+            get { return playerPosition; }
+            set
+            {
+                playerPosition = value;
+                NotifyPropertyChanged("PlayerPosition");
+            }
+        }
+
+        public string PlayerPositionStr
+        {
+            get { return playerPositionStr; }
+            set
+            {
+                playerPositionStr = value;
+                NotifyPropertyChanged("PlayerPositionStr");
+
+            }
+        }
+
+
+        public void generateNewMaze(string name, int rows, int cols)
         {
             throw new NotImplementedException();
         }
@@ -165,10 +225,7 @@ namespace ClientGUI.M
             //this.currentCommand = "list";
         }
 
-        public void movePlayer()
-        {
-            throw new NotImplementedException();
-        }
+
 
         public void disconnect()
         {
@@ -180,15 +237,10 @@ namespace ClientGUI.M
             throw new NotImplementedException();
         }
 
-        public void generateNewMazeMaze(string name, int rows, int cols)
-        {
-            //this.currentCommand = "generate " + name + row.ToString() + " " + col.ToString();
-            //Server.Controler.Controller 
-        }
 
 
 
-        public string Json
+                public string Json
         {
             get
             {

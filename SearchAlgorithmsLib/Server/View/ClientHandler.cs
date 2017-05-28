@@ -41,7 +41,7 @@ namespace Server.View
                             break;
                         }
                         Console.WriteLine(result);
-                        writer.Write("");
+                        //writer.Write("");
                         writer.Flush();
                         writer.Write(result);
                         writer.Flush();

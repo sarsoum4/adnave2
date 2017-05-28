@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ClientGUI.VM
@@ -22,6 +23,7 @@ namespace ClientGUI.VM
 
         private Maze maze;
         private Position playerPosition;
+        private Position otherPlayerPosition ;
 
 
         private bool isConnecting;
@@ -50,16 +52,198 @@ namespace ClientGUI.VM
             model.connect(ip, port);
         }
 
+        public MultiplayerVM(string name, int port, string ip)
+        {
+            this.model = new MultiplayerModel();
+            model.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e)
+            {
+                NotifyPropertyChanged("VM_" + e.PropertyName);
+            };
+
+            this.VM_Name = name;
+            this.port = port;
+            this.ip = ip;
+
+            model.connect(ip, port);
+        }
+
 
 
         public void startGame(string name, int row, int col)
         {
-            string s = "generate " + name + " " + row + " " + col;
-            //model.send(s);
-            model.generateNewMaze(name, row, col);
-            //model.start();
+            string s = "start " + name + " " + row + " " + col;
+            model.send(s);
+
+            // Run the receiving task.
+            Task recv = new Task(() =>
+            {
+                this.VM_Json = model.Recieve();
+
+            });
+            recv.Start();
+            recv.Wait();
+
+            StartParseMaze(this.VM_Json);
         }
 
+
+
+
+        internal void PlayerMoveDown()
+        {
+            int newCol = playerPosition.Col;
+            int newRow = playerPosition.Row + 1;
+
+            char newPosition = CellAtPosition(newRow, newCol);
+            if ((newPosition == '0') || (newCol == VM_EndCol && newRow == VM_EndRow))
+            {
+                playerPosition.Row++;
+                model.movePlayer(newRow, newCol);
+                //VM_PlayerPosition = new Position(newRow, newCol);
+
+            }
+        }
+
+        internal void PlayerMoveRight()
+        {
+            int newCol = playerPosition.Col + 1;
+            int newRow = playerPosition.Row;
+
+
+            char newPosition = CellAtPosition(newRow, newCol);
+            if ((newPosition == '0') || (newCol == VM_EndCol && newRow == VM_EndRow))
+            {
+                playerPosition.Col++;
+                model.movePlayer(newRow, newCol);
+                //VM_PlayerPosition = new Position(newRow, newCol);
+
+            }
+        }
+
+        internal void PlayerMoveLeft()
+        {
+            int newCol = playerPosition.Col - 1;
+            int newRow = playerPosition.Row;
+
+
+            char newPosition = CellAtPosition(newRow, newCol);
+            if ((newPosition == '0') || (newCol == VM_EndCol && newRow == VM_EndRow))
+            {
+                playerPosition.Col--;
+                model.movePlayer(newRow, newCol);
+                //VM_PlayerPosition = new Position(newRow, newCol);
+
+            }
+        }
+
+        internal void PlayerMoveUp()
+        {
+            int newCol = playerPosition.Col;
+            int newRow = playerPosition.Row - 1;
+
+
+            char newPosition = CellAtPosition(newRow, newCol);
+            if ((newPosition == '0') || (newCol == VM_EndCol && newRow == VM_EndRow))
+            {
+                playerPosition.Row--;
+                model.movePlayer(newRow, newCol);
+                //VM_PlayerPosition = new Position(newRow, newCol);
+
+            }
+        }
+
+
+
+        private char CellAtPosition(int i, int j)
+        {
+
+            int count = 0;
+            foreach (char c in mazeRep)
+            {
+                if (count == i * VM_Cols + j)
+                {
+                    return c;
+                }
+                count++;
+            }
+            return ' ';
+        }
+
+
+
+        ///get the maze representation
+        private void StartParseMaze(string json)
+        {
+
+            string newjson = json.Substring(31);
+            Maze maze = MazeLib.Maze.FromJSON(newjson);
+            VM_Cols = maze.Cols;
+            VM_Rows = maze.Rows;
+            mazeRep = maze.ToString();
+            mazeRep = mazeRep.Replace('\n', ' ');
+            mazeRep = mazeRep.Replace('\r', ' ');
+            string current = "";
+            foreach (char c in mazeRep)
+            {
+                if (c != ' ')
+                {
+                    current += c;
+                }
+            }
+            VM_MazeRep = current;
+
+            VM_Name = maze.Name;
+
+            startRow = maze.InitialPos.Row;
+            startCol = maze.InitialPos.Col;
+            endRow = maze.GoalPos.Row;
+            endCol = maze.GoalPos.Col;
+            VM_PlayerPosition = maze.InitialPos;
+
+        }
+
+
+
+
+        internal void Join(string gameName)
+        {
+            string s = "join " + gameName;
+            model.send(s);
+            this.VM_Json = model.Recieve();
+            parseMaze(this.VM_Json);
+        }
+
+
+
+        ///get the maze representation
+        private void parseMaze(string json)
+        {
+
+            Maze maze = MazeLib.Maze.FromJSON(json);
+            VM_Cols = maze.Cols;
+            VM_Rows = maze.Rows;
+            mazeRep = maze.ToString();
+            mazeRep = mazeRep.Replace('\n', ' ');
+            mazeRep = mazeRep.Replace('\r', ' ');
+            string current = "";
+            foreach (char c in mazeRep)
+            {
+                if (c != ' ')
+                {
+                    current += c;
+                }
+            }
+            VM_MazeRep = current;
+
+            VM_Name = maze.Name;
+
+            startRow = maze.InitialPos.Row;
+            startCol = maze.InitialPos.Col;
+            endRow = maze.GoalPos.Row;
+            endCol = maze.GoalPos.Col;
+            VM_PlayerPosition = maze.InitialPos;
+
+        }
 
 
 
@@ -190,5 +374,19 @@ namespace ClientGUI.VM
             set { isConnecting = value; }
         }
 
+
+
+        public Position VM_OtherPlayerPosition
+        {
+            get
+            {
+                return otherPlayerPosition;
+            }
+
+            set
+            {
+                otherPlayerPosition = value;
+            }
+        }
     }
 }

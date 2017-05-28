@@ -28,11 +28,19 @@ namespace ClientGUI.V
         public string maze;
         public string initialPos;
         public string goalPos;
+
         private int preRow;
         private int prevCol;
         public Position playerPos;
         private int playerCol;
         private int playerRow;
+
+
+        private int otherPreRow; //
+        private int otherPrevCol;//
+        public Position otherPlayerPos;//
+        private int otherPlayerCol;//
+        private int otherPlayerRow;//
 
         private Rectangle[,] rectangles;
 
@@ -42,6 +50,47 @@ namespace ClientGUI.V
             InitializeComponent();
             
         }
+
+
+
+
+
+        // Using a DependencyProperty as the backing store for position. This enables animation, styling,
+        public static readonly DependencyProperty OtherPlayerPosProperty =
+        DependencyProperty.Register("otherPlayerPos", typeof(Position), typeof(MazeBoard), new PropertyMetadata(new Position(0, 0), onOtherPlayerPosPropertyChanged));
+
+
+        private static void onOtherPlayerPosPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            MazeBoard mazeBoard = (MazeBoard)d;
+            mazeBoard.ChangeOtherPlayerPosition();
+        }
+
+
+
+        private void ChangeOtherPlayerPosition()
+        {
+
+
+            Rectangle rect = CellAtPosition(this.otherPreRow, this.otherPrevCol);
+            if (rect != null)
+            {
+                rect.Stroke = new SolidColorBrush(Colors.White);
+                rect.Fill = new SolidColorBrush(Colors.White);
+
+                rect = CellAtPosition(otherPlayerPos.Row, otherPlayerPos.Col);
+                rect.Stroke = new SolidColorBrush(Colors.Yellow);
+                rect.Fill = new SolidColorBrush(Colors.Yellow);
+
+                this.otherPreRow = otherPlayerPos.Row;
+                this.otherPrevCol = otherPlayerPos.Col;
+                this.otherPlayerRow = otherPlayerPos.Row;
+                this.otherPlayerCol = otherPlayerPos.Col;
+            }
+
+        }
+
+
 
 
 
@@ -149,7 +198,7 @@ namespace ClientGUI.V
             }
             set
             {
-                MessageBox.Show("maze beeing set");
+                //MessageBox.Show("maze beeing set");
                 SetValue(MazeProperty, value);
             }
         }
