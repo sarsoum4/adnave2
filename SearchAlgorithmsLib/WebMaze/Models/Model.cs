@@ -1,4 +1,4 @@
-﻿
+﻿using Server.Adapter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using MazeLib;
 using System.Net.Sockets;
 using MazeGeneratorLib;
+using SearchAlgorithmsLib;
+using Newtonsoft.Json.Linq;
 
 namespace WebMaze.Models
 {
@@ -28,7 +30,11 @@ namespace WebMaze.Models
 
         private static List<Maze> allMazes = new List<Maze>();
 
-
+        private MazeAdapter<Position> adapter;
+        private ISearcher<Position> ser;
+        private Solution<Position> sol;
+        private SolutionAdapter solAdapter;
+        private SolutionJson solJson;
 
         public Model()
         {
@@ -40,6 +46,27 @@ namespace WebMaze.Models
             //Maze m1 = GenerateMaze("m1", 5, 5);
             //Maze m2 = GenerateMaze("m2", 5, 5);
             //Maze m3 = GenerateMaze("m3", 5, 5);
+        }
+
+
+        public JObject SolveMaze(string name)
+        {
+            
+            Maze mazeFromModel = GetMaze(name);
+            //create new adapter
+            Maze maze = GetMaze(name);
+            adapter = new MazeAdapter<Position>(maze);
+            ser = new BestFirstSearch<Position>();
+            sol = ser.search(adapter);
+            Console.WriteLine(sol.Path.Count());
+            Console.WriteLine(sol.Path.Count());
+            solAdapter = new SolutionAdapter(sol);
+            JObject mazeSolutionObj = new JObject();
+            mazeSolutionObj["Name"] = name;
+            mazeSolutionObj["Solution"] = solAdapter.ToString();
+            return mazeSolutionObj;
+            
+            
         }
 
         public void CloseGame(string name)

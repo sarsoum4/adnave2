@@ -1,6 +1,7 @@
 ﻿using System.Net.Sockets;
 using MazeLib;
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 
 namespace WebMaze.Models
 {
@@ -28,6 +29,7 @@ namespace WebMaze.Models
         void AddSecondPlayer(string name, TcpClient client);
 
         bool GameIsFull(string name);
+        JObject SolveMaze(string name);
 
         IEnumerable<Maze> GetAllMazesList();
     }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Server.Adapter
 {
-    class SolutionAdapter
+    public class SolutionAdapter
     {
 
         private Solution<Position> solution;

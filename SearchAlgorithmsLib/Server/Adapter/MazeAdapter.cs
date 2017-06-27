@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Server.Adapter
 {
-    class MazeAdapter<T> : ISearchable<Position>
+    public class MazeAdapter<T> : ISearchable<Position>
     {
         private MazeLib.Maze maze;
 

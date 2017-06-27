@@ -15,10 +15,11 @@ var startImage;
 var endImage;
 var playerPosCol;
 var playerPosRow;
+var mazeName;
 
 (function ($) {
 
-    $.fn.mazeBoard = function (mazeD, startR, startC, exitR, exitC, playerIm,
+    $.fn.mazeBoard = function (mName, mazeD, startR, startC, exitR, exitC, playerIm,
         exitIm) {
 
         myCanvas = document.getElementById("mazeCanvas");
@@ -39,14 +40,13 @@ var playerPosRow;
         startImage.src = playerIm;
         endImage = new Image();
         endImage.src = exitIm;
+        mazeName = mName;
 
         startImage.onload = function () {
-            //document.getElementById("showInput3").innerHTML = startRow + "," + startRow;
             context.drawImage(startImage, startCol * cellWidth, startRow * cellHeight, cellWidth, cellHeight);
         };
 
         endImage.onload = function () {
-            //document.getElementById("showInput4").innerHTML = exitRow + "," + exitRow;
             context.drawImage(endImage, exitCol * cellWidth, exitRow * cellHeight, cellWidth, cellHeight);
         };
 
@@ -75,6 +75,79 @@ var playerPosRow;
             }
         }
 
+
+
+        solveMaze = function () {
+
+            var newCol = playerPosCol;
+            var newRow = playerPosRow;
+
+            document.removeEventListener('keydown', true);
+
+            var apiUrl = "api/Maze/?" + "name=" + mazeName;
+
+            $.getJSON(apiUrl).done(function (data) {
+                var mazeSol = data["Solution"];
+                document.getElementById("showInput3").innerHTML = mazeSol;
+
+                var splitMazeSol = mazeSol.split('');
+
+                var posImage = new Image();
+
+                var myCanvas = document.getElementById("mazeCanvas");
+                this.element = $("#mazeCanvas")[0];
+                var context = this.element.getContext("2d");
+
+                var i = 0;
+                var timer = window.setInterval(autoSolve, 500);
+
+                function autoSolve() {
+                    if (i >= splitMazeSol.length) {
+                        alert("Pooh found his honey!");
+                        clearInterval(timer);
+                    }
+
+                    //move left
+                    if (splitMazeSol[i] == '0') {
+                        newCol = playerPosCol - 1;
+                        newRow = playerPosRow;
+                    }
+                    //move right
+                    else if (splitMazeSol[i] == '1') {
+                        newCol = playerPosCol + 1;
+                        newRow = playerPosRow;
+                    }
+                    //move up
+                    else if (splitMazeSol[i] == '2') {
+                        newCol = playerPosCol;
+                        newRow = playerPosRow - 1;
+                    }
+                    //move down
+                    else if (splitMazeSol[i] == '3') {
+                        newCol = playerPosCol;
+                        newRow = playerPosRow + 1;
+                    }
+
+                    context.clearRect(cellWidth * playerPosCol, cellHeight * playerPosRow,
+                        cellWidth, cellHeight);
+
+                    posImage.src = startImage;
+
+                    context.beginPath();
+                    context.drawImage(startImage, newCol * cellWidth, newRow * cellHeight, cellWidth, cellHeight);
+                    context.closePath();
+
+                    playerPosRow = newRow;
+                    playerPosCol = newCol;
+
+                    if (i < splitMazeSol.length) {
+                        i++;
+                    }
+
+                }
+            });
+        }
+
         movePlayer = function () {
 
                 const e = event.keyCode;
@@ -84,44 +157,40 @@ var playerPosRow;
 
                 //move left
                 if (e == '37') {
-                    document.getElementById("showInput1").innerHTML = "LEFT!";
                     var tempCol = playerPosCol - 1;
                     var tempRow = playerPosRow;
 
-                    if ((mazeData[tempRow][tempCol] == 0) || (tempCol == endCol && tempRow == endRow)) {
+                    if ((mazeData[tempRow][tempCol] == 0) || (tempCol == exitCol && tempRow == exitRow)) {
                         newCol = playerPosCol - 1;
                         newRow = playerPosRow;
                     }
                 }
                 //move up
                 else if (e == '38') {
-                    document.getElementById("showInput1").innerHTML = "UP!";
                     var tempCol = playerPosCol;
                     var tempRow = playerPosRow - 1;
 
-                    if ((mazeData[tempRow][tempCol] == 0) || (tempCol == endCol && tempRow == endRow)) {
+                    if ((mazeData[tempRow][tempCol] == 0) || (tempCol == exitCol && tempRow == exitRow)) {
                         newCol = playerPosCol;
                         newRow = playerPosRow - 1;
                     }
                 }
                 //move right
                 else if (e == '39') {
-                    document.getElementById("showInput1").innerHTML = "RIGHT!";
                     var tempCol = playerPosCol + 1;
                     var tempRow = playerPosRow;
 
-                    if ((mazeData[tempRow][tempCol] == 0) || (tempCol == endCol && tempRow == endRow)) {
+                    if ((mazeData[tempRow][tempCol] == 0) || (tempCol == exitCol && tempRow == exitRow)) {
                         newCol = playerPosCol + 1;
                         newRow = playerPosRow;
                     }
                 }
                 //move down
                 else if (e == '40') {
-                    document.getElementById("showInput1").innerHTML = "DOWN!";
                     var tempCol = playerPosCol;
                     var tempRow = playerPosRow + 1;
 
-                    if ((mazeData[tempRow][tempCol] == 0) || (tempCol == endCol && tempRow == endRow)) {
+                    if ((mazeData[tempRow][tempCol] == 0) || (tempCol == exitCol && tempRow == exitRow)) {
                         newCol = playerPosCol;
                         newRow = playerPosRow + 1;
                     }
@@ -133,43 +202,31 @@ var playerPosRow;
                 * the player image in the new position.
                 */
 
+                if (newCol == exitCol && newRow == exitRow) {
+                    alert("Pooh found his honey!");
+                }
                 var posImage = new Image();
 
                 var myCanvas = document.getElementById("mazeCanvas");
                 this.element = $("#mazeCanvas")[0];
                 var context = this.element.getContext("2d");
 
-                context.fillStyle = "white";
-                context.fillRect(cellWidth * playerPosRow, cellHeight * playerPosCol,
+
+                context.clearRect(cellWidth * playerPosCol, cellHeight * playerPosRow,
                     cellWidth, cellHeight);
 
                 posImage.src = startImage;
 
                // context.clearRect(newRow * cellWidth, newCol * cellHeight, cellWidth, cellHeight);
+                context.beginPath();
                 context.drawImage(startImage, newCol * cellWidth, newRow * cellHeight, cellWidth, cellHeight);
-            /*
-                startImage.onload = function () {
-                    document.getElementById("showInput2").innerHTML = "PICCCCC";
-                    document.getElementById("showInput3").innerHTML = newRow + "," + newCol;
-                    context.drawImage(startImage, newRow * cellWidth, newCol * cellHeight, cellWidth, cellHeight);
-                };
-            */
-          
+                context.closePath();
+
                 document.getElementById("showInput4").innerHTML = playerPosRow + ":" + playerPosCol;
                 playerPosRow = newRow;
                 playerPosCol = newCol;
             },
-/*
-        startImage.onload = function () {
-            //document.getElementById("showInput3").innerHTML = startRow + "," + startRow;
-            context.drawImage(startImage, startRow * cellWidth, startCol * cellHeight, cellWidth, cellHeight);
-        };
 
-        endImage.onload = function () {
-            //document.getElementById("showInput4").innerHTML = exitRow + "," + exitRow;
-            context.drawImage(endImage, exitRow * cellWidth, exitCol * cellHeight, cellWidth, cellHeight);
-            };
-            */
         mazeForCanvas = {
             mazeData: mazeData,
             startRow: startRow,
@@ -187,11 +244,11 @@ var playerPosRow;
 
         'use strict';
         document.addEventListener('keydown', movePlayer, true);
-        //$.fn.mazeBoard.drawMaze = mazeForCanvas.drawMaze;
-        //$.fn.mazeBoard.movePlayer = mazeForCanvas.movePlayer;
+
+        document.getElementById("btnSolveMaze").onclick = solveMaze;
+
 
         return mazeForCanvas;
     }
 
-    //window.addEventListener('keydown', findKey, true);
     })(jQuery)

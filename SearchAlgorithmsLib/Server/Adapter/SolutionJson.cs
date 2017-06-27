@@ -7,7 +7,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Server.Adapter
 {
-    class SolutionJson
+    public class SolutionJson
     {
 
         public string MazeName;

@@ -103,9 +103,6 @@ namespace Server.TheModel
             return maze;
         }
 
-        public void AddSolvedMaze(string name, string solution) {
-            this.solvedMaze.Add(name,solution);
-        }
         
         /**
          * add the maze itself to the mazes dictionary.
@@ -152,6 +149,11 @@ namespace Server.TheModel
             if (num == 1)
                 return false;
             return false;
+        }
+
+        public void AddSolvedMaze(string name, string solution)
+        {
+            throw new NotImplementedException();
         }
     }
 }

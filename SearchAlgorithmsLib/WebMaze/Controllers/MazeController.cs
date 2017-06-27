@@ -13,7 +13,7 @@ namespace WebMaze.Controllers
 {
     public class MazeController : ApiController
     {
-        private IModel mazeModel = new Model();
+        private static IModel mazeModel = new Model();
 
         // GET: api/Maze
         public IEnumerable<Maze> GetAllMazes()
@@ -32,6 +32,13 @@ namespace WebMaze.Controllers
             mazeModel.GenerateMaze(name, mRow, mCol);
             return JObject.Parse(mazeModel.GetMaze(name).ToJSON());
         }
+
+        
+        public JObject Get(string name)
+        {
+            return mazeModel.SolveMaze(name);
+        }
+        
 
         // POST: api/Maze
         public void Post([FromBody]Maze m)
