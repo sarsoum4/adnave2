@@ -222,7 +222,6 @@ var mazeName;
                 context.drawImage(startImage, newCol * cellWidth, newRow * cellHeight, cellWidth, cellHeight);
                 context.closePath();
 
-                document.getElementById("showInput4").innerHTML = playerPosRow + ":" + playerPosCol;
                 playerPosRow = newRow;
                 playerPosCol = newCol;
             },

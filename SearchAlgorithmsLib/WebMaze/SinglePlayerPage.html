@@ -1,13 +1,19 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <title></title>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="navigation.js"></script>
 </head>
-<body>
+
+<body onload="load()">
     <h1>Single Player</h1>
     <h2>Add the maze</h2>
-    <h3>is there a change?</h3>
+
     <h4 id="h4"></h4>
     Name: <input type="text" id="mazeName"/><br/>
     Rows: <input type="number" id="mazeRow"/><br/>
@@ -16,77 +22,13 @@
     <button id="btnAddMaze">Submit Maze</button>
     <button id="btnSolveMaze">Solve Maze</button>
 
-    <input type="button" value="Menu" onclick="GoToMenu()">
-
     <canvas id="mazeCanvas" width="500" height="480" style="border:2px black
     solid; margin-left: 40%; margin-top: -10%"></canvas>
 
-    <p1 id="showInput1"></p1>
-    <p2 id="showInput2"></p2>
-    <p3 id="showInput3"></p3>
-    <p4 id="showInput4"></p4>
 
     <script src="Scripts/jquery-3.1.1.js"></script>
     <script src="DrawMazePlugin.js"></script>
-    <script>
-
-        var startRow;
-        var startCol;
-        var endRow;
-        var endCol;
-        var myMazeBoard;
-        var flag = false;
-
-        document.getElementById("btnAddMaze").onclick = sendToServer;
-
-        function GoToMenu() {
-            window.location.assign("http://localhost:58603/OpeningScreen.html");
-        }
-
-        function sendToServer() {
-            
-            var mName = document.getElementById("mazeName").value;
-            var mRow = document.getElementById("mazeRow").value;
-            var mCol = document.getElementById("mazeCol").value;
-            
-            var apiUrl = "api/Maze/5?" + "name=" + mName + "&rows=" + mRow +
-                "&cols=" + mCol;
-
-            $.getJSON(apiUrl).done(function (data) {
-                var mazeRep = data.Maze;
-                var startRow = data.Start.Row;
-                var startCol = data.Start.Col;
-                var endRow = data.End.Row;
-                var endCol = data.End.Col;
-
-                //get the maze representation, and put it in a 2D matrix
-                var splitMazeRep = mazeRep.split('');
-
-                var arrRow = [];
-
-                for (var i = 0; i < mRow; i++) {
-                    arrRow[i] = [];
-                    var imCol = i * mCol;
-                    for (var j = 0; j < mCol; j++) {
-                        arrRow[i][j] = splitMazeRep[imCol + j];
-                    };
-                };
-
-                var mazeData = arrRow;
-                myMazeBoard = $.fn.mazeBoard(
-                    mName,
-                    mazeData, // the matrix containing the maze cells
-                    startRow, startCol, // initial position of the player
-                    endRow, endCol, // the exit position
-                    "pooh.gif", // player's icon (of type Image)
-                    "hJar.jpg", // exit's icon (of type Image)
-                );
-                //myMazeBoard.drawMaze();
-            });
-            flag = true;
-        }
-
-    </script>
+    <script type="text/javascript" src="SinglePlayer.js"></script>
 
 </body>
 </html>

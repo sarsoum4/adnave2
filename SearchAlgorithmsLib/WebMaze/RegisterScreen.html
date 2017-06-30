@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="navigation.js"></script>
+</head>
+<body>
+    <p id="userIdText">User Name</p>
+    <input type="text" id="userId" />
+    <br />
+
+    <p id="userPasswordText">Password</p>
+    <input type="text" id="userPassword" />
+    <br />
+
+    <p id="userPasswordConfirmText">Password</p>
+    <input type="text" id="userPasswordConfirm" />
+    <br />
+
+    <p id="userEmailText">Email</p>
+    <input type="text" id="userEmail" />
+    <br />
+
+    <br />
+    <input type="button" value="Regiter" onclick="register()">
+
+    <script src="Scripts/jquery-3.1.1.js"></script>
+
+    <script>
+        function GoToMenu() {
+            window.location.assign("http://localhost:58603/OpeningScreen.html");
+        }
+
+        function checkValidity() {
+            var uPass = document.getElementById("userPassword").value;
+            var passConfirm = document.getElementById("userPasswordConfirm").value;
+
+            if (uPass != passConfirm) {
+                alert("Password mismatch");
+            }
+            else {
+                register();
+            }
+        }
+
+        function register() {
+
+            var uName = document.getElementById("userId").value;
+            var uPass = document.getElementById("userPassword").value;
+            var passConfirm = document.getElementById("userPasswordConfirm").value;
+            var uEmail = document.getElementById("userEmail").value;
+
+            var apiUrl = "api/UsersClassModels?" + "userName=" + uName
+                + "&userPassword=" + uPass;
+            /********/
+            apiUrl = "api/UsersClassModels/" + uName
+                + "/" + uPass;
+            /********/
+            $.post(apiUrl).done(function (data) {
+                alert(data); //TODO delet this
+                GoToMenu();
+            });
+        }
+
+    </script>
+</body>
+</html>
