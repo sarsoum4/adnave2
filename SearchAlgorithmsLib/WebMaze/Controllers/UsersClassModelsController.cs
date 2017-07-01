@@ -24,6 +24,7 @@ namespace WebMaze.Controllers
         }
 
         //find key
+        //find key
         // GET: api/UsersClassModels/5
         [ResponseType(typeof(UsersClassModel))]
         public async Task<IHttpActionResult> GetUsersClassModel(string id)
@@ -35,6 +36,22 @@ namespace WebMaze.Controllers
             }
 
             return Ok(usersClassModel);
+        }
+
+        // GET: api/UsersClassModels/5
+        [ResponseType(typeof(UsersClassModel))]
+        [HttpGet]
+        [Route("api/UsersClassModels/5/{userName}")]
+
+        public async Task<string> GetUsersClassModelAsync(string userName)
+        {
+            UsersClassModel usersClassModel = await db.UsersClassModels.FindAsync(userName);
+            if (usersClassModel == null)
+            {
+                return "error";
+            }
+
+            return usersClassModel.Password;
         }
 
         // PUT: api/UsersClassModels/5

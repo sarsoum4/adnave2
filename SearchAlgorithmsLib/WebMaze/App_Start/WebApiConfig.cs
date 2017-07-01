@@ -15,6 +15,12 @@ namespace WebMaze
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
+                name: "DefaultApiUserLogin",
+                routeTemplate: "api/UsersClassModels/5/{userName}"
+            //defaults: new { controller = "UserClassModels" }
+            );
+
+            config.Routes.MapHttpRoute(
                 name: "DefaultApiUser",
                 routeTemplate: "api/UsersClassModels/{userName}/{password}"
             //defaults: new { controller = "UserClassModels" }

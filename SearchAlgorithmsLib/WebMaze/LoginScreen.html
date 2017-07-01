@@ -10,8 +10,42 @@
     <script type="text/javascript" src="navigation.js"></script>
 </head>
 <body>
+    <p id="userIdText">User Name</p>
+    <input type="text" id="userId" />
+    <br />
+
+    <p id="userPasswordText">Password</p>
+    <input type="text" id="userPassword" />
+    <br />
+
+    <br />
+    <input type="button" value="Login" onclick="login()">
+
     <script>
 
+        function GoToMenu() {
+            window.location.assign("http://localhost:58603/OpeningScreen.html");
+        }
+
+        function login() {
+            var uName = document.getElementById("userId").value;
+            var uPass = document.getElementById("userPassword").value;
+
+            //var apiUrl = "api/UsersClassModels/5?" + "userName=" + uName;
+            /********/
+            var apiUrl = "api/UsersClassModels/5/" + uName;
+            /********/
+            $.get(apiUrl).done(function (data) {
+                if (data == uPass) {
+                    alert("Welcome " + uName);
+                    GoToMenu();
+                }
+                else {
+                    alert("Invalid input");
+                }
+
+            });
+        }
     </script>
 </body>
 </html>
